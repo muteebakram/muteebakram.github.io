@@ -47,8 +47,9 @@ a {
 }
 /* section 2 */
 .section-2 {
-  padding-top: 10vh;
   width: 80%;
+  margin: auto;
+  padding-top: 10vh;
 }
 
 .section-2 h2 {
