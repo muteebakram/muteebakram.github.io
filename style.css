@@ -3,8 +3,8 @@
 }
 
 .body {
-  padding: 0 160px;
-  font-size: 18px;
+  margin: 0 2%;
+  font-size: 16px;
 }
 
 .about-image {
@@ -14,8 +14,7 @@
   flex-direction: row;
 }
 
-.about-bio
-{
+.about-bio {
   padding: 0 24px;
 }
 
@@ -43,7 +42,7 @@
 
 .company-images {
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-between; */
 }
 
 .company-image {
@@ -66,4 +65,29 @@
 
 figure figcaption {
   text-align: center;
+}
+
+a {
+  color: blue;
+}
+
+a:visited {
+  text-decoration: none;
+  color: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: blue;
+}
+
+a:focus {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover,
+a:active {
+  text-decoration: none;
+  color: black;
 }
