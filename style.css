@@ -91,3 +91,22 @@ a:active {
   text-decoration: none;
   color: black;
 }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  font-size: 14px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.last-updated
+{
+  width: 200px;
+}

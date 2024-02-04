@@ -36,4 +36,20 @@ class MyHeader extends HTMLElement {
   }
 }
 
+class MyFooter extends HTMLElement {
+  constructor() {
+    super();
+    this.lastUpdated = "04 Feb 2024";
+  }
+
+  connectedCallback() {
+    this.innerHTML = `
+        <footer class="footer">
+            <div>™ and © Muteeb Akram. All Rights Reserved.</div>
+            <div class="last-updated">Last Updated ${this.lastUpdated}</div>
+        </footer>`;
+  }
+}
+
 customElements.define("my-header", MyHeader);
+customElements.define("my-footer", MyFooter);
