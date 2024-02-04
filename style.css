@@ -51,7 +51,7 @@
 }
 
 .profile-image {
-  width: 18%;
+  width: 15%;
   height: auto;
   border-radius: 2%;
 }
@@ -92,12 +92,21 @@ a:active {
   color: black;
 }
 
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  padding-bottom: 2.5rem;
+}
+
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
   height: 30px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .footer {
@@ -106,7 +115,6 @@ footer {
   justify-content: space-between;
 }
 
-.last-updated
-{
+.last-updated {
   width: 200px;
 }
