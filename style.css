@@ -3,7 +3,8 @@
 }
 
 .body {
-  padding: 0 60px;
+  padding: 0 160px;
+  font-size: 18px;
 }
 
 .about {
@@ -30,7 +31,7 @@
 }
 
 .role-title {
-  /* padding: 6px 0; */
+  padding: 4px 0;
   font-weight: 500;
   font-style: italic;
 }
@@ -45,9 +46,9 @@
   border-radius: 2%;
 }
 
-.image {
+.profile-image {
   margin: 4% 6%;
-  border-radius: 4%;
+  border-radius: 2%;
   height: auto;
   width: -webkit-fill-available;
 }
