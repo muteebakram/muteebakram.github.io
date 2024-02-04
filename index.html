@@ -3,168 +3,51 @@
 
 <script type="module" src="script.js"></script>
 
-<my-header></my-header>
+<my-header title="Home"></my-header>
 
 <body class="body">
-    <div class="about" id="about">
-        <div class="about-para">
-            <p>
-                I'm currently pursuing my graduate studies in computer science at the Kahlert School of Computing,
-                University of Utah. Under the guidance of Prof. Vijay Nagarajan, my research focuses on re-imagining
-                applications on CXL Memory. Additionally, I serve as a teaching assistant, supporting senior
-                undergraduate students in their Capstone Project. My research interest lies in the intersection of
-                hardware/software and multi-node systems, i.e., computer architecture, operating
-                systems, and distributed systems.
-            </p>
-            <p>
-                Before, I was part of the Cloud & Compute Team at Cisco Systems in Bangalore, India. I started as a
-                college intern and progressed to the role of Software Engineer 2 before leaving. During my time there, I
-                worked on cutting-edge enterprise hardware projects and played a key role in developing
-                industry-standard Redfish APIs. These APIs were designed for diagnosing issues, updating firmware, and
-                installing operating systems for Cisco UCS servers. My experience at Cisco marked my introduction to the
-                software field and the intricacies of systems.I found immense satisfaction in tackling technical
-                challenges and developed a keen interest in computer systems.
-                developed a fond interest in computer systems.
-            </p>
-            <p>
-                Before that, I did my Bachelor's in Computer Science at R. V. College of Engineering (RVCE) in
-                Bangalore, India. I worked with Prof. Rajashree Shettar, Prof. Minal Moharir, and Prof. Veena Gadad on
-                the traffic decongestion system, HTTP3/QUIC protocol survey, and DMTF's Redfish API for server firmware
-                management, respectively. Additionally, I was member of the entrepreneurship cell and a volunteer for
-                the Rotaract Club
-                of RVCE.
-            </p>
-        </div>
-        <div class="about-image">
-            <img class="profile-image" src="./assest/profile-image.jpg" alt="Profile Picture of Muteeb">
-        </div>
-    </div>
-
-    <div id="#experience">
-        <h3>Experience</h3>
-        <div>
-            <div class="company">
-                <div>
-                    <section class="company-title">Cisco Systems</section>
-                    Jan 2020 - July 2023
-                    <br>
-                    Bangalore, India
-                    <br>
-                    <br>
-                    <section class="role-title">Software Engineer II</section>
-                    <ul>
-                        <li>Engineered a diagnostic tool for Cisco servers, enabling troubleshooting of CPUs, DIMMs, &
-                            PCIe devices. Achieved 40% reduction in downtime & 10% decrease in RMA costs, streamlining
-                            debugging for TAC.
-                        </li>
-                        <li>Worked on Baseboard Management Controller to streamline low-level firmware and BIOS update,
-                            resulting in a 15% reduction in system downtime and improved system stability.
-                        </li>
-                        <li>Implemented thread synchronization to concurrently install operating systems and update the
-                            firmware of 100+ Cisco UCS servers at once.
-                        </li>
-                    </ul>
-                    <section class="role-title">Software Engineer</section>
-                    <ul>
-                        <li>Designed a Data Sanitization framework to fully wipe data from storage controllers, NVMe &
-                            disks.
-                        </li>
-                        <li>Migrate from legacy build systems to container-based CI/CD builds utilizing runC and
-                            dockerd runtime engines, resulting in a notable 20% acceleration in build times.
-                        </li>
-                        <li>Owned and revamped Cisco firmware application front-end with web components and integrated
-                            12+ back-end APIs. Shipped the application in a customized Linux container, offering CLI,
-                            UI, & REST interfaces.
-                        </li>
-                    </ul>
-                    <section class="role-title">Software Engineer Intern</section>
-                    <ul>
-                        <li>
-                            Developed 3 new industry-standard Redfish APIs for firmware discovery, update, & monitoring.
-                        </li>
-                        <li>
-                            Ported 7,000+ source code from Python2 to Python3 with no performance impact.
-                        </li>
-                        <li>Owned and maintained Cisco Inventory Portal by automating source check-ins, creating
-                            SSH key-pairs, and optimizing large NFS storage, resulting in a 30% reduction in
-                            storage & 2x API performance.
-                        </li>
-                    </ul>
-                </div>
-                <div class="company-images">
-                    <figure>
-                        <img class="company-image" src="./assest/cisco0.png" alt="Cisco Onboarding">
-                        <figcaption>Cisco Internship Onboarding</figcaption>
-                    </figure>
-                    <figure>
-                        <img class="company-image" src="./assest/cisco1.png" alt="Cisco Team Outing">
-                        <figcaption>Cisco Team Outing</figcaption>
-                    </figure>
-                    <figure>
-                        <img class="company-image" src="./assest/cisco2.png" alt="Cisco Last Working Day">
-                        <figcaption>Cisco Last Working Day</figcaption>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="education">
-        <h3>Education</h3>
-        <div>
-            <div>
-                <section class="education-title">Kahlert School of Computing, The University of Utah</section>
-                <section class="role-title">Master of Science, Computer Science</section>
-                Aug 2023 - May 2025
-                <br>
-                Salt Lake City, Utah, USA
-            </div>
+    <div class="about-image">
+        <img class="profile-image" src="./assest/profile-image.jpg" alt="Profile Picture of Muteeb">
+        <div class="about-bio">
+            <strong>Muteeb Akram Nawaz Doctor</strong>
             <br>
-            <div>
-                <section class="education-title">R. V. College of Engineering (RVCE)</section>
-                <section class="role-title">Bachelor of Engineering, Computer Science & Engineering</section>
-                Aug 2016 - July 2020
-                <br>
-                Mysore Road, Bangalore, Karnataka, India
-            </div>
+            Graduate Student & Teaching Assistant
             <br>
-            <div>
-                <section class="education-title">Deeksha Reva Independent PU College</section>
-                <section class="role-title">Pre-University Education, Computer Science</section>
-                May 2014 - June 2016
-                <br>
-                Yelahanka, Bangalore, Karnataka, India
-            </div>
+            The University of Utah
             <br>
-            <div>
-                <section class="education-title">Deepayan Secondary School</section>
-                <section class="role-title">Kinder Garden, Primary, and High School</section>
-                Jan 2001 - April 2014
-                <br>
-                NC Colony, Hospet, Karnataka, India
-            </div>
+            <br>
+            <a href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a>
+            <br>
+            Salt Lake City, Utah, USA
         </div>
     </div>
-
-    <div id="#projects">
-        <h3>Projects</h3>
-    </div>
-
-    <div id="#publications">
-        <h3>Publications</h3>
-    </div>
-
-    <div id="contact">
-        <h3>Contact</h3>
-        <ul>
-            <li>Email: <a href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></li>
-            <li>Github: <a href="https://github.com/muteebakram">github.com/muteebakram</a></li>
-            <li>LinkedIn: <a href="https://www.linkedin.com/in/muteeb-akram/">linkedin.com/in/muteeb-akram/</a></li>
-            <li>Google Scholar: <a
-                    href="https://scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en">scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en</a>
-            </li>
-        </ul>
-        If you search extensively, you'll discover my presence on Twitter and Instagram.
+    <div>
+        <p>
+            I'm currently pursuing my graduate studies in computer science at the Kahlert School of Computing,
+            University of Utah. Under the guidance of Prof. Vijay Nagarajan, my research focuses on re-imagining
+            applications on CXL Memory. Additionally, I serve as a teaching assistant, supporting senior
+            undergraduate students in their Capstone Project. My research interest lies in the intersection of
+            hardware/software and multi-node systems, i.e., computer architecture, operating
+            systems, and distributed systems.
+        </p>
+        <p>
+            Before, I was part of the Cloud & Compute Team at Cisco Systems in Bangalore, India. I started as a
+            college intern and progressed to the role of Software Engineer 2 before leaving. During my time there, I
+            worked on cutting-edge enterprise hardware projects and played a key role in developing
+            industry-standard Redfish APIs. These APIs were designed for diagnosing issues, updating firmware, and
+            installing operating systems for Cisco UCS servers. My experience at Cisco marked my introduction to the
+            software field and the intricacies of systems.I found immense satisfaction in tackling technical
+            challenges and developed a keen interest in computer systems.
+            developed a fond interest in computer systems.
+        </p>
+        <p>
+            Before that, I did my Bachelor's in Computer Science at R. V. College of Engineering (RVCE) in
+            Bangalore, India. I worked with Prof. Rajashree Shettar, Prof. Minal Moharir, and Prof. Veena Gadad on
+            the traffic decongestion system, HTTP3/QUIC protocol survey, and DMTF's Redfish API for server firmware
+            management, respectively. Additionally, I was member of the entrepreneurship cell and a volunteer for
+            the Rotaract Club
+            of RVCE.
+        </p>
     </div>
 </body>
 

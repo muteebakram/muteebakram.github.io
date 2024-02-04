@@ -7,17 +7,16 @@
   font-size: 18px;
 }
 
-.about {
-  display: flex;
-}
-
-.about-para {
-  width: 80%;
-  text-align: justify;
-}
-
 .about-image {
-  width: 20%;
+  width: 100%;
+  margin: 2% 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.about-bio
+{
+  padding: 0 24px;
 }
 
 .company-title {
@@ -36,6 +35,12 @@
   font-style: italic;
 }
 
+.degree-title {
+  padding: 8px 0;
+  font-weight: 400;
+  font-style: italic;
+}
+
 .company-images {
   display: flex;
   justify-content: space-evenly;
@@ -47,21 +52,16 @@
 }
 
 .profile-image {
-  margin: 4% 6%;
-  border-radius: 2%;
+  width: 18%;
   height: auto;
-  width: -webkit-fill-available;
+  border-radius: 2%;
 }
 
 .row {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-}
-
-.row-block {
-  width: 200px;
+  justify-content: space-between;
 }
 
 figure figcaption {
