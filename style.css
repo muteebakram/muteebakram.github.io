@@ -111,10 +111,15 @@ footer {
 
 .footer {
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
 }
 
+.copyright-text {
+  min-width: calc(100% - 180px);
+}
+
 .last-updated {
-  width: 200px;
+  width: -webkit-fill-available;
 }

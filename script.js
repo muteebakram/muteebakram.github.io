@@ -45,7 +45,7 @@ class MyFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
         <footer class="footer">
-            <div>™ and © Muteeb Akram. All Rights Reserved.</div>
+            <div class="copyright-text">™ and © Muteeb Akram. All Rights Reserved.</div>
             <div class="last-updated">Last Updated ${this.lastUpdated}</div>
         </footer>`;
   }
