@@ -5,6 +5,7 @@
 .body {
   margin: 0 2%;
   font-size: 16px;
+  /* font-family: "Helvetica, Arial, sans-serif"; */
 }
 
 .about-image {
@@ -122,4 +123,16 @@ footer {
 
 .last-updated {
   width: -webkit-fill-available;
+}
+
+.education-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.education-image {
+  border-radius: 2%;
+  width: 16%;
+  height: auto;
 }
