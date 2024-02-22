@@ -327,7 +327,7 @@ class MyProjects extends HTMLElement {
       </section>
       <p>${p.Description}</p>
       ${this.getGithubLink(p)}
-      <hr style="margin: 16px 0; opacity: 0.4">`;
+      <hr style="margin: 24px 0; opacity: 0.4">`;
   }
 
   renderProjectByYear(projects) {
@@ -340,7 +340,7 @@ class MyProjects extends HTMLElement {
     var resultantHTML = `<i style="font-size: 12px;">Showing results for ${this.projects.length} projects.</i><br>`;
 
     projectMap.forEach((projects, year) => {
-      resultantHTML += `<h3>${year}</h3>${this.renderProjectByYear(projects)}`;
+      resultantHTML += `<h2>${year}</h2>${this.renderProjectByYear(projects)}`;
     });
 
     this.innerHTML = resultantHTML;
@@ -389,15 +389,15 @@ class MyHeader extends HTMLElement {
 class MyFooter extends HTMLElement {
   constructor() {
     super();
-    this.lastUpdated = "18 Feb 2024";
+    this.lastUpdated = "Feb 18, 2024";
   }
 
   connectedCallback() {
     this.innerHTML = `
-        <footer class="footer">
-            <div class="copyright-text">™ and © Muteeb Akram. All Rights Reserved.</div>
-            <div class="last-updated">Last Updated ${this.lastUpdated}</div>
-        </footer>`;
+      <footer class="footer">
+        <div class="copyright-text">™ and © Muteeb Akram. All Rights Reserved.</div>
+        <div class="last-updated">Last Updated ${this.lastUpdated}</div>
+      </footer>`;
   }
 }
 
