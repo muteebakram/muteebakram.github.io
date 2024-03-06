@@ -1,5 +1,29 @@
 window.projects = [
   {
+    Title: "CS6350: Machine Learning",
+    Description:
+      "<ul class='project-ul'><li><a target='_blank' href='https://github.com/muteebakram/CS6350/tree/master/Assignments/Decision%20Trees/solution'>Decision Trees (DT)</a>: Learn to represent the problem as  DT. Develop variants of the ID3 algorithm, entropy, and information gain. Dealing with missing features and overfitting.</li>\
+      <li><a target='_blank' href='https://github.com/muteebakram/CS6350/tree/master/Assignments/Linear%20classifiers%2C%20Online%20learning%2C%20Perceptron/solution'>Linear Classifiers, Online Learning, and Perceptron</a>:  What problem can linear classifiers help solve, and which problems are linearly separable. Different mistake bounds like CON and Halving algorithms. What makes the Perceptron? Learn its importance, updates, and variants.</li></ul>",
+    Year: "2024",
+    Date: "Jan 9, 2024",
+    Skills: ["Machine Learning", "Python"],
+    TeamSize: 1,
+    Professor: "Prof. Vivek Srikumar",
+    ProfessorLink: "",
+    GithubLink: "https://github.com/muteebakram/CS6350",
+  },
+  {
+    Title: "Personal Website Portfolio",
+    Description:
+      "Develop this minimal website to showcase my experience, education, projects, research, skills, publication, and more.",
+    Year: "2024",
+    Date: "Feb 4, 2024",
+    Skills: ["HTML", "CSS", "Javascript", "Web Components", "Web Development"],
+    TeamSize: 1,
+    TitleLink: "https://muteebakram.github.io/",
+    GithubLink: "https://github.com/muteebakram/muteebakram.github.io",
+  },
+  {
     Title: "GEneral Matrix Multiplication (GEMM)",
     Description:
       "<ul class='project-ul'><li>Develop high-performance transformations for GEMM (matrix multiplication) with OpenMP & CUDA at runtime. Demonstrating techniques like loop unrolling, tiling, vectorization, permutation, coalesced shared memory, and more.</li>\
@@ -7,11 +31,12 @@ window.projects = [
       <li>Thus, adaptivity concerning the problem size parameters in the call can be beneficial. The adaptivity may involve dynamically choosing parameters such as tile sizes, shapes/sizes of thread blocks, or even different code versions, e.g., representing various loop permutations and/or degrees of loop unrolling. </li></ul>",
     Year: "2023",
     Date: "Nov 14, 2023",
-    Skills: ["OpenMP", "CUDA", "HPC", "Parallel Programming"],
+    Skills: ["C", "OpenMP", "CUDA", "HPC", "Parallel Programming"],
     TeamSize: 1,
     Professor: "Prof. Saday",
     ProfessorLink: "",
-    TitleLink: "https://github.com/muteebakram/GEMM/blob/master/term-project-fa23.pdf",
+    TitleLink:
+      "https://github.com/muteebakram/GEMM/blob/master/term-project-fa23.pdf",
     GithubLink: "https://github.com/muteebakram/GEMM",
   },
   {
@@ -48,13 +73,7 @@ window.projects = [
       <li>The ring buffer is "magic," i.e., it is mapped twice into the user address space to avoid awkward fragmentation problems when the area the user is reading from or writing wraps around the end of the ring buffer. As a result, it will always be able to copy in/copy out data from the buffer in one memmove call.</li></ul>',
     Year: "2023",
     Date: "Aug 21, 2023",
-    Skills: [
-      "C",
-      "Ring Buffer",
-      "Benchmark",
-      "Kernel Programming",
-      "Operating Systems",
-    ],
+    Skills: ["C", "Benchmark", "Kernel Programming", "Operating Systems"],
     TeamSize: 2,
     GithubLink: "https://github.com/muteebakram/zerocopy-ringbuf",
   },
@@ -143,7 +162,13 @@ window.projects = [
       "The project involves capturing network packets, preprocessing them to remove noise, and implementing a classifier to determine the transport protocol used. The objective is to evaluate various machine learning algorithms for classifying packets based solely on characteristics such as size, headers, etc., without inspecting the packet contents.",
     Year: "2022",
     Date: "Feb 22, 2022",
-    Skills: ["QUIC", "Wireshark", "Network Programming", "HTTP"],
+    Skills: [
+      "QUIC",
+      "Wireshark",
+      "Python",
+      "Machine Learning",
+      "HTTP",
+    ],
     TeamSize: 1,
     GithubLink: "https://github.com/muteebakram/quic-classifier",
   },
@@ -207,7 +232,7 @@ window.projects = [
       "Learn and understand the workings of NodeJS. This was my formal introduction to Javascript and the workings of the v8 browser engine. The knowledge gained from this Udemy course helped me complete several front-end projects at Cisco.",
     Year: "2021",
     Date: "Feb 13, 2021",
-    Skills: ["NodeJS", "Javascript", "Web Development"],
+    Skills: ["NodeJS", "Javascript", "Web Components", "Web Development"],
     TeamSize: 1,
     Professor: "Udemy",
     ProfessorLink: "",
@@ -436,7 +461,7 @@ class MyFilters extends HTMLElement {
     );
     titleFilter += "</select>";
 
-    filters += `<div class="filters-div">Filters: &nbsp; ${titleFilter}&nbsp; ${skillFilter}&nbsp; ${yearFilter}</div>`;
+    filters += `<div class="filters-div"><div>Filters: &nbsp;</div> ${titleFilter}&nbsp; ${skillFilter}&nbsp; ${yearFilter}</div>`;
     return filters;
   }
 
@@ -559,7 +584,7 @@ class MyProjects extends HTMLElement {
       </section>
       ${this.getGithubLink(p)}
       <section class="project-description">${p.Description}</section>
-      <hr class="project-hr">`;
+      <hr class="hr">`;
   }
 
   renderProjectByYear(projects) {
@@ -611,7 +636,7 @@ class MyHeader extends HTMLElement {
           <section title="Publications"><a href="./publications.html">Publications</a></section>
           <section title="Contact"><a href="./contact.html">Contact</a></section>
         </div>
-        <h2>${this.title}</h2>
+        <h2 style="padding-top: 12px;">${this.title}</h2>
       </header>`;
   }
 }
