@@ -28,7 +28,7 @@ body {
   /* font-family: "Helvetica, Arial, sans-serif"; */
   /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
@@ -103,7 +103,7 @@ footer {
 }
 
 .profile-image {
-  width: max(24%, 150px);
+  width: max(24%, 180px);
   height: auto;
   border-radius: 2%;
 }
@@ -196,7 +196,7 @@ footer {
 }
 
 .education-image {
-  width: 240px;
+  width: 200px;
   height: auto;
   border-radius: 2%;
 }
@@ -204,6 +204,10 @@ footer {
 .education-subtitle {
   padding: 20px 0;
   font-size: 16px;
+}
+
+.education-text {
+  margin: 0 24px 24px 0;
 }
 
 .filters-div {
