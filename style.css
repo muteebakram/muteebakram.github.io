@@ -24,6 +24,7 @@ body {
   line-height: 1.2;
   margin-left: auto;
   margin-right: auto;
+  /* font-family: "SF Pro Display", "SF Pro Icons"; */
   /* font-family: Arial, Helvetica, sans-serif; */
   /* font-family: "Helvetica, Arial, sans-serif"; */
   /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
@@ -207,7 +208,7 @@ footer {
 }
 
 .education-text {
-  margin: 0 24px 24px 0;
+  margin: 0 30px 0 0;
 }
 
 .filters-div {
@@ -231,7 +232,7 @@ footer {
 }
 
 .project-subsection {
-  font-size: 13px;
+  font-size: 14px;
   margin: 8px 0;
 }
 

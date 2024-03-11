@@ -27,6 +27,7 @@ style.innerHTML = `
   align-items: center;
   width: -webkit-fit-content;
   margin: 2px;
+  color: black;
 }
 .multiselect-dropdown span.optext .optdel {
   float: right;
