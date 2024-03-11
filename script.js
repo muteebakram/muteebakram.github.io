@@ -13,7 +13,7 @@ window.projects = [
     GithubLink: "https://github.com/muteebakram/CS6350",
   },
   {
-    Title: "Personal Website Portfolio",
+    Title: "Personal Portfolio Website",
     Description:
       "Develop this minimal website to showcase my experience, education, projects, research, skills, publication, and more.",
     Year: "2024",
@@ -162,13 +162,7 @@ window.projects = [
       "The project involves capturing network packets, preprocessing them to remove noise, and implementing a classifier to determine the transport protocol used. The objective is to evaluate various machine learning algorithms for classifying packets based solely on characteristics such as size, headers, etc., without inspecting the packet contents.",
     Year: "2022",
     Date: "Feb 22, 2022",
-    Skills: [
-      "QUIC",
-      "Wireshark",
-      "Python",
-      "Machine Learning",
-      "HTTP",
-    ],
+    Skills: ["QUIC", "Wireshark", "Python", "Machine Learning", "HTTP"],
     TeamSize: 1,
     GithubLink: "https://github.com/muteebakram/quic-classifier",
   },
@@ -303,7 +297,7 @@ window.projects = [
   {
     Title: "Smart Parking System",
     Description:
-      "<ul class='project-ul'><li>Designed and developed an end-to-end system with IR sensors connected to a WiFi module and an Android application to locate and reserve a parking slot in real-time.</li>\
+      "<ul class='project-ul'><li>Designed and developed an end-to-end system with IR sensors connected to a WiFi module with a camera to run character recognition for vehicle license numbers and an Android application to locate and reserve a parking slot in real-time.</li>\
       <li>The project was shortlisted to showcase at the Cisco RVCE IoT workshop, where we conducted a three-day workshop to teach it to 40 students.</li></ul>",
     Year: "2018",
     Date: "Oct 21, 2018",
@@ -312,7 +306,7 @@ window.projects = [
       "IoT",
       "Arduino",
       "Camera",
-      "Character Recognition",
+      "Machine Learning",
       "Android",
       "Mobile Development",
       "Java",
@@ -442,6 +436,7 @@ class MyFilters extends HTMLElement {
 
   renderFilters() {
     let filters = ``;
+    const filterIcon = `<svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2" viewBox="0 0 30 30" id="filter"><path fill="#111224" d="M17 11H4A1 1 0 0 1 4 9H17A1 1 0 0 1 17 11zM26 11H22a1 1 0 0 1 0-2h4A1 1 0 0 1 26 11z"></path><path fill="#111224" d="M19.5 13.5A3.5 3.5 0 1 1 23 10 3.5 3.5 0 0 1 19.5 13.5zm0-5A1.5 1.5 0 1 0 21 10 1.5 1.5 0 0 0 19.5 8.5zM26 21H13a1 1 0 0 1 0-2H26A1 1 0 0 1 26 21zM8 21H4a1 1 0 0 1 0-2H8A1 1 0 0 1 8 21z"></path><path fill="#111224" d="M10.5,23.5A3.5,3.5,0,1,1,14,20,3.5,3.5,0,0,1,10.5,23.5Zm0-5A1.5,1.5,0,1,0,12,20,1.5,1.5,0,0,0,10.5,18.5Z"></path></svg>`;
 
     let yearFilter = `<select id="selectedYears" placeholder="Select Year" txtSearch="Search Year" style="width: 100px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
     yearFilter += this.years.map(
@@ -461,7 +456,7 @@ class MyFilters extends HTMLElement {
     );
     titleFilter += "</select>";
 
-    filters += `<div class="filters-div"><div>Filters: &nbsp;</div> ${titleFilter}&nbsp; ${skillFilter}&nbsp; ${yearFilter}</div>`;
+    filters += `<div class="filters-div">${filterIcon} ${titleFilter}&nbsp; ${skillFilter}&nbsp; ${yearFilter}</div>`;
     return filters;
   }
 
@@ -607,6 +602,7 @@ class MyHeader extends HTMLElement {
 
   constructor() {
     super();
+    this.theme = "light";
     this.title = "Muteeb Akram";
   }
 
@@ -615,6 +611,34 @@ class MyHeader extends HTMLElement {
   }
 
   connectedCallback() {
+    this.setInitialTheme();
+    this.render();
+    this.querySelector("#theme-toggle").addEventListener(
+      "click",
+      this.onThemeChange
+    );
+  }
+
+  setInitialTheme() {
+    const initialTheme = sessionStorage.getItem("theme");
+    const setInitialTheme = initialTheme === null ? "light" : initialTheme;
+
+    if (setInitialTheme === "light")
+      document.body.classList.remove("dark-theme");
+    else document.body.classList.add("dark-theme");
+  }
+
+  onThemeChange() {
+    console.log("here");
+    const currentTheme = sessionStorage.getItem("theme");
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+
+    if (newTheme === "light") document.body.classList.remove("dark-theme");
+    else document.body.classList.add("dark-theme");
+    sessionStorage.setItem("theme", newTheme);
+  }
+
+  render() {
     this.innerHTML = `
       <head>
         <meta charset="UTF-8">
@@ -626,8 +650,19 @@ class MyHeader extends HTMLElement {
       </head>
 
       <header>
-        <h1 class="name">Muteeb Akram</h1>
-        <hr />
+        <div class="header-container">
+          <h1 class="name">Muteeb Akram</h1>
+          <div title="Toggle Theme" class="theme-icon">
+            <svg id="theme-toggle" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="🔍-Product-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="ic_fluent_dark_theme_24_regular" fill="#212121" fill-rule="nonzero">
+                  <path d="M12,22 C17.5228475,22 22,17.5228475 22,12 C22,6.4771525 17.5228475,2 12,2 C6.4771525,2 2,6.4771525 2,12 C2,17.5228475 6.4771525,22 12,22 Z M12,20.5 L12,3.5 C16.6944204,3.5 20.5,7.30557963 20.5,12 C20.5,16.6944204 16.6944204,20.5 12,20.5 Z" id="🎨-Color"></path>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <hr>
         <div class="row">
           <section title="Home"><a href="./index.html">Home</a></section>
           <section title="Experience"><a href="./experience.html">Experience</a></section>
@@ -644,7 +679,7 @@ class MyHeader extends HTMLElement {
 class MyFooter extends HTMLElement {
   constructor() {
     super();
-    this.lastUpdated = "Mar 3, 2024";
+    this.lastUpdated = "Mar 10, 2024";
   }
 
   connectedCallback() {

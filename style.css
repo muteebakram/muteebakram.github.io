@@ -1,22 +1,36 @@
-/* @font-face {
-  font-family: "My Custom Font";
-  src: url("assets/Inter/static/Inter-Light.ttf");
+/* Dark Theme */
+.dark-theme {
+  background-color: black;
+  color: white;
 }
 
-body {
-  font-family: "My Custom Font", sans-serif;
+/* Use Operating System theme for the website */
+/* @media (prefers-color-scheme: dark) {
+  body {
+    background-color: black;
+    color: white;
+  }
 } */
 
-.name {
-  text-align: center;
-}
+/* Add custom font family */
+/* @font-face {
+  font-family: "My Custom Font";
+  src: url("assets/Inter/static/Inter-Regular.ttf");
+} */
 
 body {
-  font-family: "Helvetica, Arial, sans-serif";
+  padding: 0 1em;
   max-width: 48rem;
+  line-height: 1.2;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 1em;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  /* font-family: "Helvetica, Arial, sans-serif"; */
+  /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  font-family: 'Times New Roman', Times, serif;
+  /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
 
 h1 h2 {
@@ -37,17 +51,13 @@ figcaption {
 }
 
 a {
-  color: blue;
+  text-decoration: none;
+  color: #1a73e8;
 }
 
 a:visited {
   text-decoration: none;
   color: none;
-}
-
-a:hover {
-  text-decoration: none;
-  color: blue;
 }
 
 a:focus {
@@ -57,8 +67,8 @@ a:focus {
 
 a:hover,
 a:active {
-  text-decoration: none;
-  color: black;
+  text-decoration: underline;
+  /* color: lightblue; */
 }
 
 li {
@@ -73,6 +83,18 @@ footer {
   font-size: 12px;
 }
 
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  margin: auto;
+  padding: 12px;
+  text-align: center;
+}
+
 .about-image {
   width: 100%;
   margin: 2% 0;
@@ -81,7 +103,7 @@ footer {
 }
 
 .profile-image {
-  width: max(23%, 150px);
+  width: max(24%, 150px);
   height: auto;
   border-radius: 2%;
 }
@@ -92,7 +114,7 @@ footer {
 
 .about-text {
   text-align: justify;
-  padding: 4px 0;
+  padding: 6px 0;
 }
 
 .experience-title {
@@ -191,6 +213,13 @@ footer {
   justify-content: space-between;
 }
 
+.filter-icon {
+  width: 18px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background-color: white;
+}
+
 .project-title {
   font-size: 18px;
   font-weight: 600;
@@ -198,7 +227,7 @@ footer {
 }
 
 .project-subsection {
-  font-size: 12px;
+  font-size: 13px;
   margin: 8px 0;
 }
 
@@ -215,4 +244,22 @@ footer {
 .project-ul {
   padding: 0px 16px;
   margin: 0px;
+}
+
+.paper-title {
+  font-size: 18px;
+  padding: 8px 0;
+  font-weight: 600;
+}
+
+.paper-subsection {
+  padding: 8px 0;
+}
+
+.theme-icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  border-radius: 16px;
+  background-color: white;
 }

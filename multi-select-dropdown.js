@@ -37,8 +37,11 @@ style.innerHTML = `
 }
 .multiselect-dropdown span.optext .optdel:hover { color: #c66;}
 .multiselect-dropdown span.placeholder{
-  color: darkslategray;
+  color: black;
   font-size: 12px;
+  align-items: center;
+  display: flex;
+  padding: 2px;
 }
 .multiselect-dropdown-list-wrapper{
   box-shadow: gray 0 3px 8px;
@@ -73,10 +76,11 @@ style.innerHTML = `
 }
 
 .multiselect-dropdown-list div{
-  padding: 2px;
+  padding: 4px 2px;
 }
 .multiselect-dropdown-list label{
-  font-size: 13px;
+  color: black;
+  font-size: 14px;
   padding: 0px 6px;
 }
 .multiselect-dropdown-list input{
@@ -150,7 +154,9 @@ function MultiselectDropdown(options) {
         config.searchInput?.class ?? "form-control",
       ]),
       style: {
-        width: "100%",
+        margin: "0",
+        padding: "6px",
+        width: "-webkit-fill-available",
         display:
           el.attributes["multiselect-search"]?.value === "true"
             ? "block"
