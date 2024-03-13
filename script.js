@@ -620,7 +620,7 @@ class MyHeader extends HTMLElement {
   }
 
   setInitialTheme() {
-    const initialTheme = sessionStorage.getItem("theme");
+    const initialTheme = localStorage.getItem("theme");
     const setInitialTheme = initialTheme === null ? "light" : initialTheme;
 
     if (setInitialTheme === "light")
@@ -630,12 +630,12 @@ class MyHeader extends HTMLElement {
 
   onThemeChange() {
     console.log("here");
-    const currentTheme = sessionStorage.getItem("theme");
+    const currentTheme = localStorage.getItem("theme");
     const newTheme = currentTheme === "light" ? "dark" : "light";
 
     if (newTheme === "light") document.body.classList.remove("dark-theme");
     else document.body.classList.add("dark-theme");
-    sessionStorage.setItem("theme", newTheme);
+    localStorage.setItem("theme", newTheme);
   }
 
   render() {
