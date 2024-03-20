@@ -105,8 +105,9 @@ footer {
 }
 
 .profile-image {
-  width: max(24%, 180px);
   height: auto;
+  width: 220px;
+  min-width: 220px;
   border-radius: 2%;
 }
 
@@ -220,8 +221,10 @@ footer {
 }
 
 .filter-icon {
-  width: 18px;
+  width: 20px;
+  height: 18px;
   padding: 4px 6px;
+  margin-right: 8px;
   border-radius: 6px;
   background-color: white;
 }
@@ -271,4 +274,12 @@ footer {
   height: 16px;
   cursor: pointer;
   border-radius: 16px;
+}
+
+.small-pad {
+  padding: 2px 0;
+}
+
+.footer-container {
+  margin-top: 24px;
 }

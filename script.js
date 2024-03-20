@@ -338,265 +338,6 @@ window.projects = [
   },
 ];
 
-class MyFilters extends HTMLElement {
-  constructor() {
-    super();
-    this.skills = [];
-    this.years = [];
-    this.titles = [];
-    // this.professors = [];
-    this.selectedSkills = [];
-    this.selectedYears = [];
-    this.selectedTitles = [];
-    // this.selectedProfessors = [];
-    this.projects = window.projects;
-  }
-
-  connectedCallback() {
-    this.prepareFilters();
-    // FIXME When filter is added clicking on x of filter must also trigger this event.
-    this.addEventListener("click", this.onFilterSelect);
-    this.render();
-  }
-
-  prepareFilters() {
-    this.years = this.projects.map((p) => p.Year);
-    this.years = [...new Set(this.years)]; // Remove duplicates
-    // this.years = this.years.filter((value, index)=> this.years.indexOf(value) === index); // Remove duplicates
-    this.years.sort().reverse(); // Current year at the beginning.
-
-    this.titles = this.projects.map((p) => p.Title);
-    this.titles = [...new Set(this.titles)]; // Remove duplicates
-
-    // this.professors = this.projects.map((p) => p.Professor);
-    // this.professors = [...new Set(this.professors)]; // Remove duplicates
-
-    this.skills = this.projects.map((p) => p.Skills).flat(1); // Convert 2D array to 1D array.
-    this.skills = [...new Set(this.skills)]; // Remove duplicates
-    this.skills.sort();
-  }
-
-  onFilterSelect() {
-    let selectedYears = Array.from(
-      document.getElementById("selectedYears").options
-    )
-      .filter((option) => option.selected)
-      .map((option) => option.value);
-
-    // console.log("this.selectedYears", selectedYears);
-    this.selectedYears = selectedYears;
-
-    let selectedSkills = Array.from(
-      document.getElementById("selectedSkills").options
-    )
-      .filter((option) => option.selected)
-      .map((option) => option.value);
-
-    // console.log("this.selectedSkills", selectedSkills);
-    this.selectedSkills = selectedSkills;
-
-    let selectedTitles = Array.from(
-      document.getElementById("selectedTitles").options
-    )
-      .filter((option) => option.selected)
-      .map((option) => option.value);
-
-    // console.log("this.selectedTitles", selectedTitles);
-    this.selectedTitles = selectedTitles;
-
-    // Prepare the projects to show with filters selected.
-    // Start from all projects and filter one bye one.
-    this.selectedProjects = this.projects;
-    if (this.selectedYears.length) {
-      this.selectedProjects = this.selectedProjects.filter((p) =>
-        this.selectedYears.includes(p.Year)
-      );
-    }
-
-    // console.log("this.selectedProjects", this.selectedProjects);
-    if (this.selectedSkills.length) {
-      this.selectedProjects = this.selectedProjects.filter((project) =>
-        project.Skills.some((skill, _) => this.selectedSkills.includes(skill))
-      );
-    }
-
-    if (this.selectedTitles.length) {
-      this.selectedProjects = this.selectedProjects.filter((p) =>
-        this.selectedTitles.includes(p.Title)
-      );
-    }
-
-    this.renderMyProjects();
-  }
-
-  renderMyProjects() {
-    const component = document.querySelector("my-projects");
-    component.projects = JSON.stringify(this.selectedProjects);
-  }
-
-  renderFilters() {
-    let filters = ``;
-    const filterIcon = `<svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2" viewBox="0 0 30 30" id="filter"><path fill="#111224" d="M17 11H4A1 1 0 0 1 4 9H17A1 1 0 0 1 17 11zM26 11H22a1 1 0 0 1 0-2h4A1 1 0 0 1 26 11z"></path><path fill="#111224" d="M19.5 13.5A3.5 3.5 0 1 1 23 10 3.5 3.5 0 0 1 19.5 13.5zm0-5A1.5 1.5 0 1 0 21 10 1.5 1.5 0 0 0 19.5 8.5zM26 21H13a1 1 0 0 1 0-2H26A1 1 0 0 1 26 21zM8 21H4a1 1 0 0 1 0-2H8A1 1 0 0 1 8 21z"></path><path fill="#111224" d="M10.5,23.5A3.5,3.5,0,1,1,14,20,3.5,3.5,0,0,1,10.5,23.5Zm0-5A1.5,1.5,0,1,0,12,20,1.5,1.5,0,0,0,10.5,18.5Z"></path></svg>`;
-
-    let yearFilter = `<select id="selectedYears" placeholder="Select Year" txtSearch="Search Year" style="width: 100px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
-    yearFilter += this.years.map(
-      (year) => `<option value="${year}">${year}</option>`
-    );
-    yearFilter += "</select>";
-
-    let skillFilter = `<select id="selectedSkills" placeholder="Select Skills" txtSearch="Search Skills" style="width: 180px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
-    skillFilter += this.skills.map(
-      (skill) => `<option value="${skill}">${skill}</option>`
-    );
-    skillFilter += "</select>";
-
-    let titleFilter = `<select id="selectedTitles" placeholder="Select Projects" txtSearch="Search Projects" style="width: 320px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
-    titleFilter += this.titles.map(
-      (skill) => `<option value="${skill}">${skill}</option>`
-    );
-    titleFilter += "</select>";
-
-    filters += `<div class="filters-div">${filterIcon} ${titleFilter}&nbsp; ${skillFilter}&nbsp; ${yearFilter}</div>`;
-    return filters;
-  }
-
-  render() {
-    this.innerHTML = `${this.renderFilters()}`;
-  }
-}
-
-class MyProjects extends HTMLElement {
-  static observedAttributes = ["projects"];
-
-  constructor() {
-    super();
-    this.skillCount = 0;
-    this.totalSkillCount = this.getSkillCount(window.projects);
-    this.projectCount = window.projects.length;
-    // Property projects here is a string. my-filter component sends a string of objects.
-    this.projects = JSON.stringify(window.projects);
-  }
-
-  connectedCallback() {
-    if (!this.projects) return;
-
-    let projectMap = this.prepareProjectMap();
-    this.render(projectMap);
-  }
-
-  getSkillCount(projects) {
-    let skillCount;
-    skillCount = projects.map((p) => p.Skills).flat(1); // Convert 2D array to 1D array.
-    skillCount = [...new Set(skillCount)]; // Remove duplicates
-    return skillCount.length;
-  }
-
-  get projects() {
-    return this.getAttribute("projects");
-  }
-
-  set projects(newValue) {
-    this.setAttribute("projects", newValue);
-  }
-
-  attributeChangedCallback(_, oldValue, newValue) {
-    // Don't change the project value when newValue is empty.
-    if (newValue && oldValue !== newValue) {
-      this.projects = newValue;
-      this.connectedCallback(); // Re-render manually when the project value changes.
-    }
-  }
-
-  prepareProjectMap() {
-    // Convert the string from my-filters to object.
-    let projects = JSON.parse(this.projects);
-    this.projectCount = projects.length;
-    this.skillCount = this.getSkillCount(projects);
-
-    let projectMap = projects.reduce(function (map, project) {
-      if (!(project.Year in map)) map[project.Year] = [];
-      map[project.Year].push(project);
-      return map;
-    }, {});
-
-    const map = new Map(Object.entries(projectMap));
-    let sortedArray = Array.from(map.entries());
-
-    sortedArray.sort((a, b) => b[0] - a[0]);
-    let sortedMap = new Map(sortedArray);
-
-    return sortedMap;
-  }
-
-  getProjectTitle(p) {
-    if (p.TitleLink && p.TitleLink !== "")
-      return `<a target="_blank" href="${p.TitleLink}"><section class="project-title">${p.Title}</section></a>`;
-
-    return `<section class="project-title">${p.Title}</section>`;
-  }
-
-  getGithubLink(p) {
-    if (p.GithubLink && p.GithubLink !== "")
-      return `
-        <section class="project-subsection">
-          Github Link:&nbsp;
-          <a target="_blank" href="${p.GithubLink}">
-            ${p.GithubLink.replace("https://", "")}
-          </a>
-        </section>`;
-
-    return ``;
-  }
-
-  getTeamSize(p) {
-    if (p.TeamSize && p.TeamSize > 1)
-      return `&nbsp; • &nbsp;Team of ${p.TeamSize}`;
-
-    return ``;
-  }
-
-  getProfessorName(p) {
-    if (p.Professor && p.Professor !== "")
-      return `&nbsp; • &nbsp; Taught by ${p.Professor}`;
-
-    return ``;
-  }
-
-  getSkills(p) {
-    if (p.Skills && p.Skills.length) {
-      return `${p.Skills.map((tag) => `&nbsp;&nbsp;#${tag}`).join("")}`;
-    }
-
-    return ``;
-  }
-
-  renderProject(p) {
-    return `
-      ${this.getProjectTitle(p)}
-      <section class="project-subsection">
-        ${p.Date} &nbsp;•&nbsp; Skills: ${this.getSkills(p)}
-        ${this.getTeamSize(p)} ${this.getProfessorName(p)}
-      </section>
-      ${this.getGithubLink(p)}
-      <section class="project-description">${p.Description}</section>
-      <hr class="hr">`;
-  }
-
-  renderProjectByYear(projects) {
-    return projects.map((p) => `${this.renderProject(p)}`).join(" ");
-  }
-
-  render(projectMap) {
-    let resultantHTML = `<br><i style="font-size: 12px">Showing ${this.projectCount} projects from ${window.projects.length} projects with ${this.skillCount} skills from ${this.totalSkillCount} skills.</i>`;
-
-    projectMap.forEach((projects, year) => {
-      resultantHTML += `<h2>${year}</h2>${this.renderProjectByYear(projects)}`;
-    });
-
-    this.innerHTML = resultantHTML;
-  }
-}
-
 class MyHeader extends HTMLElement {
   static observedAttributes = ["title", "theme"];
 
@@ -689,22 +430,670 @@ class MyHeader extends HTMLElement {
   }
 }
 
-class MyFooter extends HTMLElement {
+class MyHome extends HTMLElement {
   constructor() {
     super();
-    this.lastUpdated = "Mar 10, 2024";
   }
 
   connectedCallback() {
     this.innerHTML = `
-      <footer class="footer">
-        <div class="copyright-text">™ and © Muteeb Akram. All Rights Reserved.</div>
-        <div class="last-updated">Last Updated ${this.lastUpdated}</div>
-      </footer>`;
+      <div class="page-content">
+        <div class="about-image">
+          <img class="profile-image" src="./assets/profile-image.jpg" alt="Profile Picture of Muteeb">
+          <div class="about-bio">
+            <strong>Muteeb Akram Nawaz Doctor</strong>
+            <section class="small-pad" style="margin-top: 8px;">Graduate Student & Teaching Assistant</section>
+            <section class="small-pad">The University of Utah</section>
+            <br>
+            <section class="small-pad"><a href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></section>
+            <section class="small-pad">Salt Lake City, Utah, USA</section>
+            <br>
+            <section class="small-pad"><i style="font-size: 12px;">To give anything less than your best is to sacrifice the gift.</i></section>
+          </div>
+        </div>
+        <div class="about-text">
+          <p>
+            I'm pursuing graduate studies in Computer Science at the
+            <a target="_blank" href="https://www.cs.utah.edu">Kahlert School of Computing</a>,
+            <a target="_blank" href="https://www.utah.edu">University of Utah</a>.
+            My research interest lies in the intersection of hardware/software of computer systems, i.e.,
+            computer architecture, operating systems, distributed systems, and embedded systems. Under the
+            guidance of <a target="_blank" href="https://users.cs.utah.edu/~vijay/index.html">
+              Prof. Vijay Nagarajan</a>,
+            my research focuses on re-imagining applications on CXL Memory. Additionally, I serve as a teaching
+            assistant, helping senior undergraduate students in their capstone projects.
+          </p>
+          <p>
+            Before Utah, I was part of the Cloud & Compute Team at <a href="https://www.cisco.com">Cisco
+              Systems</a>
+            in Bangalore, India. I started as a college intern and progressed to the role of Software Engineer 2
+            before leaving. While there, I worked on cutting-edge enterprise hardware and
+            implemented industry-standard
+            <a target="_blank" href="https://www.dmtf.org/standards/redfish">DMTF Redfish APIs</a>
+            for diagnosing hardware, updating firmware, disk data
+            sanitization, and installing operating systems for
+            <a target="_blank"
+              href="https://www.cisco.com/site/us/en/products/computing/servers-unified-computing-systems/index.html">
+              Cisco UCS servers</a>.
+            My experience at Cisco marked my introduction to the software industry.
+            I found immense joy in tackling technical challenges and developed a keen interest in
+            systems.
+          </p>
+          <p>
+            Before Cisco, I did my Bachelor's in Computer Science at
+            <a target="_blank" href="https://rvce.edu.in">R. V. College of Engineering (RVCE)</a> in
+            Bangalore, India. I worked with Prof. Rajashree Shettar, Prof. Minal Moharir, and Prof. Veena Gadad
+            on the traffic decongestion system, HTTP3/QUIC protocol survey, and server firmware
+            management, respectively. Additionally, I was a member of the
+            <a target="_blank" href="https://ecellrvce.in">Entrepreneurship Cell</a> and a volunteer for
+            the Rotaract Club of RVCE.
+          </p>
+          <p>
+            Before RVCE, I did my pre-university education with Deeksha Integrated Learning at
+            <a target="_blank" href="https://www.revapucollege.edu.in/yelahanka/about-yelahanka">
+              Reva Independent PU College</a>, Bangalore, India. It is here where I learned how to study and
+            the importance of
+            education and hard work. The passion and support of the teachers here truly inspired me.
+          </p>
+          <p>
+            It all started at <a target="_blank" href="https://deepayanschool.com">Deepayan School</a>, Hospet,
+            India.
+          </p>
+          <p>
+            I'm forever grateful to my mother, father, younger brother, sister, well-wishers, and teachers for
+            their unconditional love, guidance, and support.
+          </p>
+        </div>
+      </div>`;
+  }
+}
+
+class MyEducation extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.innerHTML = `
+      <div id="education">
+      <div class="education-section">
+        <div class="education-text">
+          <section class="education-title">Kahlert School of Computing, The University of Utah</section>
+          <section class="degree-title">Master of Science, Computer Science</section>
+          <section class="education-subtitle">
+            Aug 2023 - May 2025
+            <br>
+            Salt Lake City, Utah, USA
+            <br>
+            <br>
+            u1471482@umail.utah.edu
+          </section>
+        </div>
+        <figure style="margin: 0; height: 100%">
+          <img class="education-image" src="./assets/uofu.jpeg" alt="The University of Utah U Statue.">
+          <figcaption>Famous U Statue.</figcaption>
+        </figure>
+      </div>
+      <br>
+      <br>
+      <div class="education-section">
+        <div class="education-text">
+          <section class="education-title">R. V. College of Engineering (RVCE)</section>
+          <section class="degree-title">Bachelor of Engineering, Computer Science & Engineering</section>
+          <section class="education-subtitle">
+            Aug 2016 - July 2020
+            <br>
+            Mysore Road, Bangalore, Karnataka, India
+            <br>
+            <br>
+            muteeban.cs16@rvce.edu.in
+          </section>
+        </div>
+        <figure style="margin: 0; height: 100%">
+          <img class="education-image" src="./assets/rvce.jpg" alt="RVCE Front Entrance.">
+          <figcaption>RVCE Front Gate. ID card is mandatory!</figcaption>
+        </figure>
+      </div>
+      <br>
+      <br>
+      <div class="education-section">
+        <div class="education-text">
+          <section class="education-title">Deeksha Reva Independent PU College</section>
+          <section class="degree-title">Pre-University Education, Computer Science</section>
+          <section class="education-subtitle">
+            May 2014 - June 2016
+            <br>
+            Yelahanka, Bangalore, Karnataka, India
+          </section>
+        </div>
+        <figure style="margin: 0; height: 100%">
+          <img class="education-image" src="./assets/reva.jpeg" alt="Reva PUC Building">
+          <figcaption>Reva PUC building has nice proverbs.</figcaption>
+        </figure>
+      </div>
+      <br>
+      <br>
+      <div class="education-section">
+        <div class="education-text">
+          <section class="education-title">Deepayan Secondary School</section>
+          <section class="degree-title">Kinder Garden, Primary, and High School</section>
+          <section class="education-subtitle">
+            Jan 2001 - April 2014
+            <br>
+            NC Colony, Hospet, Karnataka, India
+          </section>
+        </div>
+        <figure style="margin: 0; height: 100%">
+          <img class="education-image" src="./assets/deepayan.jpeg" alt="Deepayan Secondary School Building & Ground">
+          <figcaption>Deepayan new building & ground. 2011</figcaption>
+        </figure>
+      </div>
+      <br>
+      <br>
+    </div>`;
+  }
+}
+
+class MyExperience extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.innerHTML = `
+      <div style="font-size: 14px;">
+        <a href="#current">Current</a>&nbsp; |&nbsp;
+        <a href="#research">Research</a>&nbsp; |&nbsp;
+        <a href="#teaching">Teaching</a>&nbsp; |&nbsp;
+        <a href="#previous">Previous</a>&nbsp; |&nbsp;
+        <a href="#internships">Internships</a>
+      </div>
+      <br>
+      <div id="current">
+        <section class="experience-title">Current</section>
+      </div>
+      <hr class="hr">
+      <div id="research">
+        <section class="experience-title">Research</section>
+        <section class="company-title">University of Utah</section>
+        <section style="padding: 6px 0;"><i>Spring 2024: CS6950 Independent Study</i></section>
+        <section style="padding: 8px 0 0 0;">Prof. Vijay Nagarajan</section>
+        <ul>
+          <li>
+            New distributed scheduler for disaggregated memory like CXL, RDMA, etc.
+          </li>
+        </ul>
+      </div>
+      <!-- <hr class="hr"> -->
+      <div id="teaching">
+        <section class="experience-title">Teaching</section>
+        <section class="company-title">University of Utah</section>
+        <section style="padding: 6px 0;"><i>Spring 2024: CS4500 Senior Capstone Project</i></section>
+        <section style="padding: 6px 0;"><i>Fall 2023: CS4000 Senior Capstone Design</i></section>
+        <section style="padding: 8px 0 0 0;">Prof. Jim de st Germain, Prof. David Bean, and Prof. Aaron Wood</section>
+        <ul>
+          <li>
+            Mentoring a class of 160 senior undergraduates in their project ideation, design,
+            development, and deployment.
+          </li>
+        </ul>
+      </div>
+      <hr class="hr">
+      <div id="previous">
+        <section class="experience-title">Previous</section>
+        <div class="company" id="cisco">
+          <div>
+            <section class="company-title">Cisco Systems</section>
+            Aug 2020 - July 2023
+            <br>
+            mutnawaz@cisco.com
+            <br>
+            <br>
+            3rd floor, BGL 17
+            <br>
+            Cessna Park, Bangalore, India
+            <br>
+            <br>
+            <section class="role-title">Software Engineer II</section>
+            <ul>
+              <li>Engineered a diagnostic tool for Cisco servers, enabling troubleshooting of CPUs, DIMMs, &
+                PCIe devices. Achieved 40% reduction in downtime & 10% decrease in RMA costs, streamlining
+                debugging for TAC.
+              </li>
+              <li>Designed a Data Sanitization framework & Redfish APIs to fully wipe data from storage
+                controllers, NVMe & disks.
+              </li>
+              <li>Owned and revamped Cisco firmware application front-end with web components and integrated
+                12+ back-end APIs. Shipped the application in a customized Linux container, offering CLI,
+                UI, & Redfish REST APIs interfaces.
+              </li>
+              <li>Implemented thread synchronization to concurrently install operating systems and update the
+                firmware of 100+ Cisco UCS servers at once.
+              </li>
+            </ul>
+            <section class="role-title">Software Engineer</section>
+            <ul>
+              <li>Worked on Baseboard Management Controller to streamline low-level firmware and BIOS update,
+                resulting in a 15% reduction in system downtime and improved system stability.
+              </li>
+              <li>Migrate from legacy build systems to container-based CI/CD builds utilizing runC and
+                dockerd runtime engines, resulting in a notable 20% acceleration in build times.
+              </li>
+              <li>Owned and maintained Cisco Inventory Portal by automating source check-ins, creating
+                SSH key-pairs, and optimizing large NFS storage, resulting in a 30% reduction in
+                storage & 2x API performance.
+              </li>
+            </ul>
+          </div>
+          <div class="company-images">
+            <figure>
+              <img class="company-image" src="./assets/cisco1.png" alt="Cisco Team Outing">
+              <figcaption>Cisco First Team Outing. Aug 26, 2022.</figcaption>
+            </figure>
+            <figure>
+              <img class="company-image" src="./assets/cisco2.png" alt="Cisco Last Working Day">
+              <figcaption>Cisco Last Working Day. Jul 20, 2023.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <hr class="hr">
+      <div id="internships">
+        <section class="experience-title">Internships</section>
+        <section class="company-title" id="cisco-internship">Cisco Systems</section>
+        Jan 2020 - Jun 2020
+        <br>
+        mutnawaz@cisco.com
+        <br>
+        <br>
+        <section class="role-title">Software Engineer Intern</section>
+        <ul>
+          <li>
+            Developed 3 new industry-standard Redfish APIs for firmware discovery, update, & monitoring.
+          </li>
+          <li>
+            Ported 7,000+ source code from Python2 to Python3 with no performance impact.
+          </li>
+        </ul>
+        <div class="company-images">
+          <figure>
+            <img class="company-image" src="./assets/cisco0.png" alt="Cisco Onboarding">
+            <figcaption>Cisco Internship Onboarding. Jan 16, 2020.</figcaption>
+          </figure>
+        </div>
+      </div>`;
+  }
+}
+
+class MyFilter extends HTMLElement {
+  constructor() {
+    super();
+    this.skills = [];
+    this.years = [];
+    this.titles = [];
+    this.selectedSkills = [];
+    this.selectedYears = [];
+    this.selectedTitles = [];
+    this.projects = window.projects;
+  }
+
+  connectedCallback() {
+    this.prepareFilters();
+    // FIXME When filter is added clicking on x of filter must also trigger this event.
+    this.addEventListener("click", this.onFilterSelect);
+    this.render();
+  }
+
+  prepareFilters() {
+    this.years = this.projects.map((p) => p.Year);
+    this.years = [...new Set(this.years)]; // Remove duplicates
+    // this.years = this.years.filter((value, index)=> this.years.indexOf(value) === index); // Remove duplicates
+    this.years.sort().reverse(); // Current year at the beginning.
+
+    this.titles = this.projects.map((p) => p.Title);
+    this.titles = [...new Set(this.titles)]; // Remove duplicates
+
+    // this.professors = this.projects.map((p) => p.Professor);
+    // this.professors = [...new Set(this.professors)]; // Remove duplicates
+
+    this.skills = this.projects.map((p) => p.Skills).flat(1); // Convert 2D array to 1D array.
+    this.skills = [...new Set(this.skills)]; // Remove duplicates
+    this.skills.sort();
+  }
+
+  onFilterSelect() {
+    let selectedYears = Array.from(
+      document.getElementById("selectedYears").options
+    )
+      .filter((option) => option.selected)
+      .map((option) => option.value);
+
+    // console.log("this.selectedYears", selectedYears);
+    this.selectedYears = selectedYears;
+
+    let selectedSkills = Array.from(
+      document.getElementById("selectedSkills").options
+    )
+      .filter((option) => option.selected)
+      .map((option) => option.value);
+
+    // console.log("this.selectedSkills", selectedSkills);
+    this.selectedSkills = selectedSkills;
+
+    let selectedTitles = Array.from(
+      document.getElementById("selectedTitles").options
+    )
+      .filter((option) => option.selected)
+      .map((option) => option.value);
+
+    // console.log("this.selectedTitles", selectedTitles);
+    this.selectedTitles = selectedTitles;
+
+    // Prepare the projects to show with filters selected.
+    // Start from all projects and filter one bye one.
+    this.selectedProjects = this.projects;
+    if (this.selectedYears.length) {
+      this.selectedProjects = this.selectedProjects.filter((p) =>
+        this.selectedYears.includes(p.Year)
+      );
+    }
+
+    // console.log("this.selectedProjects", this.selectedProjects);
+    if (this.selectedSkills.length) {
+      this.selectedProjects = this.selectedProjects.filter((project) =>
+        project.Skills.some((skill, _) => this.selectedSkills.includes(skill))
+      );
+    }
+
+    if (this.selectedTitles.length) {
+      this.selectedProjects = this.selectedProjects.filter((p) =>
+        this.selectedTitles.includes(p.Title)
+      );
+    }
+
+    this.renderMyProject();
+  }
+
+  renderMyProject() {
+    const component = document.querySelector("my-project");
+    component.projects = JSON.stringify(this.selectedProjects);
+  }
+
+  renderFilters() {
+    let filters = ``;
+    const filterIcon = `<svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2" viewBox="0 0 30 30" id="filter"><path fill="#111224" d="M17 11H4A1 1 0 0 1 4 9H17A1 1 0 0 1 17 11zM26 11H22a1 1 0 0 1 0-2h4A1 1 0 0 1 26 11z"></path><path fill="#111224" d="M19.5 13.5A3.5 3.5 0 1 1 23 10 3.5 3.5 0 0 1 19.5 13.5zm0-5A1.5 1.5 0 1 0 21 10 1.5 1.5 0 0 0 19.5 8.5zM26 21H13a1 1 0 0 1 0-2H26A1 1 0 0 1 26 21zM8 21H4a1 1 0 0 1 0-2H8A1 1 0 0 1 8 21z"></path><path fill="#111224" d="M10.5,23.5A3.5,3.5,0,1,1,14,20,3.5,3.5,0,0,1,10.5,23.5Zm0-5A1.5,1.5,0,1,0,12,20,1.5,1.5,0,0,0,10.5,18.5Z"></path></svg>`;
+
+    let yearFilter = `<select id="selectedYears" placeholder="Select Year" txtSearch="Search Year" style="width: 160px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
+    yearFilter += this.years.map(
+      (year) => `<option value="${year}">${year}</option>`
+    );
+    yearFilter += "</select>";
+
+    let skillFilter = `<select id="selectedSkills" placeholder="Select Skills" txtSearch="Search Skills" style="width: 180px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
+    skillFilter += this.skills.map(
+      (skill) => `<option value="${skill}">${skill}</option>`
+    );
+    skillFilter += "</select>";
+
+    let titleFilter = `<select id="selectedTitles" placeholder="Select Projects" txtSearch="Search Projects" style="width: 320px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
+    titleFilter += this.titles.map(
+      (skill) => `<option value="${skill}">${skill}</option>`
+    );
+    titleFilter += "</select>";
+
+    filters += `<div class="filters-div">${filterIcon} ${titleFilter}&nbsp; ${skillFilter}&nbsp; ${yearFilter}</div>`;
+    return filters;
+  }
+
+  render() {
+    this.innerHTML = `${this.renderFilters()}`;
+  }
+}
+
+class MyProject extends HTMLElement {
+  static observedAttributes = ["projects"];
+
+  constructor() {
+    super();
+    this.skillCount = 0;
+    this.totalSkillCount = this.getSkillCount(window.projects);
+    this.projectCount = window.projects.length;
+    // Property projects here is a string. my-filter component sends a string of objects.
+    this.projects = JSON.stringify(window.projects);
+  }
+
+  connectedCallback() {
+    if (!this.projects) return;
+
+    let projectMap = this.prepareProjectMap();
+    this.render(projectMap);
+  }
+
+  getSkillCount(projects) {
+    let skillCount;
+    skillCount = projects.map((p) => p.Skills).flat(1); // Convert 2D array to 1D array.
+    skillCount = [...new Set(skillCount)]; // Remove duplicates
+    return skillCount.length;
+  }
+
+  get projects() {
+    return this.getAttribute("projects");
+  }
+
+  set projects(newValue) {
+    this.setAttribute("projects", newValue);
+  }
+
+  attributeChangedCallback(_, oldValue, newValue) {
+    // Don't change the project value when newValue is empty.
+    if (newValue && oldValue !== newValue) {
+      this.projects = newValue;
+      this.connectedCallback(); // Re-render manually when the project value changes.
+    }
+  }
+
+  prepareProjectMap() {
+    // Convert the string from my-filter to object.
+    let projects = JSON.parse(this.projects);
+    this.projectCount = projects.length;
+    this.skillCount = this.getSkillCount(projects);
+
+    let projectMap = projects.reduce(function (map, project) {
+      if (!(project.Year in map)) map[project.Year] = [];
+      map[project.Year].push(project);
+      return map;
+    }, {});
+
+    const map = new Map(Object.entries(projectMap));
+    let sortedArray = Array.from(map.entries());
+
+    sortedArray.sort((a, b) => b[0] - a[0]);
+    let sortedMap = new Map(sortedArray);
+
+    return sortedMap;
+  }
+
+  getProjectTitle(p) {
+    if (p.TitleLink && p.TitleLink !== "")
+      return `<a target="_blank" href="${p.TitleLink}"><section class="project-title">${p.Title}</section></a>`;
+
+    return `<section class="project-title">${p.Title}</section>`;
+  }
+
+  getGithubLink(p) {
+    if (p.GithubLink && p.GithubLink !== "")
+      return `
+        <section class="project-subsection">
+          Code:&nbsp;
+          <a target="_blank" href="${p.GithubLink}">
+            ${p.GithubLink.replace("https://", "")}
+          </a>
+        </section>`;
+
+    return ``;
+  }
+
+  getTeamSize(p) {
+    if (p.TeamSize && p.TeamSize > 1)
+      return `&nbsp; • &nbsp;Team of ${p.TeamSize}`;
+
+    return ``;
+  }
+
+  getProfessorName(p) {
+    if (p.Professor && p.Professor !== "")
+      return `&nbsp; • &nbsp; Taught by ${p.Professor}`;
+
+    return ``;
+  }
+
+  getSkills(p) {
+    if (p.Skills && p.Skills.length) {
+      return `${p.Skills.map((tag) => `&nbsp;&nbsp;#${tag}`).join("")}`;
+    }
+
+    return ``;
+  }
+
+  renderProject(p) {
+    return `
+      ${this.getProjectTitle(p)}
+      <section class="project-subsection">
+        ${p.Date} &nbsp;•&nbsp; Skills: ${this.getSkills(p)}
+        ${this.getTeamSize(p)} ${this.getProfessorName(p)}
+      </section>
+      ${this.getGithubLink(p)}
+      <section class="project-description">${p.Description}</section>
+      <hr class="hr">`;
+  }
+
+  renderProjectByYear(projects) {
+    return projects.map((p) => `${this.renderProject(p)}`).join(" ");
+  }
+
+  render(projectMap) {
+    let resultantHTML = `<br><i style="font-size: 12px">Showing ${this.projectCount} projects from ${window.projects.length} projects with ${this.skillCount} skills from ${this.totalSkillCount} skills.</i>`;
+
+    projectMap.forEach((projects, year) => {
+      resultantHTML += `<h2>${year}</h2>${this.renderProjectByYear(projects)}`;
+    });
+
+    this.innerHTML = resultantHTML;
+  }
+}
+
+class MyPublication extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.innerHTML = `
+      <div id="#publications">
+        <ol>
+          <li>
+            <section class="paper-title">
+              <a target="_blank" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9777199&isnumber=9776641">
+                A Detail Survey on QUIC and its Impact on Network Data Transmission
+              </a>
+            </section>
+            2022 6th International Conference on Trends in Electronics and Informatics (ICOEI), Tirunelveli,
+            India, 2022, pp. 378-385, doi: 10.1109/ICOEI53556.2022.9777199.
+            <section class="paper-authors">
+              <i>Pratiksha Narasimha Nayak G; Nimisha Dey; Neha N; Malavika Hariprasad; Sandhya S; Minal Moharir;
+                <strong>Muteeb Akram</strong>
+              </i>
+            </section>
+          </li>
+          <li>
+            <section class="paper-title">
+              <a target="_blank" href="https://www.irjet.net/archives/V7/i5/IRJET-V7I51018.pdf">
+                Server Firmware Management using DMTF Redfish REST APIs
+              </a>
+            </section>
+            May 2020, International Research Journal of Engineering and Technology (IRJET)
+            <section class="paper-authors">
+              <i><strong>Muteeb Akram Nawaz</strong>, Veena Gadad (Dept. of Computer Science and Engineering,
+                R V College of Engineering, Karnataka, India)
+              </i>
+            </section>
+            <section class="paper-subsection">
+              [ <a href="https://www.dmtf.org/about/academicalliance#redfish">DMTF Redfish Recognition</a> ]
+            </section>
+          </li>
+        </ol>
+      </div>`;
+  }
+}
+
+class MyContact extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.innerHTML = `
+      <div id="contact">
+        <p style="padding: 6px 0 0 0;">Hello there!</p>
+        <p>Feel free to reach out to me on any of the platforms.</p>
+        <ul>
+          <li>Email: <a target="_blank" href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></li>
+          <li>Github: <a target="_blank" href="https://github.com/muteebakram">github.com/muteebakram</a></li>
+          <li>
+            Twitter: <a target="_blank" href="https://www.twitter.com/muteeb_akram/">twitter.com/muteeb_akram</a>
+          </li>
+          <li>
+            LinkedIn: <a target="_blank" href="https://www.linkedin.com/in/muteeb-akram/">linkedin.com/in/muteeb-akram</a>
+          </li>
+          <li>
+            Google Scholar: <a target="_blank"
+              href="https://scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en">scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en</a>
+          </li>
+        </ul>
+        <p>Thanks for stopping by.</p>
+      </div>`;
+  }
+}
+
+class MyFooter extends HTMLElement {
+  static observedAttributes = [
+    "showHR",
+    "showTop",
+    "showCopyright",
+    "showLastUpdated",
+  ];
+
+  constructor() {
+    super();
+    this.lastUpdated = "Mar 10, 2024";
+    this.showHR = this.hasAttribute("showHR");
+    this.showTop = this.hasAttribute("showTop");
+    this.showCopyright = this.hasAttribute("showCopyright");
+    this.showLastUpdated = this.hasAttribute("showLastUpdated");
+  }
+
+  connectedCallback() {
+    const lastUpdated = `<div class="last-updated">Last Updated ${this.lastUpdated}</div>`;
+    const copyright = `<div class="copyright-text">™ and © Muteeb Akram. All Rights Reserved.</div>`;
+
+    this.innerHTML = `
+      <div class="footer-container">
+        ${this.showHR ? `<hr>` : ``}
+        <footer class="footer">
+          ${this.showCopyright ? copyright : ``}
+          ${this.showTop ? `` : ``}
+          ${this.showLastUpdated ? lastUpdated : ``}
+        </footer>
+      </div>`;
   }
 }
 
 customElements.define("my-header", MyHeader);
+customElements.define("my-home", MyHome);
+customElements.define("my-experience", MyExperience);
+customElements.define("my-education", MyEducation);
+customElements.define("my-publication", MyPublication);
+customElements.define("my-filter", MyFilter);
+customElements.define("my-project", MyProject);
+customElements.define("my-contact", MyContact);
 customElements.define("my-footer", MyFooter);
-customElements.define("my-filters", MyFilters);
-customElements.define("my-projects", MyProjects);
