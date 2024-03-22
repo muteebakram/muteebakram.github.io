@@ -339,12 +339,12 @@ window.projects = [
 ];
 
 class MyHeader extends HTMLElement {
-  static observedAttributes = ["title", "theme"];
+  static observedAttributes = ["pageTitle", "theme"];
 
   constructor() {
     super();
     this.theme = "light";
-    this.title = "Muteeb Akram";
+    this.pageTitle = this.getAttribute("pageTitle")
   }
 
   get theme() {
@@ -356,7 +356,7 @@ class MyHeader extends HTMLElement {
   }
 
   attributeChangedCallback(attr, oldValue, newValue) {
-    if (oldValue !== newValue && attr === "title") this.title = newValue;
+    if (oldValue !== newValue && attr === "pageTitle") this.pageTitle = newValue;
     else if (oldValue !== newValue && attr === "theme") this.theme = newValue;
   }
 
@@ -406,7 +406,16 @@ class MyHeader extends HTMLElement {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link rel="stylesheet" href="./style.css">
-        <title>Muteeb Akram: ${this.title}</title>
+        <title>Muteeb Akram: ${this.pageTitle}</title>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1W01HG67P1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-1W01HG67P1');
+        </script>
       </head>
 
       <header>
@@ -425,7 +434,7 @@ class MyHeader extends HTMLElement {
           <section title="Publications"><a href="./publications.html">Publications</a></section>
           <section title="Contact"><a href="./contact.html">Contact</a></section>
         </div>
-        <h2 style="padding-top: 12px;">${this.title}</h2>
+        <h2 style="padding-top: 12px;">${this.pageTitle}</h2>
       </header>`;
   }
 }
@@ -438,9 +447,9 @@ class MyHome extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <div class="page-content">
-        <div class="about-image">
+        <div class="profile-container">
           <img class="profile-image" src="./assets/profile-image.jpg" alt="Profile Picture of Muteeb">
-          <div class="about-bio">
+          <div>
             <strong>Muteeb Akram Nawaz Doctor</strong>
             <section class="small-pad" style="margin-top: 8px;">Graduate Student & Teaching Assistant</section>
             <section class="small-pad">The University of Utah</section>

@@ -97,10 +97,11 @@ footer {
   text-align: center;
 }
 
-.about-image {
+.profile-container {
   width: 100%;
   margin: 2% 0;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
 }
 
@@ -109,15 +110,12 @@ footer {
   width: 220px;
   min-width: 220px;
   border-radius: 2%;
-}
-
-.about-bio {
-  padding: 0 24px;
+  padding-right: 24px;
+  padding-bottom: 12px;
 }
 
 .about-text {
   text-align: justify;
-  padding: 6px 0;
 }
 
 .experience-title {
