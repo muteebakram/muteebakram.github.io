@@ -344,7 +344,7 @@ class MyHeader extends HTMLElement {
   constructor() {
     super();
     this.theme = "light";
-    this.pageTitle = this.getAttribute("pageTitle")
+    this.pageTitle = this.getAttribute("pageTitle");
   }
 
   get theme() {
@@ -356,8 +356,9 @@ class MyHeader extends HTMLElement {
   }
 
   attributeChangedCallback(attr, oldValue, newValue) {
-    if (oldValue !== newValue && attr === "pageTitle") this.pageTitle = newValue;
-    else if (oldValue !== newValue && attr === "theme") this.theme = newValue;
+    if (oldValue !== newValue && attr === "pageTitle") {
+      this.pageTitle = newValue;
+    } else if (oldValue !== newValue && attr === "theme") this.theme = newValue;
   }
 
   connectedCallback() {
@@ -407,15 +408,6 @@ class MyHeader extends HTMLElement {
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link rel="stylesheet" href="./style.css">
         <title>Muteeb Akram: ${this.pageTitle}</title>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-1W01HG67P1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-1W01HG67P1');
-        </script>
       </head>
 
       <header>
