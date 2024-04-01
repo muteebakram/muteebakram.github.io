@@ -245,7 +245,7 @@ window.projects = [
     GithubLink: "https://github.com/muteebakram/ExpenseApp",
   },
   {
-    Title: "CI/CD with Docker Cloud Computing",
+    Title: "CI/CD with Docker Cloud",
     Description:
       "Implement Continuous Integration and Continuous Deployment on the docker cloud. Once pushed to the cloud, a test container spins the application container and runs tests to validate the correctness of the application. When tests are passed, the new application container is deployed; otherwise, deployment fails.",
     Year: "2020",
@@ -453,6 +453,7 @@ class MyHome extends HTMLElement {
           </div>
         </div>
         <div class="about-text">
+          <h4>About Me</h4>
           <p>
             I'm pursuing graduate studies in Computer Science at the
             <a target="_blank" href="https://www.cs.utah.edu">Kahlert School of Computing</a>,
@@ -470,7 +471,7 @@ class MyHome extends HTMLElement {
             in Bangalore, India. I started as a college intern and progressed to the role of Software Engineer 2
             before leaving. While there, I worked on cutting-edge enterprise hardware and
             implemented industry-standard
-            <a target="_blank" href="https://www.dmtf.org/standards/redfish">DMTF Redfish APIs</a>
+            <a target="_blank" href="https://www.dmtf.org/standards/redfish">DMTF Redfish API</a>
             for diagnosing hardware, updating firmware, disk data
             sanitization, and installing operating systems for
             <a target="_blank"
@@ -617,8 +618,8 @@ class MyExperience extends HTMLElement {
       <div id="research">
         <section class="experience-title">Research</section>
         <section class="company-title">University of Utah</section>
-        <section style="padding: 6px 0;"><i>Spring 2024: CS6950 Independent Study</i></section>
-        <section style="padding: 8px 0 0 0;">Prof. Vijay Nagarajan</section>
+        <section style="padding: 12px 0 4px 0;"><i>Spring 2024: CS6950 Independent Study</i></section>
+        <section style="padding: 12px 0 0 0;">Prof. Vijay Nagarajan</section>
         <ul>
           <li>
             New distributed scheduler for disaggregated memory like CXL, RDMA, etc.
@@ -629,9 +630,9 @@ class MyExperience extends HTMLElement {
       <div id="teaching">
         <section class="experience-title">Teaching</section>
         <section class="company-title">University of Utah</section>
-        <section style="padding: 6px 0;"><i>Spring 2024: CS4500 Senior Capstone Project</i></section>
-        <section style="padding: 6px 0;"><i>Fall 2023: CS4000 Senior Capstone Design</i></section>
-        <section style="padding: 8px 0 0 0;">Prof. Jim de st Germain, Prof. David Bean, and Prof. Aaron Wood</section>
+        <section style="padding: 12px 0 4px 0;"><i>Fall 2023: CS4000 Senior Capstone Design</i></section>
+        <section style="padding: 4px 0;"><i>Spring 2024: CS4500 Senior Capstone Project</i></section>
+        <section style="padding: 12px 0 0 0;">Prof. Jim de st Germain, Prof. David Bean, and Prof. Aaron Wood</section>
         <ul>
           <li>
             Mentoring a class of 160 senior undergraduates in their project ideation, design,
@@ -657,16 +658,16 @@ class MyExperience extends HTMLElement {
             <br>
             <section class="role-title">Software Engineer II</section>
             <ul>
-              <li>Engineered a diagnostic tool for Cisco servers, enabling troubleshooting of CPUs, DIMMs, &
-                PCIe devices. Achieved 40% reduction in downtime & 10% decrease in RMA costs, streamlining
-                debugging for TAC.
+              <li>Engineered a diagnostic utility for Cisco UCS servers, enabling troubleshooting of CPUs, 
+                DIMMs, & PCIe devices. Achieving 40% faster root cause dectection, 10% decrease in RMA costs,
+                 and streamlining debugging for TAC.
               </li>
-              <li>Designed a Data Sanitization framework & Redfish APIs to fully wipe data from storage
+              <li>Designed a secure Data Sanitization framework with Redfish APIs to fully wipe data from storage
                 controllers, NVMe & disks.
               </li>
-              <li>Owned and revamped Cisco firmware application front-end with web components and integrated
+              <li>Owned & revamped Cisco firmware application front-end with web components and designed
                 12+ back-end APIs. Shipped the application in a customized Linux container, offering CLI,
-                UI, & Redfish REST APIs interfaces.
+                UI, & Redfish interfaces.
               </li>
               <li>Implemented thread synchronization to concurrently install operating systems and update the
                 firmware of 100+ Cisco UCS servers at once.

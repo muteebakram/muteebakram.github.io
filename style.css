@@ -46,10 +46,10 @@ figure {
 }
 
 figcaption {
-  text-align: center;
-  display: table-caption;
-  caption-side: bottom;
   padding: 4px 0;
+  text-align: center;
+  caption-side: bottom;
+  display: table-caption;
 }
 
 a {
@@ -116,6 +116,7 @@ footer {
 
 .about-text {
   text-align: justify;
+  padding-bottom: 24px;
 }
 
 .experience-title {
@@ -125,8 +126,9 @@ footer {
 }
 
 .company-title {
-  padding: 8px 0;
+  font-size: 16px;
   font-weight: 600;
+  padding: 12px 0 6px 0; 
 }
 
 .education-title {
@@ -150,11 +152,13 @@ footer {
 
 .company-images {
   display: flex;
+  flex-wrap: wrap;
+  padding-left: 24px; 
   /* justify-content: space-between; */
 }
 
 .company-image {
-  width: 240px;
+  width: 250px;
   border-radius: 2%;
 }
 
