@@ -24,7 +24,9 @@ body {
   line-height: 1.2;
   margin-left: auto;
   margin-right: auto;
-  font-family: "Libre Baskerville", Libre, Georgia, Times, serif;
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Oxygen,
+    Ubuntu, Cantarell, open sans, helvetica neue, sans-serif;
+  /* font-family: "Libre Baskerville", Libre, Georgia, Times, serif; */
   /* font-family: "SF Pro Display", "SF Pro Icons"; */
   /* font-family: Arial, Helvetica, sans-serif; */
   /* font-family: "Helvetica, Arial, sans-serif"; */
@@ -106,12 +108,12 @@ footer {
 }
 
 .profile-image {
-  height: auto;
-  width: 220px;
-  min-width: 220px;
-  border-radius: 2%;
-  padding-right: 24px;
-  padding-bottom: 12px;
+  height: 210px;
+  width: 210px;
+  min-width: 200px;
+  border-radius: 4%;
+  margin-right: 24px;
+  margin-bottom: 12px;
 }
 
 .about-text {
@@ -128,7 +130,7 @@ footer {
 .company-title {
   font-size: 16px;
   font-weight: 600;
-  padding: 12px 0 6px 0; 
+  padding: 12px 0 6px 0;
 }
 
 .education-title {
@@ -153,7 +155,7 @@ footer {
 .company-images {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 24px; 
+  padding-left: 24px;
   /* justify-content: space-between; */
 }
 
@@ -162,12 +164,17 @@ footer {
   border-radius: 2%;
 }
 
-.row {
+.row-header {
   width: 100%;
   margin: 16px 0;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.row-header-item {
+  padding: 0 8px;
 }
 
 .page-container {
@@ -280,6 +287,7 @@ footer {
 
 .small-pad {
   padding: 2px 0;
+  font-size: 14px;
 }
 
 .footer-container {

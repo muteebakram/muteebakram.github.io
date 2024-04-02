@@ -418,13 +418,13 @@ class MyHeader extends HTMLElement {
           </div>
         </div>
         <hr>
-        <div class="row">
-          <section title="Home"><a href="./index.html">Home</a></section>
-          <section title="Experience"><a href="./experience.html">Experience</a></section>
-          <section title="Education"><a href="./education.html">Education</a></section>
-          <section title="Projects"><a href="./projects.html">Projects</a></section>
-          <section title="Publications"><a href="./publications.html">Publications</a></section>
-          <section title="Contact"><a href="./contact.html">Contact</a></section>
+        <div class="row-header">
+          <section class="row-header-item" style="padding-left: 0;" title="Home"><a href="./index.html">Home</a></section>
+          <section class="row-header-item" title="Experience"><a href="./experience.html">Experience</a></section>
+          <section class="row-header-item" title="Education"><a href="./education.html">Education</a></section>
+          <section class="row-header-item" title="Projects"><a href="./projects.html">Projects</a></section>
+          <section class="row-header-item" title="Publications"><a href="./publications.html">Publications</a></section>
+          <section class="row-header-item" style="padding-right: 0;" title="Contact"><a href="./contact.html">Contact</a></section>
         </div>
         <h2 style="padding-top: 12px;">${this.pageTitle}</h2>
       </header>`;
@@ -453,7 +453,7 @@ class MyHome extends HTMLElement {
           </div>
         </div>
         <div class="about-text">
-          <h4>About Me</h4>
+          <h4 style="margin: 12px 0;">About Me</h4>
           <p>
             I'm pursuing graduate studies in Computer Science at the
             <a target="_blank" href="https://www.cs.utah.edu">Kahlert School of Computing</a>,
