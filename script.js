@@ -453,7 +453,7 @@ class MyHome extends HTMLElement {
           </div>
         </div>
         <div class="about-text">
-          <h4 style="margin: 12px 0;">About Me</h4>
+          <h4>About Me</h4>
           <p>
             I'm pursuing graduate studies in Computer Science at the
             <a target="_blank" href="https://www.cs.utah.edu">Kahlert School of Computing</a>,
@@ -1075,8 +1075,8 @@ class MyFooter extends HTMLElement {
   }
 
   connectedCallback() {
-    const lastUpdated = `<div class="last-updated">Last Updated ${this.lastUpdated}</div>`;
-    const copyright = `<div class="copyright-text">™ and © Muteeb Akram. All Rights Reserved.</div>`;
+    const lastUpdated = `<div class="footer-text">Last Updated ${this.lastUpdated}</div>`;
+    const copyright = `<div class="footer-text">™ and © Muteeb Akram. All Rights Reserved.</div>`;
 
     this.innerHTML = `
       <div class="footer-container">
