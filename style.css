@@ -41,6 +41,10 @@ h1 h2 {
   margin: 24px;
 }
 
+h3 {
+  margin: 16px 0;
+}
+
 figure {
   display: table;
   margin: 8px 16px;
@@ -129,9 +133,9 @@ footer {
 }
 
 .company-title {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
-  padding: 12px 0 6px 0;
+  padding: 12px 0;
 }
 
 .education-title {
@@ -175,7 +179,7 @@ footer {
 }
 
 .row-header-item {
-  padding: 0 8px;
+  padding: 0 2px;
 }
 
 .page-container {
@@ -228,9 +232,9 @@ footer {
 }
 
 .filter-icon {
-  width: 20px;
+  width: 28px;
   height: 18px;
-  padding: 4px 6px;
+  padding: 4px 2px;
   margin-right: 8px;
   border-radius: 6px;
   background-color: white;
@@ -239,12 +243,15 @@ footer {
 .project-title {
   font-size: 18px;
   font-weight: 600;
-  padding: 4px 0px 4px 0px;
+  margin: 16px 0;
 }
 
 .project-subsection {
-  font-size: 14px;
+  display: flex;
   margin: 8px 0;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: dimgrey;
 }
 
 .project-description {

@@ -85,7 +85,7 @@ window.projects = [
       <li>Implement Stride & Distance Hardware-based Cache Prefetchers on Intel Dynamic Pin Tool.</li></ul>",
     Year: "2023",
     Date: "Aug 21, 2023",
-    Skills: ["Computer Architecture", "C++", "Intel Dynamic Pin Tool."],
+    Skills: ["Computer Architecture", "C++", "Intel Dynamic Pin Tool"],
     TeamSize: 1,
     GithubLink:
       "https://github.com/muteebakram/CS6810/tree/master/Assignments/2",
@@ -97,7 +97,7 @@ window.projects = [
       <li>Implement Local, Gshare Global, & Tournament Branch Predictors on the Intel Dynamic Pin Tool.</li></ul>",
     Year: "2023",
     Date: "Aug 21, 2023",
-    Skills: ["Computer Architecture", "C++", "Intel Dynamic Pin Tool."],
+    Skills: ["Computer Architecture", "C++", "Intel Dynamic Pin Tool"],
     TeamSize: 1,
     GithubLink:
       "https://github.com/muteebakram/CS6810/tree/master/Assignments/1",
@@ -114,7 +114,7 @@ window.projects = [
       "Computer Architecture",
       "Memory Models",
       "C++",
-      "Intel Dynamic Pin Tool.",
+      "Intel Dynamic Pin Tool",
     ],
     TeamSize: 1,
     Professor: "Prof. Vijay Nagarajan",
@@ -618,8 +618,8 @@ class MyExperience extends HTMLElement {
       <div id="research">
         <section class="experience-title">Research</section>
         <section class="company-title">University of Utah</section>
-        <section style="padding: 12px 0 4px 0;"><i>Spring 2024: CS6950 Independent Study</i></section>
-        <section style="padding: 12px 0 0 0;">Prof. Vijay Nagarajan</section>
+        <section style="padding: 4px 0;"><i>Spring 2024: CS6950 Independent Study</i></section>
+        <section style="padding: 8px 0 0 0;">Prof. Vijay Nagarajan</section>
         <ul>
           <li>
             New distributed scheduler for disaggregated memory like CXL, RDMA, etc.
@@ -630,9 +630,9 @@ class MyExperience extends HTMLElement {
       <div id="teaching">
         <section class="experience-title">Teaching</section>
         <section class="company-title">University of Utah</section>
-        <section style="padding: 12px 0 4px 0;"><i>Fall 2023: CS4000 Senior Capstone Design</i></section>
+        <section style="padding: 4px 0;"><i>Fall 2023: CS4000 Senior Capstone Design</i></section>
         <section style="padding: 4px 0;"><i>Spring 2024: CS4500 Senior Capstone Project</i></section>
-        <section style="padding: 12px 0 0 0;">Prof. Jim de st Germain, Prof. David Bean, and Prof. Aaron Wood</section>
+        <section style="padding: 12px 0 0 0;">Professors: Jim de st Germain, David Bean, and Aaron Wood</section>
         <ul>
           <li>
             Mentoring a class of 160 senior undergraduates in their project ideation, design,
@@ -825,19 +825,19 @@ class MyFilter extends HTMLElement {
     let filters = ``;
     const filterIcon = `<svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2" viewBox="0 0 30 30" id="filter"><path fill="#111224" d="M17 11H4A1 1 0 0 1 4 9H17A1 1 0 0 1 17 11zM26 11H22a1 1 0 0 1 0-2h4A1 1 0 0 1 26 11z"></path><path fill="#111224" d="M19.5 13.5A3.5 3.5 0 1 1 23 10 3.5 3.5 0 0 1 19.5 13.5zm0-5A1.5 1.5 0 1 0 21 10 1.5 1.5 0 0 0 19.5 8.5zM26 21H13a1 1 0 0 1 0-2H26A1 1 0 0 1 26 21zM8 21H4a1 1 0 0 1 0-2H8A1 1 0 0 1 8 21z"></path><path fill="#111224" d="M10.5,23.5A3.5,3.5,0,1,1,14,20,3.5,3.5,0,0,1,10.5,23.5Zm0-5A1.5,1.5,0,1,0,12,20,1.5,1.5,0,0,0,10.5,18.5Z"></path></svg>`;
 
-    let yearFilter = `<select id="selectedYears" placeholder="Select Year" txtSearch="Search Year" style="width: 160px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
+    let yearFilter = `<select id="selectedYears" placeholder="Select Year" txtSearch="Search Year" style="width: 20%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
     yearFilter += this.years.map(
       (year) => `<option value="${year}">${year}</option>`
     );
     yearFilter += "</select>";
 
-    let skillFilter = `<select id="selectedSkills" placeholder="Select Skills" txtSearch="Search Skills" style="width: 180px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
+    let skillFilter = `<select id="selectedSkills" placeholder="Select Skills" txtSearch="Search Skills" style="width: 30%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
     skillFilter += this.skills.map(
       (skill) => `<option value="${skill}">${skill}</option>`
     );
     skillFilter += "</select>";
 
-    let titleFilter = `<select id="selectedTitles" placeholder="Select Projects" txtSearch="Search Projects" style="width: 320px;" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
+    let titleFilter = `<select id="selectedTitles" placeholder="Select Projects" txtSearch="Search Projects" style="width: 40%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
     titleFilter += this.titles.map(
       (skill) => `<option value="${skill}">${skill}</option>`
     );
@@ -917,9 +917,9 @@ class MyProject extends HTMLElement {
 
   getProjectTitle(p) {
     if (p.TitleLink && p.TitleLink !== "")
-      return `<a target="_blank" href="${p.TitleLink}"><section class="project-title">${p.Title}</section></a>`;
+      return `<h3><a target="_blank" href="${p.TitleLink}">${p.Title}</a></h3>`;
 
-    return `<section class="project-title">${p.Title}</section>`;
+    return `<h3>${p.Title}</h3>`;
   }
 
   getGithubLink(p) {
@@ -937,21 +937,23 @@ class MyProject extends HTMLElement {
 
   getTeamSize(p) {
     if (p.TeamSize && p.TeamSize > 1)
-      return `&nbsp; • &nbsp;Team of ${p.TeamSize}`;
+      return `&nbsp;•&nbsp;Team of ${p.TeamSize}`;
 
     return ``;
   }
 
   getProfessorName(p) {
     if (p.Professor && p.Professor !== "")
-      return `&nbsp; • &nbsp; Taught by ${p.Professor}`;
+      return `&nbsp;•&nbsp; Taught by ${p.Professor}`;
 
     return ``;
   }
 
   getSkills(p) {
     if (p.Skills && p.Skills.length) {
-      return `${p.Skills.map((tag) => `&nbsp;&nbsp;#${tag}`).join("")}`;
+      return `&nbsp;•&nbsp; Skills:${p.Skills.map(
+        (tag) => `&nbsp;&nbsp;#${tag}`
+      ).join("")}`;
     }
 
     return ``;
@@ -961,7 +963,7 @@ class MyProject extends HTMLElement {
     return `
       ${this.getProjectTitle(p)}
       <section class="project-subsection">
-        ${p.Date} &nbsp;•&nbsp; Skills: ${this.getSkills(p)}
+        ${p.Date} ${this.getSkills(p)}
         ${this.getTeamSize(p)} ${this.getProfessorName(p)}
       </section>
       ${this.getGithubLink(p)}
@@ -1039,17 +1041,16 @@ class MyContact extends HTMLElement {
         <p style="padding: 6px 0 0 0;">Hello there!</p>
         <p>Feel free to reach out to me on any of the platforms.</p>
         <ul>
-          <li>Email: <a target="_blank" href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></li>
-          <li>Github: <a target="_blank" href="https://github.com/muteebakram">github.com/muteebakram</a></li>
+          <li><a target="_blank" href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></li>
+          <li><a target="_blank" href="https://github.com/muteebakram">github.com/muteebakram</a></li>
           <li>
-            Twitter: <a target="_blank" href="https://www.twitter.com/muteeb_akram/">twitter.com/muteeb_akram</a>
+            <a target="_blank" href="https://www.twitter.com/muteeb_akram/">twitter.com/muteeb_akram</a>
           </li>
           <li>
-            LinkedIn: <a target="_blank" href="https://www.linkedin.com/in/muteeb-akram/">linkedin.com/in/muteeb-akram</a>
+            <a target="_blank" href="https://www.linkedin.com/in/muteeb-akram/">linkedin.com/in/muteeb-akram</a>
           </li>
           <li>
-            Google Scholar: <a target="_blank"
-              href="https://scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en">scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en</a>
+            <a target="_blank" href="https://scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en">scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en</a>
           </li>
         </ul>
         <p>Thanks for stopping by.</p>

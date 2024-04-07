@@ -76,20 +76,24 @@ style.innerHTML = `
   border-radius:3px;
 }
 
-.multiselect-dropdown-list div{
-  padding: 4px 2px;
+.multiselect-dropdown-list div {
+  display: flex;
+  padding: 8px 2px;
+  align-items: center;
 }
+
 .multiselect-dropdown-list label{
   color: black;
   font-size: 14px;
   padding: 0px 6px;
 }
 .multiselect-dropdown-list input{
-  margin-right: 6px;  
+  margin: 2px 4px;  
 }
 .multiselect-dropdown-list div.checked{
 }
 .multiselect-dropdown-list div:hover{
+  border-radius: 8px;
   background-color: #ced4da;
 }
 .multiselect-dropdown span.maxselected {
