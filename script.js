@@ -518,81 +518,81 @@ class MyEducation extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <div id="education">
-      <div class="education-section">
-        <div class="education-text">
-          <section class="education-title">Kahlert School of Computing, The University of Utah</section>
-          <section class="degree-title">Master of Science, Computer Science</section>
-          <section class="education-subtitle">
-            Aug 2023 - May 2025
-            <br>
-            Salt Lake City, Utah, USA
-            <br>
-            <br>
-            u1471482@umail.utah.edu
-          </section>
+        <div class="education-section" style="margin-top: -8px;">
+          <div class="education-text">
+            <h3 id="masters">Kahlert School of Computing, The University of Utah</h3>
+            <section class="degree-title">Master of Science, Computer Science</section>
+            <section class="education-subtitle">
+              Aug 2023 - May 2025
+              <br>
+              Salt Lake City, Utah, USA
+              <br>
+              <br>
+              u1471482@umail.utah.edu
+            </section>
+          </div>
+          <figure class="education-figure-container">
+            <img class="education-image" src="./assets/uofu.jpeg" alt="The University of Utah U Statue.">
+            <figcaption>Famous U Statue.</figcaption>
+          </figure>
         </div>
-        <figure style="margin: 0; height: 100%">
-          <img class="education-image" src="./assets/uofu.jpeg" alt="The University of Utah U Statue.">
-          <figcaption>Famous U Statue.</figcaption>
-        </figure>
-      </div>
-      <br>
-      <br>
-      <div class="education-section">
-        <div class="education-text">
-          <section class="education-title">R. V. College of Engineering (RVCE)</section>
-          <section class="degree-title">Bachelor of Engineering, Computer Science & Engineering</section>
-          <section class="education-subtitle">
-            Aug 2016 - July 2020
-            <br>
-            Mysore Road, Bangalore, Karnataka, India
-            <br>
-            <br>
-            muteeban.cs16@rvce.edu.in
-          </section>
+        <br>
+        <br>
+        <div class="education-section">
+          <div class="education-text">
+            <h3 id="bachelors">R. V. College of Engineering (RVCE)</h3>
+            <section class="degree-title">Bachelor of Engineering, Computer Science & Engineering</section>
+            <section class="education-subtitle">
+              Aug 2016 - July 2020
+              <br>
+              Mysore Road, Bangalore, Karnataka, India
+              <br>
+              <br>
+              muteeban.cs16@rvce.edu.in
+            </section>
+          </div>
+          <figure class="education-figure-container">
+            <img class="education-image" src="./assets/rvce.jpg" alt="RVCE Front Entrance.">
+            <figcaption>RVCE Front Gate. ID card is mandatory!</figcaption>
+          </figure>
         </div>
-        <figure style="margin: 0; height: 100%">
-          <img class="education-image" src="./assets/rvce.jpg" alt="RVCE Front Entrance.">
-          <figcaption>RVCE Front Gate. ID card is mandatory!</figcaption>
-        </figure>
-      </div>
-      <br>
-      <br>
-      <div class="education-section">
-        <div class="education-text">
-          <section class="education-title">Deeksha Reva Independent PU College</section>
-          <section class="degree-title">Pre-University Education, Computer Science</section>
-          <section class="education-subtitle">
-            May 2014 - June 2016
-            <br>
-            Yelahanka, Bangalore, Karnataka, India
-          </section>
+        <br>
+        <br>
+        <div class="education-section">
+          <div class="education-text">
+            <h3 id="PUC">Deeksha Reva Independent PU College</h3>
+            <section class="degree-title">Pre-University Education, Computer Science</section>
+            <section class="education-subtitle">
+              May 2014 - June 2016
+              <br>
+              Yelahanka, Bangalore, Karnataka, India
+            </section>
+          </div>
+          <figure class="education-figure-container">
+            <img class="education-image" src="./assets/reva.jpeg" alt="Reva PUC Building">
+            <figcaption>Reva PUC building has nice proverbs.</figcaption>
+          </figure>
         </div>
-        <figure style="margin: 0; height: 100%">
-          <img class="education-image" src="./assets/reva.jpeg" alt="Reva PUC Building">
-          <figcaption>Reva PUC building has nice proverbs.</figcaption>
-        </figure>
-      </div>
-      <br>
-      <br>
-      <div class="education-section">
-        <div class="education-text">
-          <section class="education-title">Deepayan Secondary School</section>
-          <section class="degree-title">Kinder Garden, Primary, and High School</section>
-          <section class="education-subtitle">
-            Jan 2001 - April 2014
-            <br>
-            NC Colony, Hospet, Karnataka, India
-          </section>
+        <br>
+        <br>
+        <div class="education-section">
+          <div class="education-text">
+            <h3 id="classX">Deepayan Secondary School</h3>
+            <section class="degree-title">Kinder Garden, Primary, and High School</section>
+            <section class="education-subtitle">
+              Jan 2001 - April 2014
+              <br>
+              NC Colony, Hospet, Karnataka, India
+            </section>
+          </div>
+          <figure class="education-figure-container">
+            <img class="education-image" src="./assets/deepayan.jpeg" alt="Deepayan Secondary School Building & Ground">
+            <figcaption>Deepayan new building & ground. 2011</figcaption>
+          </figure>
         </div>
-        <figure style="margin: 0; height: 100%">
-          <img class="education-image" src="./assets/deepayan.jpeg" alt="Deepayan Secondary School Building & Ground">
-          <figcaption>Deepayan new building & ground. 2011</figcaption>
-        </figure>
-      </div>
-      <br>
-      <br>
-    </div>`;
+        <br>
+        <br>
+      </div>`;
   }
 }
 
@@ -618,7 +618,7 @@ class MyExperience extends HTMLElement {
       <div id="research">
         <section class="experience-title">Research</section>
         <section class="company-title">University of Utah</section>
-        <section style="padding: 4px 0;"><i>Spring 2024: CS6950 Independent Study</i></section>
+        <section class="role-title">Spring 2024: CS6950 Independent Study</section>
         <section style="padding: 8px 0 0 0;">Prof. Vijay Nagarajan</section>
         <ul>
           <li>
@@ -630,8 +630,8 @@ class MyExperience extends HTMLElement {
       <div id="teaching">
         <section class="experience-title">Teaching</section>
         <section class="company-title">University of Utah</section>
-        <section style="padding: 4px 0;"><i>Fall 2023: CS4000 Senior Capstone Design</i></section>
-        <section style="padding: 4px 0;"><i>Spring 2024: CS4500 Senior Capstone Project</i></section>
+        <section class="role-title">Fall 2023: CS4000 Senior Capstone Design</section>
+        <section class="role-title">Spring 2024: CS4500 Senior Capstone Project</section>
         <section style="padding: 12px 0 0 0;">Professors: Jim de st Germain, David Bean, and Aaron Wood</section>
         <ul>
           <li>
@@ -831,13 +831,13 @@ class MyFilter extends HTMLElement {
     );
     yearFilter += "</select>";
 
-    let skillFilter = `<select id="selectedSkills" placeholder="Select Skills" txtSearch="Search Skills" style="width: 30%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
+    let skillFilter = `<select id="selectedSkills" placeholder="Select Skills" txtSearch="Search Skills" style="width: 25%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
     skillFilter += this.skills.map(
       (skill) => `<option value="${skill}">${skill}</option>`
     );
     skillFilter += "</select>";
 
-    let titleFilter = `<select id="selectedTitles" placeholder="Select Projects" txtSearch="Search Projects" style="width: 40%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
+    let titleFilter = `<select id="selectedTitles" placeholder="Select Projects" txtSearch="Search Projects" style="width: 35%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
     titleFilter += this.titles.map(
       (skill) => `<option value="${skill}">${skill}</option>`
     );
@@ -976,7 +976,7 @@ class MyProject extends HTMLElement {
   }
 
   render(projectMap) {
-    let resultantHTML = `<br><i style="font-size: 12px">Showing ${this.projectCount} projects from ${window.projects.length} projects with ${this.skillCount} skills from ${this.totalSkillCount} skills.</i>`;
+    let resultantHTML = `<section class="filter-result">Showing ${this.projectCount} projects from ${window.projects.length} projects with ${this.skillCount} skills from ${this.totalSkillCount} skills.</section>`;
 
     projectMap.forEach((projects, year) => {
       resultantHTML += `<h2>${year}</h2>${this.renderProjectByYear(projects)}`;
@@ -1054,6 +1054,7 @@ class MyContact extends HTMLElement {
           </li>
         </ul>
         <p>Thanks for stopping by.</p>
+        <p>:wq</p>
       </div>`;
   }
 }
@@ -1080,14 +1081,14 @@ class MyFooter extends HTMLElement {
     const copyright = `<div class="footer-text">™ and © Muteeb Akram. All Rights Reserved.</div>`;
 
     this.innerHTML = `
-      <div class="footer-container">
-        ${this.showHR ? `<hr>` : ``}
-        <footer class="footer">
+      ${this.showHR ? `<hr>` : ``}
+      <footer>
+        <div class="footer-container">
           ${this.showCopyright ? copyright : ``}
           ${this.showTop ? `` : ``}
           ${this.showLastUpdated ? lastUpdated : ``}
-        </footer>
-      </div>`;
+        </div>
+      </footer>`;
   }
 }
 
