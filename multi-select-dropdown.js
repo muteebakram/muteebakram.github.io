@@ -2,11 +2,11 @@ var style = document.createElement("style");
 style.setAttribute("id", "multiselect_dropdown_styles");
 style.innerHTML = `
 .multiselect-dropdown{
-  display: inline;
-  align-items: center;
+  display: flex;
   padding: 4px;
-  padding-right: 20px;
   border-radius: 6px;
+  align-items: center;
+  padding-right: 20px;
   border: solid 1px #ced4da;
   background-color: white;
   position: relative;

@@ -1,5 +1,54 @@
 window.projects = [
   {
+    Title: "Coherent Kubernetes Scheduler",
+    Description: "TBD",
+    Year: "2024",
+    Date: "Jan 9, 2024",
+    Skills: ["Computer Architecture", "C++"],
+    TeamSize: 2,
+    Links: {
+      "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
+      // "Github Code": "https://github.com/muteebakram/CS7810",
+    },
+  },
+  {
+    Title: "CS7810: Advance Memory Systems",
+    Description: "TBD",
+    Year: "2024",
+    Date: "Jan 9, 2024",
+    Skills: ["Computer Architecture", "C++"],
+    TeamSize: 1,
+    Links: {
+      "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
+      "Github Code": "https://github.com/muteebakram/CS7810",
+    },
+  },
+  {
+    Title: "CS7937: Advance Computer Architecture Seminar",
+    Description: "TBD",
+    Year: "2024",
+    Date: "Jan 9, 2024",
+    Skills: ["Computer Architecture"],
+    TeamSize: 1,
+    Links: {
+      "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
+      "Github Code": "https://github.com/muteebakram/CS7937",
+    },
+  },
+  {
+    Title: "Old Bailey's Problem",
+    Description: "TBD",
+    Year: "2024",
+    Date: "Jan 9, 2024",
+    Skills: ["Machine Learning", "Python"],
+    TeamSize: 1,
+    Links: {
+      "Prof. Vivek Srikumar": "https://svivek.com",
+      "Paper": "https://github.com/muteebakram/CS6350/blob/master/Project/CS6350_ML_Report_Muteeb_u1471482.pdf",
+      "Github Code": "https://github.com/muteebakram/CS6350/tree/master/Project",
+    },
+  },
+  {
     Title: "CS6350: Machine Learning",
     Description:
       "<ul class='project-ul'><li><a target='_blank' href='https://github.com/muteebakram/CS6350/tree/master/Assignments/Decision%20Trees/solution'>Decision Trees (DT)</a>: Learn to represent the problem as  DT. Develop variants of the ID3 algorithm, entropy, and information gain. Dealing with missing features and overfitting.</li>\
@@ -8,9 +57,10 @@ window.projects = [
     Date: "Jan 9, 2024",
     Skills: ["Machine Learning", "Python"],
     TeamSize: 1,
-    Professor: "Prof. Vivek Srikumar",
-    ProfessorLink: "",
-    GithubLink: "https://github.com/muteebakram/CS6350",
+    Links: {
+      "Prof. Vivek Srikumar": "https://svivek.com",
+      "Github Code": "https://github.com/muteebakram/CS6350",
+    },
   },
   {
     Title: "Personal Portfolio Website",
@@ -20,8 +70,10 @@ window.projects = [
     Date: "Feb 4, 2024",
     Skills: ["HTML", "CSS", "Javascript", "Web Components", "Web Development"],
     TeamSize: 1,
-    TitleLink: "https://muteebakram.github.io/",
-    GithubLink: "https://github.com/muteebakram/muteebakram.github.io",
+    Links: {
+      "Github Code": "https://github.com/muteebakram/muteebakram.github.io",
+      Website: "https://muteebakram.github.io/",
+    },
   },
   {
     Title: "GEneral Matrix Multiplication (GEMM)",
@@ -33,11 +85,12 @@ window.projects = [
     Date: "Nov 14, 2023",
     Skills: ["C", "OpenMP", "CUDA", "HPC", "Parallel Programming"],
     TeamSize: 1,
-    Professor: "Prof. Saday",
-    ProfessorLink: "",
-    TitleLink:
-      "https://github.com/muteebakram/GEMM/blob/master/term-project-fa23.pdf",
-    GithubLink: "https://github.com/muteebakram/GEMM",
+    Links: {
+      "Prof. Saday": "https://users.cs.utah.edu/~saday/",
+      "Github Code": "https://github.com/muteebakram/GEMM",
+      Report:
+        "https://github.com/muteebakram/GEMM/blob/master/term-project-fa23.pdf",
+    },
   },
   {
     Title: "I/O Protocols Benchmark",
@@ -58,11 +111,12 @@ window.projects = [
       "Operating Systems",
     ],
     TeamSize: 3,
-    Professor: "Prof. Ryan Stutsman",
-    ProfessorLink: "",
-    TitleLink:
-      "https://github.com/muteebakram/io_benchmark/blob/master/pdfs/Report%20-%20Async%20IO%20Benchmark%3B%20Muteeb%2C%20Prikshit%2C%20Yuvraj.pdf",
-    GithubLink: "https://github.com/muteebakram/io_benchmark",
+    Links: {
+      "Prof. Ryan Stutsman": "https://rstutsman.github.io",
+      "Github Code": "https://github.com/muteebakram/io_benchmark",
+      Report:
+        "https://github.com/muteebakram/io_benchmark/blob/master/pdfs/Report%20-%20Async%20IO%20Benchmark%3B%20Muteeb%2C%20Prikshit%2C%20Yuvraj.pdf",
+    },
   },
   {
     Title: "Zero Copy - Magic - Ring Buffer",
@@ -75,7 +129,9 @@ window.projects = [
     Date: "Aug 21, 2023",
     Skills: ["C", "Benchmark", "Kernel Programming", "Operating Systems"],
     TeamSize: 2,
-    GithubLink: "https://github.com/muteebakram/zerocopy-ringbuf",
+    Links: {
+      "Github Code": "https://github.com/muteebakram/zerocopy-ringbuf",
+    },
   },
   {
     Title: "Cache Prefetchers",
@@ -87,8 +143,10 @@ window.projects = [
     Date: "Aug 21, 2023",
     Skills: ["Computer Architecture", "C++", "Intel Dynamic Pin Tool"],
     TeamSize: 1,
-    GithubLink:
-      "https://github.com/muteebakram/CS6810/tree/master/Assignments/2",
+    Links: {
+      "Github Code":
+        "https://github.com/muteebakram/CS6810/tree/master/Assignments/2",
+    },
   },
   {
     Title: "Branch Predictors",
@@ -99,8 +157,10 @@ window.projects = [
     Date: "Aug 21, 2023",
     Skills: ["Computer Architecture", "C++", "Intel Dynamic Pin Tool"],
     TeamSize: 1,
-    GithubLink:
-      "https://github.com/muteebakram/CS6810/tree/master/Assignments/1",
+    Links: {
+      "Github Code":
+        "https://github.com/muteebakram/CS6810/tree/master/Assignments/1",
+    },
   },
   {
     Title: "CS6810: Computer Architecture",
@@ -117,9 +177,10 @@ window.projects = [
       "Intel Dynamic Pin Tool",
     ],
     TeamSize: 1,
-    Professor: "Prof. Vijay Nagarajan",
-    ProfessorLink: "",
-    GithubLink: "https://github.com/muteebakram/CS6810",
+    Links: {
+      "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
+      "Github Code": "https://github.com/muteebakram/CS6810",
+    },
   },
   {
     Title: "CS6465: Advance Operating Systems",
@@ -137,9 +198,10 @@ window.projects = [
       "RISC-V",
     ],
     TeamSize: 1,
-    Professor: "Prof. Ryan Stutsman",
-    ProfessorLink: "",
-    GithubLink: "https://github.com/muteebakram/CS6465",
+    Links: {
+      "Prof. Ryan Stutsman": "https://rstutsman.github.io",
+      "Github Code": "https://github.com/muteebakram/CS6465",
+    },
   },
   {
     Title: "CS6230: Parallel Programming & HPC",
@@ -152,9 +214,10 @@ window.projects = [
     Date: "Aug 21, 2023",
     Skills: ["HPC", "OpenMP", "CUDA", "MPI", "C", "Parallel Programming"],
     TeamSize: 1,
-    Professor: "Prof. Saday",
-    ProfessorLink: "",
-    GithubLink: "https://github.com/muteebakram/CS6230",
+    Links: {
+      "Prof. Saday": "https://users.cs.utah.edu/~saday/",
+      "Github Code": "https://github.com/muteebakram/CS6230",
+    },
   },
   {
     Title: "QUIC Packet Identifier",
@@ -164,7 +227,9 @@ window.projects = [
     Date: "Feb 22, 2022",
     Skills: ["QUIC", "Wireshark", "Python", "Machine Learning", "HTTP"],
     TeamSize: 1,
-    GithubLink: "https://github.com/muteebakram/quic-classifier",
+    Links: {
+      "Github Code": "https://github.com/muteebakram/quic-classifier",
+    },
   },
   {
     Title: "Cross Platform CLI Timer",
@@ -174,7 +239,9 @@ window.projects = [
     Date: "Aug 2, 2020",
     Skills: ["CLI", "Python"],
     TeamSize: 1,
-    GithubLink: "https://github.com/muteebakram/Timer",
+    Links: {
+      "Github Code": "https://github.com/muteebakram/Timer",
+    },
   },
   {
     Title: "Learn ReactJS",
@@ -184,7 +251,9 @@ window.projects = [
     Date: "Dec 20, 2021",
     Skills: ["ReactJS", "Javascript"],
     TeamSize: 1,
-    GithubLink: "https://github.com/muteebakram/react-js",
+    Links: {
+      "Github Code": "https://github.com/muteebakram/react-js",
+    },
   },
   {
     Title: "Learn GoLang",
@@ -194,9 +263,10 @@ window.projects = [
     Date: "Aug 20, 2021",
     Skills: ["Go"],
     TeamSize: 1,
-    Professor: "LinkedIn",
-    ProfessorLink: "",
-    GithubLink: "https://github.com/muteebakram/go-tutorial",
+    Links: {
+      "LinkedIn Course": "",
+      "Github Code": "https://github.com/muteebakram/go-tutorial",
+    },
   },
   {
     Title: "CLI Games",
@@ -206,7 +276,9 @@ window.projects = [
     Date: "Nov 5, 2021",
     Skills: ["Games", "CLI", "Python"],
     TeamSize: 1,
-    GithubLink: "https://github.com/muteebakram/games",
+    Links: {
+      "Github Code": "https://github.com/muteebakram/games",
+    },
   },
   {
     Title: "Blockchain",
@@ -216,9 +288,10 @@ window.projects = [
     Date: "Feb 13, 2021",
     Skills: ["Blockchain", "Cryptocurrency", "Python"],
     TeamSize: 1,
-    Professor: "Udemy",
-    ProfessorLink: "",
-    GithubLink: "https://github.com/muteebakram/blockchain",
+    Links: {
+      "Udemy Course": "",
+      "Github Code": "https://github.com/muteebakram/blockchain",
+    },
   },
   {
     Title: "Learn NodeJS",
@@ -228,9 +301,10 @@ window.projects = [
     Date: "Feb 13, 2021",
     Skills: ["NodeJS", "Javascript", "Web Components", "Web Development"],
     TeamSize: 1,
-    Professor: "Udemy",
-    ProfessorLink: "",
-    GithubLink: "https://github.com/muteebakram/nodejs-tutorial",
+    Links: {
+      "Udemy Course": "",
+      "Github Code": "https://github.com/muteebakram/nodejs-tutorial",
+    },
   },
   {
     Title: "Expense App",
@@ -240,9 +314,10 @@ window.projects = [
     Date: "Aug 17, 2020",
     Skills: ["Flutter", "Dart", "Android", "Mobile Development"],
     TeamSize: 1,
-    Professor: "Udemy",
-    ProfessorLink: "",
-    GithubLink: "https://github.com/muteebakram/ExpenseApp",
+    Links: {
+      "Udemy Course": "",
+      "Github Code": "https://github.com/muteebakram/ExpenseApp",
+    },
   },
   {
     Title: "CI/CD with Docker Cloud",
@@ -252,9 +327,10 @@ window.projects = [
     Date: "Dec 27, 2020",
     Skills: ["Containers", "Docker", "CI/CD", "Cloud Computing", "Python"],
     TeamSize: 1,
-    Professor: "Udemy",
-    ProfessorLink: "",
-    GithubLink: "https://github.com/muteebakram/docker-cloud",
+    Links: {
+      "Udemy Course": "",
+      "Github Code": "https://github.com/muteebakram/docker-cloud",
+    },
   },
   {
     Title: "Analysis of Container Runtime Engines",
@@ -271,7 +347,9 @@ window.projects = [
       "Python",
     ],
     TeamSize: 1,
-    GithubLink: "https://github.com/muteebakram/container-performance",
+    Links: {
+      "Github Code": "https://github.com/muteebakram/container-performance",
+    },
   },
   {
     Title: "Traffic Decongestion System",
@@ -290,10 +368,10 @@ window.projects = [
       "Python",
     ],
     TeamSize: 3,
-    GithubLink: "",
-    TitleLink: "",
+    Links: {
+      "Github Code": "",
+    },
   },
-
   {
     Title: "Smart Parking System",
     Description:
@@ -314,8 +392,9 @@ window.projects = [
       "Python",
     ],
     TeamSize: 3,
-    GithubLink: "",
-    TitleLink: "",
+    Links: {
+      "Github Code": "",
+    },
   },
   {
     Title: "Event Management System",
@@ -333,11 +412,11 @@ window.projects = [
       "Web Development",
     ],
     TeamSize: 2,
-    GithubLink: "https://github.com/muteebakram/Event-Managment-System",
-    TitleLink: "",
+    Links: {
+      "Github Code": "https://github.com/muteebakram/Event-Managment-System",
+    },
   },
 ];
-
 class MyHeader extends HTMLElement {
   static observedAttributes = ["pageTitle", "theme"];
 
@@ -418,6 +497,7 @@ class MyHeader extends HTMLElement {
           </div>
         </div>
         <hr>
+        <center>
         <div class="row-header">
           <section class="row-header-item" style="padding-left: 0;" title="Home"><a href="./index.html">Home</a></section>
           <section class="row-header-item" title="Experience"><a href="./experience.html">Experience</a></section>
@@ -426,6 +506,7 @@ class MyHeader extends HTMLElement {
           <section class="row-header-item" title="Publications"><a href="./publications.html">Publications</a></section>
           <section class="row-header-item" style="padding-right: 0;" title="Contact"><a href="./contact.html">Contact</a></section>
         </div>
+        </center>
         <h2 style="padding-top: 12px;">${this.pageTitle}</h2>
       </header>`;
   }
@@ -443,13 +524,14 @@ class MyHome extends HTMLElement {
           <img class="profile-image" src="./assets/profile-image.jpg" alt="Profile Picture of Muteeb">
           <div>
             <strong>Muteeb Akram Nawaz Doctor</strong>
+            <section class="small-pad" style="margin-top: 8px;">System Software Intern</section>
+            <section class="small-pad">NVIDIA</section>
+            <br>
             <section class="small-pad" style="margin-top: 8px;">Graduate Student & Teaching Assistant</section>
             <section class="small-pad">The University of Utah</section>
             <br>
             <section class="small-pad"><a href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></section>
             <section class="small-pad">Salt Lake City, Utah, USA</section>
-            <br>
-            <section class="small-pad"><i style="font-size: 12px;">To give anything less than your best is to sacrifice the gift.</i></section>
           </div>
         </div>
         <div class="about-text">
@@ -461,9 +543,9 @@ class MyHome extends HTMLElement {
             My research interest lies in the intersection of hardware/software of computer systems, i.e.,
             computer architecture, operating systems, distributed systems, and embedded systems. Under the
             guidance of <a target="_blank" href="https://users.cs.utah.edu/~vijay/index.html">
-              Prof. Vijay Nagarajan</a>,
+              Prof. Vijay Nagarajan</a>https://users.cs.utah.edu/~vijay/,
             my research focuses on re-imagining applications on CXL Memory. Additionally, I serve as a teaching
-            assistant, helping senior undergraduate students in their capstone projects.
+            assistant, helping senior's in their capstone projects.
           </p>
           <p>
             Before Utah, I was part of the Cloud & Compute Team at <a href="https://www.cisco.com">Cisco
@@ -478,8 +560,7 @@ class MyHome extends HTMLElement {
               href="https://www.cisco.com/site/us/en/products/computing/servers-unified-computing-systems/index.html">
               Cisco UCS servers</a>.
             My experience at Cisco marked my introduction to the software industry.
-            I found immense joy in tackling technical challenges and developed a keen interest in
-            systems.
+            I found immense joy in tackling technical challenges and developed a keen interest in systems.
           </p>
           <p>
             Before Cisco, I did my Bachelor's in Computer Science at
@@ -502,7 +583,7 @@ class MyHome extends HTMLElement {
             India.
           </p>
           <p>
-            I'm forever grateful to my mother, father, younger brother, sister, well-wishers, and teachers for
+            I'm forever grateful to my mother, father, younger brother, sister, and teachers for
             their unconditional love, guidance, and support.
           </p>
         </div>
@@ -605,39 +686,25 @@ class MyExperience extends HTMLElement {
     this.innerHTML = `
       <div style="font-size: 14px;">
         <a href="#current">Current</a>&nbsp; |&nbsp;
-        <a href="#research">Research</a>&nbsp; |&nbsp;
-        <a href="#teaching">Teaching</a>&nbsp; |&nbsp;
         <a href="#previous">Previous</a>&nbsp; |&nbsp;
-        <a href="#internships">Internships</a>
+        <a href="#internships">Internships</a>&nbsp; |&nbsp;
+        <a href="#research">Research</a>&nbsp; |&nbsp;
+        <a href="#teaching">Teaching</a>
       </div>
       <br>
       <div id="current">
         <section class="experience-title">Current</section>
-      </div>
-      <hr class="hr">
-      <div id="research">
-        <section class="experience-title">Research</section>
-        <section class="company-title">University of Utah</section>
-        <section class="role-title">Spring 2024: CS6950 Independent Study</section>
-        <section style="padding: 8px 0 0 0;">Prof. Vijay Nagarajan</section>
+        <section class="company-title" id="nvidia-internship">NVIDIA</section>
+        May 2024 - Aug 2024
+        <br>
+        Santa Clara, CA, USA
+        <br>
+        <br>
+        <section class="role-title">System Software Intern</section>
         <ul>
-          <li>
-            New distributed scheduler for disaggregated memory like CXL, RDMA, etc.
-          </li>
-        </ul>
-      </div>
-      <!-- <hr class="hr"> -->
-      <div id="teaching">
-        <section class="experience-title">Teaching</section>
-        <section class="company-title">University of Utah</section>
-        <section class="role-title">Fall 2023: CS4000 Senior Capstone Design</section>
-        <section class="role-title">Spring 2024: CS4500 Senior Capstone Project</section>
-        <section style="padding: 12px 0 0 0;">Professors: Jim de st Germain, David Bean, and Aaron Wood</section>
-        <ul>
-          <li>
-            Mentoring a class of 160 senior undergraduates in their project ideation, design,
-            development, and deployment.
-          </li>
+          <li>Working on Nvidia's Jetson Tegra Software Platform Team.</li>
+          <li>Designed & developed PLDM based Redfish Update API for Nvidia IGX safety component with initrd.</li>
+          <li>Added HTTPS/CIFS remote virtual media support on Nvidia OpenBMC on Redfish and webUI.</li>
         </ul>
       </div>
       <hr class="hr">
@@ -723,6 +790,32 @@ class MyExperience extends HTMLElement {
             <figcaption>Cisco Internship Onboarding. Jan 16, 2020.</figcaption>
           </figure>
         </div>
+      </div>
+      <hr class="hr">
+      <div id="research">
+        <section class="experience-title">Research</section>
+        <section class="company-title">The University of Utah</section>
+        <section class="role-title">Spring 2024: CS6950 Independent Study</section>
+        <section style="padding: 8px 0 0 0;">Prof. Vijay Nagarajan</sehttps://users.cs.utah.edu/~vijay/ction>
+        <ul>
+          <li>
+            New distributed scheduler for disaggregated memory like CXL, RDMA, etc.
+          </li>
+        </ul>
+      </div>
+      <hr class="hr">
+      <div id="teaching">
+        <section class="experience-title">Teaching</section>
+        <section class="company-title">The University of Utah</section>
+        <section class="role-title">Fall 2023: CS4000 Senior Capstone Design</section>
+        <section class="role-title">Spring 2024: CS4500 Senior Capstone Project</section>
+        <section style="padding: 12px 0 0 0;">Professors: Jim de st Germain, David Bean, and Aaron Wood</section>
+        <ul>
+          <li>
+            Mentoring a class of 160 senior undergraduates in their project ideation, design,
+            development, and deployment.
+          </li>
+        </ul>
       </div>`;
   }
 }
@@ -823,7 +916,8 @@ class MyFilter extends HTMLElement {
 
   renderFilters() {
     let filters = ``;
-    const filterIcon = `<svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2" viewBox="0 0 30 30" id="filter"><path fill="#111224" d="M17 11H4A1 1 0 0 1 4 9H17A1 1 0 0 1 17 11zM26 11H22a1 1 0 0 1 0-2h4A1 1 0 0 1 26 11z"></path><path fill="#111224" d="M19.5 13.5A3.5 3.5 0 1 1 23 10 3.5 3.5 0 0 1 19.5 13.5zm0-5A1.5 1.5 0 1 0 21 10 1.5 1.5 0 0 0 19.5 8.5zM26 21H13a1 1 0 0 1 0-2H26A1 1 0 0 1 26 21zM8 21H4a1 1 0 0 1 0-2H8A1 1 0 0 1 8 21z"></path><path fill="#111224" d="M10.5,23.5A3.5,3.5,0,1,1,14,20,3.5,3.5,0,0,1,10.5,23.5Zm0-5A1.5,1.5,0,1,0,12,20,1.5,1.5,0,0,0,10.5,18.5Z"></path></svg>`;
+    const filterIcon = ``;
+    // const filterIcon = `<svg class="filter-icon" xmlns="http://www.w3.org/2000/svg" data-name="Layer 2" viewBox="0 0 30 30" id="filter"><path fill="#111224" d="M17 11H4A1 1 0 0 1 4 9H17A1 1 0 0 1 17 11zM26 11H22a1 1 0 0 1 0-2h4A1 1 0 0 1 26 11z"></path><path fill="#111224" d="M19.5 13.5A3.5 3.5 0 1 1 23 10 3.5 3.5 0 0 1 19.5 13.5zm0-5A1.5 1.5 0 1 0 21 10 1.5 1.5 0 0 0 19.5 8.5zM26 21H13a1 1 0 0 1 0-2H26A1 1 0 0 1 26 21zM8 21H4a1 1 0 0 1 0-2H8A1 1 0 0 1 8 21z"></path><path fill="#111224" d="M10.5,23.5A3.5,3.5,0,1,1,14,20,3.5,3.5,0,0,1,10.5,23.5Zm0-5A1.5,1.5,0,1,0,12,20,1.5,1.5,0,0,0,10.5,18.5Z"></path></svg>`;
 
     let yearFilter = `<select id="selectedYears" placeholder="Select Year" txtSearch="Search Year" style="width: 20%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
     yearFilter += this.years.map(
@@ -831,7 +925,7 @@ class MyFilter extends HTMLElement {
     );
     yearFilter += "</select>";
 
-    let skillFilter = `<select id="selectedSkills" placeholder="Select Skills" txtSearch="Search Skills" style="width: 25%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
+    let skillFilter = `<select id="selectedSkills" placeholder="Select Skills" txtSearch="Search Skills" style="width: 30%" multiple multiselect-search="true" @click=${this.onFilterSelect}>`;
     skillFilter += this.skills.map(
       (skill) => `<option value="${skill}">${skill}</option>`
     );
@@ -922,15 +1016,19 @@ class MyProject extends HTMLElement {
     return `<h3>${p.Title}</h3>`;
   }
 
-  getGithubLink(p) {
-    if (p.GithubLink && p.GithubLink !== "")
-      return `
-        <section class="project-subsection">
-          Code:&nbsp;
-          <a target="_blank" href="${p.GithubLink}">
-            ${p.GithubLink.replace("https://", "")}
-          </a>
-        </section>`;
+  getLinks(p) {
+    if (p.Links && Object.keys(p.Links).length) {
+      let links = ` `;
+
+      Object.entries(p.Links).forEach(([key, value], index) => {
+        // prettier-ignore
+        links += value ? `<a target="_blank" href="${value}">${key}</a>` : `${key}`;
+        if (index != Object.keys(p.Links).length - 1)
+          links += `&nbsp; • &nbsp;`;
+      });
+
+      return links;
+    }
 
     return ``;
   }
@@ -944,16 +1042,15 @@ class MyProject extends HTMLElement {
 
   getProfessorName(p) {
     if (p.Professor && p.Professor !== "")
-      return `&nbsp;•&nbsp; Taught by ${p.Professor}`;
+      return `${p.Professor} &nbsp;•&nbsp; `;
 
     return ``;
   }
 
   getSkills(p) {
     if (p.Skills && p.Skills.length) {
-      return `&nbsp;•&nbsp; Skills:${p.Skills.map(
-        (tag) => `&nbsp;&nbsp;#${tag}`
-      ).join("")}`;
+      return `&nbsp;•&nbsp; Skills:
+        ${p.Skills.map((tag) => `&nbsp;&nbsp;#${tag}`).join("")}`;
     }
 
     return ``;
@@ -964,9 +1061,11 @@ class MyProject extends HTMLElement {
       ${this.getProjectTitle(p)}
       <section class="project-subsection">
         ${p.Date} ${this.getSkills(p)}
-        ${this.getTeamSize(p)} ${this.getProfessorName(p)}
+        ${this.getTeamSize(p)} 
       </section>
-      ${this.getGithubLink(p)}
+      <section class="project-subsection">
+        ${this.getLinks(p)}
+      </section>
       <section class="project-description">${p.Description}</section>
       <hr class="hr">`;
   }
@@ -976,10 +1075,12 @@ class MyProject extends HTMLElement {
   }
 
   render(projectMap) {
-    let resultantHTML = `<section class="filter-result">Showing ${this.projectCount} projects from ${window.projects.length} projects with ${this.skillCount} skills from ${this.totalSkillCount} skills.</section>`;
+    let resultantHTML = `<section class="filter-result">Showing ${this.projectCount} from ${window.projects.length} projects with ${this.skillCount} from ${this.totalSkillCount} skills.</section>`;
 
     projectMap.forEach((projects, year) => {
-      resultantHTML += `<h2>${year}</h2>${this.renderProjectByYear(projects)}`;
+      resultantHTML += `
+        <section class="year-title">${year}</section>
+        ${this.renderProjectByYear(projects)}`;
     });
 
     this.innerHTML = resultantHTML;
@@ -1069,7 +1170,7 @@ class MyFooter extends HTMLElement {
 
   constructor() {
     super();
-    this.lastUpdated = "Mar 10, 2024";
+    this.lastUpdated = "Jul 7, 2024";
     this.showHR = this.hasAttribute("showHR");
     this.showTop = this.hasAttribute("showTop");
     this.showCopyright = this.hasAttribute("showCopyright");
