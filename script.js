@@ -43,9 +43,11 @@ window.projects = [
     Skills: ["Machine Learning", "Python"],
     TeamSize: 1,
     Links: {
+      Paper:
+        "https://github.com/muteebakram/CS6350/blob/master/Project/CS6350_ML_Report_Muteeb_u1471482.pdf",
       "Prof. Vivek Srikumar": "https://svivek.com",
-      "Paper": "https://github.com/muteebakram/CS6350/blob/master/Project/CS6350_ML_Report_Muteeb_u1471482.pdf",
-      "Github Code": "https://github.com/muteebakram/CS6350/tree/master/Project",
+      "Github Code":
+        "https://github.com/muteebakram/CS6350/tree/master/Project",
     },
   },
   {
@@ -71,8 +73,8 @@ window.projects = [
     Skills: ["HTML", "CSS", "Javascript", "Web Components", "Web Development"],
     TeamSize: 1,
     Links: {
-      "Github Code": "https://github.com/muteebakram/muteebakram.github.io",
       Website: "https://muteebakram.github.io/",
+      "Github Code": "https://github.com/muteebakram/muteebakram.github.io",
     },
   },
   {
@@ -86,10 +88,10 @@ window.projects = [
     Skills: ["C", "OpenMP", "CUDA", "HPC", "Parallel Programming"],
     TeamSize: 1,
     Links: {
-      "Prof. Saday": "https://users.cs.utah.edu/~saday/",
-      "Github Code": "https://github.com/muteebakram/GEMM",
       Report:
         "https://github.com/muteebakram/GEMM/blob/master/term-project-fa23.pdf",
+      "Github Code": "https://github.com/muteebakram/GEMM",
+      "Prof. Saday": "https://users.cs.utah.edu/~saday/",
     },
   },
   {
@@ -112,10 +114,10 @@ window.projects = [
     ],
     TeamSize: 3,
     Links: {
-      "Prof. Ryan Stutsman": "https://rstutsman.github.io",
-      "Github Code": "https://github.com/muteebakram/io_benchmark",
       Report:
         "https://github.com/muteebakram/io_benchmark/blob/master/pdfs/Report%20-%20Async%20IO%20Benchmark%3B%20Muteeb%2C%20Prikshit%2C%20Yuvraj.pdf",
+      "Github Code": "https://github.com/muteebakram/io_benchmark",
+      "Prof. Ryan Stutsman": "https://rstutsman.github.io",
     },
   },
   {
@@ -368,9 +370,7 @@ window.projects = [
       "Python",
     ],
     TeamSize: 3,
-    Links: {
-      "Github Code": "",
-    },
+    Links: {},
   },
   {
     Title: "Smart Parking System",
@@ -392,9 +392,7 @@ window.projects = [
       "Python",
     ],
     TeamSize: 3,
-    Links: {
-      "Github Code": "",
-    },
+    Links: {},
   },
   {
     Title: "Event Management System",
@@ -499,12 +497,12 @@ class MyHeader extends HTMLElement {
         <hr>
         <center>
         <div class="row-header">
-          <section class="row-header-item" style="padding-left: 0;" title="Home"><a href="./index.html">Home</a></section>
-          <section class="row-header-item" title="Experience"><a href="./experience.html">Experience</a></section>
-          <section class="row-header-item" title="Education"><a href="./education.html">Education</a></section>
-          <section class="row-header-item" title="Projects"><a href="./projects.html">Projects</a></section>
-          <section class="row-header-item" title="Publications"><a href="./publications.html">Publications</a></section>
-          <section class="row-header-item" style="padding-right: 0;" title="Contact"><a href="./contact.html">Contact</a></section>
+          <section id="#" class="row-header-item" style="padding-left: 0;" title="Home"><a href="./index.html">Home</a></section>
+          <section id="#" class="row-header-item" title="Experience"><a href="./experience.html">Experience</a></section>
+          <section id="#" class="row-header-item" title="Education"><a href="./education.html">Education</a></section>
+          <section id="#" class="row-header-item" title="Projects"><a href="./projects.html">Projects</a></section>
+          <section id="#" class="row-header-item" title="Publications"><a href="./publications.html">Publications</a></section>
+          <section id="#" class="row-header-item" style="padding-right: 0;" title="Contact"><a href="./contact.html">Contact</a></section>
         </div>
         </center>
         <h2 style="padding-top: 12px;">${this.pageTitle}</h2>
@@ -1177,6 +1175,7 @@ class MyFooter extends HTMLElement {
   }
 
   connectedCallback() {
+    const showTop = `<div class="footer-text"><a href="#">Go Top ↑</a></div>`;
     const lastUpdated = `<div class="footer-text">Last Updated ${this.lastUpdated}</div>`;
     const copyright = `<div class="footer-text">™ and © Muteeb Akram. All Rights Reserved.</div>`;
 
@@ -1185,7 +1184,7 @@ class MyFooter extends HTMLElement {
       <footer>
         <div class="footer-container">
           ${this.showCopyright ? copyright : ``}
-          ${this.showTop ? `` : ``}
+          ${this.showTop ? showTop : ``}
           ${this.showLastUpdated ? lastUpdated : ``}
         </div>
       </footer>`;
