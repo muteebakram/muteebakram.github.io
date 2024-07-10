@@ -542,8 +542,7 @@ class MyHome extends HTMLElement {
             <a target="_blank" href="https://www.utah.edu">University of Utah</a>.
             My research interest lies in the intersection of hardware/software of computer systems, i.e.,
             computer architecture, operating systems, distributed systems, and embedded systems. Under the
-            guidance of <a target="_blank" href="https://users.cs.utah.edu/~vijay/index.html">
-              Prof. Vijay Nagarajan</a>https://users.cs.utah.edu/~vijay/,
+            guidance of <a target="_blank" href="https://users.cs.utah.edu/~vijay/index.html">Prof. Vijay Nagarajan</a>
             my research focuses on re-imagining applications on CXL Memory. Additionally, I serve as a teaching
             assistant, helping senior's in their capstone projects.
           </p>
