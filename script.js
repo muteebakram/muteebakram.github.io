@@ -1,43 +1,54 @@
 window.projects = [
   {
     Title: "Coherent Kubernetes Scheduler",
-    Description: "TBD",
+    Description:
+      "<ul class='project-ul'>\
+        <li>Characterize performance of centralized KubeSim & distributed Work Stealing Queues for Kubernetes.</li>\
+        <li>Designed coherent multi-node simulator in C++ mimicking Kubernetes & WSQ scheduler.</li>\
+        <li>Showcased 100x Kubernetes performance increase with CXL based WSQ scheduler.</li>\
+      </ul>",
     Year: "2024",
     Date: "Jan 9, 2024",
     Skills: ["Computer Architecture", "C++"],
     TeamSize: 2,
     Links: {
+      "Paper": "https://github.com/muteebakram/CS7810/blob/master/Report/CS7810_Distributed_Schedulers.pdf",
+      "Github Code": "https://github.com/icsa-caps/distributed-scheduler",
       "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
-      // "Github Code": "https://github.com/muteebakram/CS7810",
     },
   },
   {
-    Title: "CS7810: Advance Memory Systems",
-    Description: "TBD",
+    Title: "CS7810: Advance Architecture & Memory Systems",
+    Description:
+      "Recent technological advances have meant that computing today is predominantly concurrent and heterogeneous. Today's mobile phones, desktops and servers consist of multiple different processors including CPUs, GPUs and other accelerators. Therefore, applications written for these systems are typically concurrent with communication and coordination bottlenecking the performance and energy efficiency of the system. One effective way to reduce data movement is to replicate objects in multiple locations, abstractly speaking, in hardware or software. When there are multiple replicas of a data item the question of consistency comes into play, since a precise notion of a consistency model is essential to to be able to reason about what value an object read will return. How does one precisely specify a consistency model? How does one design protocols that ensure that the replicas are kept consistent as per the requirements of the consistency model efficiently and correctly? How to take advantage of modern technological innovations such as RDMA, CXL and Non-volatile memory technologies?<br><br>\
+      This research-oriented course strives to answer these questions by studying memory consistency from multiple perspectives: computer-architecture predominantly but also formal methods and verification, programming languages, and distributed systems. In that sense, this was a unique course as it spans the system stack.",
     Year: "2024",
     Date: "Jan 9, 2024",
     Skills: ["Computer Architecture", "C++"],
     TeamSize: 1,
     Links: {
-      "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
       "Github Code": "https://github.com/muteebakram/CS7810",
+      "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
     },
   },
   {
-    Title: "CS7937: Advance Computer Architecture Seminar",
+    Title: "CS7937: Advance Architecture & VLSI Seminar",
     Description: "TBD",
     Year: "2024",
     Date: "Jan 9, 2024",
     Skills: ["Computer Architecture"],
     TeamSize: 1,
     Links: {
-      "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
+      "UtahArch Lab": "https://arch.cs.utah.edu/arch-rd-club.html",
       "Github Code": "https://github.com/muteebakram/CS7937",
+      "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
     },
   },
   {
     Title: "Old Bailey's Problem",
-    Description: "TBD",
+    Description:
+      'The "Old Bailey Decision Classifier" is a machine learning project to predict the outcomes of criminal trials held at the Old Bailey, the central criminal court of England and Wales. Utilizing a diverse dataset of trial transcripts, case summaries, and others. Different machine learning algorithms and various classifiers are employed to predict sentencing decisions. The classifier achieves high accuracy in predicting verdicts,\
+      such as guilty or not guilty, through dataset cleaning and transformation, model optimization, and fine-tuning hyperparameter. The Old Bailey Decision Classifier describes authors understanding of Machine Learning algorithms and their implementation to solve a real-world problem using different classifiers and algorithms.',
     Year: "2024",
     Date: "Jan 9, 2024",
     Skills: ["Machine Learning", "Python"],
@@ -45,23 +56,34 @@ window.projects = [
     Links: {
       Paper:
         "https://github.com/muteebakram/CS6350/blob/master/Project/CS6350_ML_Report_Muteeb_u1471482.pdf",
-      "Prof. Vivek Srikumar": "https://svivek.com",
       "Github Code":
         "https://github.com/muteebakram/CS6350/tree/master/Project",
+      "Kaggle Competition":
+        "https://www.kaggle.com/competitions/uofu-ml-spring-2024-project",
+      "Prof. Vivek Srikumar": "https://svivek.com",
     },
   },
   {
     Title: "CS6350: Machine Learning",
     Description:
       "<ul class='project-ul'><li><a target='_blank' href='https://github.com/muteebakram/CS6350/tree/master/Assignments/Decision%20Trees/solution'>Decision Trees (DT)</a>: Learn to represent the problem as  DT. Develop variants of the ID3 algorithm, entropy, and information gain. Dealing with missing features and overfitting.</li>\
-      <li><a target='_blank' href='https://github.com/muteebakram/CS6350/tree/master/Assignments/Linear%20classifiers%2C%20Online%20learning%2C%20Perceptron/solution'>Linear Classifiers, Online Learning, and Perceptron</a>:  What problem can linear classifiers help solve, and which problems are linearly separable. Different mistake bounds like CON and Halving algorithms. What makes the Perceptron? Learn its importance, updates, and variants.</li></ul>",
+      <li><a target='_blank' href='https://github.com/muteebakram/CS6350/tree/master/Assignments/Linear%20classifiers%2C%20Online%20learning%2C%20Perceptron/solution'>Linear Classifiers, Online Learning, and Perceptron</a>:  What problem can linear classifiers help solve, and which problems are linearly separable. Different mistake bounds like CON and Halving algorithms. What makes the Perceptron? Learn its importance, updates, and variants.</li>\
+      <li><a target='_blank' href='https://github.com/muteebakram/CS6350/tree/master/Assignments/Computational%20Learning%20Theory/solution'>Computational Learning Theory</a>:  The Theory of Generalization: When can be trust the learning algorithm? Errors of hypotheses Batch Learning •Probably Approximately Correct (PAC) learning •Positive and negative learnability results •Agnostic Learning •Shattering and the VC dimension</li>\
+      <li><a target='_blank' href='https://github.com/muteebakram/CS6350/tree/master/Assignments/HW5-Quiz%20Boosting%20and%20Ensembles'>Boosting and Ensembles</a>: Step through the AdaBoost algorithm on a certain dataset. The goal is to understand the mechanics of the algorithm, and also to understand what ensembles are.</li>\
+      <li><a target='_blank' href='https://github.com/muteebakram/CS6350/tree/master/Assignments/Logistic%20Regression%20and%20SVMs'>Logistic Regression and SVMs</a>: The concept of probabilistic learning introduces shift from discrete label values (such as 0 or 1) to using values between 0 and 1 for classification.\
+      This approach involves exploring Bayesian probability an logistic regression. The fundamental idea revolve around maximizing a Posterior (MAP), which represents the hypothesis’s probability given the dataset being directly proportional to Maximum Likelihood Estimation (MLE), which assesses how well a hypothesis performs given the dataset, along with incorporating prior knowledge of the hypothesis.</li>\
+      </ul>",
     Year: "2024",
     Date: "Jan 9, 2024",
     Skills: ["Machine Learning", "Python"],
     TeamSize: 1,
     Links: {
-      "Prof. Vivek Srikumar": "https://svivek.com",
       "Github Code": "https://github.com/muteebakram/CS6350",
+      "Course Page":
+        "https://svivek.com/teaching/machine-learning/spring2024/info.html",
+      "Lecture Videos":
+        "https://www.youtube.com/watch?v=hPsvYcI9fnE&list=PLbuogVdPnkCr-ANNi5GZid3MvSkzm_wnM",
+      "Prof. Vivek Srikumar": "https://svivek.com",
     },
   },
   {
@@ -699,9 +721,9 @@ class MyExperience extends HTMLElement {
         <br>
         <section class="role-title">System Software Intern</section>
         <ul>
-          <li>Working on Nvidia's Jetson Tegra Software Platform Team.</li>
-          <li>Designed & developed PLDM based Redfish Update API for Nvidia IGX safety component with initrd.</li>
-          <li>Added HTTPS/CIFS remote virtual media support on Nvidia OpenBMC on Redfish and webUI.</li>
+          <li>Working on Nvidia's Jetson products with Linux for Tegra Software Team.</li>
+          <li>Designed & developed PLDM based Redfish Update API for Nvidia IGX safety component.</li>
+          <li>Added HTTPS/CIFS remote virtual media support on Nvidia OpenBMC via Redfish and webUI.</li>
         </ul>
       </div>
       <hr class="hr">
@@ -1140,12 +1162,15 @@ class MyContact extends HTMLElement {
         <p>Feel free to reach out to me on any of the platforms.</p>
         <ul>
           <li><a target="_blank" href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></li>
-          <li><a target="_blank" href="https://github.com/muteebakram">github.com/muteebakram</a></li>
-          <li>
-            <a target="_blank" href="https://www.twitter.com/muteeb_akram/">twitter.com/muteeb_akram</a>
-          </li>
           <li>
             <a target="_blank" href="https://www.linkedin.com/in/muteeb-akram/">linkedin.com/in/muteeb-akram</a>
+          </li>
+          <li><a target="_blank" href="https://github.com/muteebakram">github.com/muteebakram</a></li>
+          <li>
+            <a target="_blank" href="https://www.instagram.com/muteebakram/">instagram.com/muteebakram</a>
+          </li>
+          <li>
+            <a target="_blank" href="https://www.twitter.com/muteeb_akram/">twitter.com/muteeb_akram</a>
           </li>
           <li>
             <a target="_blank" href="https://scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en">scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en</a>
