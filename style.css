@@ -180,6 +180,16 @@ footer {
   padding: 0 2px;
 }
 
+.exp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-subtitle {
+  font-size: 14px;
+}
+
 .page-container {
   position: relative;
   min-height: 100vh;

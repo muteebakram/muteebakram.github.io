@@ -5,14 +5,15 @@ window.projects = [
       "<ul class='project-ul'>\
         <li>Characterize performance of centralized KubeSim & distributed Work Stealing Queues for Kubernetes.</li>\
         <li>Designed coherent multi-node simulator in C++ mimicking Kubernetes & WSQ scheduler.</li>\
-        <li>Showcased 100x Kubernetes performance increase with CXL based WSQ scheduler.</li>\
+        <li>Showcased 10x Kubernetes performance increase with CXL based WSQ scheduler.</li>\
       </ul>",
     Year: "2024",
     Date: "Jan 9, 2024",
-    Skills: ["Computer Architecture", "C++"],
+    Skills: ["C++", "Computer Architecture"],
     TeamSize: 2,
     Links: {
-      "Paper": "https://github.com/muteebakram/CS7810/blob/master/Report/CS7810_Distributed_Schedulers.pdf",
+      Paper:
+        "https://github.com/muteebakram/CS7810/blob/master/Report/CS7810_Distributed_Schedulers.pdf",
       "Github Code": "https://github.com/icsa-caps/distributed-scheduler",
       "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
     },
@@ -20,11 +21,13 @@ window.projects = [
   {
     Title: "CS7810: Advance Architecture & Memory Systems",
     Description:
-      "Recent technological advances have meant that computing today is predominantly concurrent and heterogeneous. Today's mobile phones, desktops and servers consist of multiple different processors including CPUs, GPUs and other accelerators. Therefore, applications written for these systems are typically concurrent with communication and coordination bottlenecking the performance and energy efficiency of the system. One effective way to reduce data movement is to replicate objects in multiple locations, abstractly speaking, in hardware or software. When there are multiple replicas of a data item the question of consistency comes into play, since a precise notion of a consistency model is essential to to be able to reason about what value an object read will return. How does one precisely specify a consistency model? How does one design protocols that ensure that the replicas are kept consistent as per the requirements of the consistency model efficiently and correctly? How to take advantage of modern technological innovations such as RDMA, CXL and Non-volatile memory technologies?<br><br>\
+      "Recent technological advances have meant that computing today is predominantly concurrent and heterogeneous. Today's mobile phones, desktops and servers consist of multiple different processors including CPUs, GPUs and other accelerators. Therefore, applications written for these systems are typically concurrent with communication and coordination bottlenecks the performance and energy efficiency of the system.<br><br>\
+      One effective way to reduce data movement is to replicate objects in multiple locations, abstractly speaking, in hardware or software. When there are multiple replicas of a data item the question of consistency comes into play, since a precise notion of a consistency model is essential to to be able to reason about what value an object read will return.<br><br>\
+      How does one precisely specify a consistency model? How does one design protocols that ensure that the replicas are kept consistent as per the requirements of the consistency model efficiently and correctly? How to take advantage of modern technological innovations such as RDMA, CXL and Non-volatile memory technologies?<br><br>\
       This research-oriented course strives to answer these questions by studying memory consistency from multiple perspectives: computer-architecture predominantly but also formal methods and verification, programming languages, and distributed systems. In that sense, this was a unique course as it spans the system stack.",
     Year: "2024",
     Date: "Jan 9, 2024",
-    Skills: ["Computer Architecture", "C++"],
+    Skills: ["C++", "Computer Architecture"],
     TeamSize: 1,
     Links: {
       "Github Code": "https://github.com/muteebakram/CS7810",
@@ -438,12 +441,13 @@ window.projects = [
   },
 ];
 class MyHeader extends HTMLElement {
-  static observedAttributes = ["pageTitle", "theme"];
+  static observedAttributes = ["pageTitle", "pageSubTitle", "theme"];
 
   constructor() {
     super();
     this.theme = "light";
     this.pageTitle = this.getAttribute("pageTitle");
+    this.pageSubTitle = this.getAttribute("pageSubTitle");
   }
 
   get theme() {
@@ -457,7 +461,9 @@ class MyHeader extends HTMLElement {
   attributeChangedCallback(attr, oldValue, newValue) {
     if (oldValue !== newValue && attr === "pageTitle") {
       this.pageTitle = newValue;
-    } else if (oldValue !== newValue && attr === "theme") this.theme = newValue;
+    } else if (oldValue !== newValue && attr === "pageSubTitle")
+      this.pageSubTitle = newValue;
+    else if (oldValue !== newValue && attr === "theme") this.theme = newValue;
   }
 
   connectedCallback() {
@@ -499,6 +505,10 @@ class MyHeader extends HTMLElement {
   }
 
   render() {
+    const subTitle = this.pageSubTitle
+      ? `<section class="header-subtitle">${this.pageSubTitle}</section>`
+      : "";
+
     this.innerHTML = `
       <head>
         <meta charset="UTF-8">
@@ -527,7 +537,10 @@ class MyHeader extends HTMLElement {
           <section id="#" class="row-header-item" style="padding-right: 0;" title="Contact"><a href="./contact.html">Contact</a></section>
         </div>
         </center>
-        <h2 style="padding-top: 12px;">${this.pageTitle}</h2>
+        <div class="exp-header">
+          <h2>${this.pageTitle}</h2>
+          ${subTitle}
+        </div>
       </header>`;
   }
 }
@@ -721,9 +734,9 @@ class MyExperience extends HTMLElement {
         <br>
         <section class="role-title">System Software Intern</section>
         <ul>
-          <li>Working on Nvidia's Jetson products with Linux for Tegra Software Team.</li>
-          <li>Designed & developed PLDM based Redfish Update API for Nvidia IGX safety component.</li>
-          <li>Added HTTPS/CIFS remote virtual media support on Nvidia OpenBMC via Redfish and webUI.</li>
+          <li>Working on Nvidia's Jetson products with <i>Linux for Tegra</i> Software Team.</li>
+          <li>Designed & developed PLDM based Redfish Update API for Nvidia's IGX safety functionality.</li>
+          <li>Added HTTPS/CIFS remote virtual media support for Nvidia's OpenBMC via Redfish for webUI.</li>
         </ul>
       </div>
       <hr class="hr">
