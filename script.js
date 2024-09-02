@@ -43,6 +43,7 @@ window.projects = [
     TeamSize: 1,
     Links: {
       "UtahArch Lab": "https://arch.cs.utah.edu/arch-rd-club.html",
+      "Reading Spring'24": "https://arch.cs.utah.edu/arch-rd-club_spring24.html",
       "Github Code": "https://github.com/muteebakram/CS7937",
       "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
     },
@@ -557,13 +558,11 @@ class MyHome extends HTMLElement {
           <img class="profile-image" src="./assets/profile-image.jpg" alt="Profile Picture of Muteeb">
           <div>
             <strong>Muteeb Akram Nawaz Doctor</strong>
-            <section class="small-pad" style="margin-top: 8px;">System Software Intern</section>
+            <section class="small-pad" style="margin-top: 16px;">Graduate Student & Research Assistant</section>
+            <section class="small-pad">University of Utah</section>
+            <section class="small-pad" style="margin-top: 20px;">Previously System Software Intern</section>
             <section class="small-pad">NVIDIA</section>
-            <br>
-            <section class="small-pad" style="margin-top: 8px;">Graduate Student & Teaching Assistant</section>
-            <section class="small-pad">The University of Utah</section>
-            <br>
-            <section class="small-pad"><a href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></section>
+            <section class="small-pad" style="margin-top: 20px;"><a href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></section>
             <section class="small-pad">Salt Lake City, Utah, USA</section>
           </div>
         </div>
@@ -574,10 +573,11 @@ class MyHome extends HTMLElement {
             <a target="_blank" href="https://www.cs.utah.edu">Kahlert School of Computing</a>,
             <a target="_blank" href="https://www.utah.edu">University of Utah</a>.
             My research interest lies in the intersection of hardware/software of computer systems, i.e.,
-            computer architecture, operating systems, distributed systems, and embedded systems. Under the
-            guidance of <a target="_blank" href="https://users.cs.utah.edu/~vijay/index.html">Prof. Vijay Nagarajan</a>
-            my research focuses on re-imagining applications on CXL Memory. Additionally, I serve as a teaching
-            assistant, helping senior's in their capstone projects.
+            computer architecture, operating systems, distributed systems, and embedded systems.
+            Researching with <a target="_blank" href="https://users.cs.utah.edu/~saday/">Prof. Saday</a>
+            on developing low-power neural nets for lightning storm detection on satellites.
+            Under the guidance of <a target="_blank" href="https://users.cs.utah.edu/~vijay/index.html">Prof. Vijay Nagarajan</a>
+            I researched re-imagining applications for CXL Memory. Additionally, I served as a teaching assistant, helping seniors in their capstone projects.
           </p>
           <p>
             Before Utah, I was part of the Cloud & Compute Team at <a href="https://www.cisco.com">Cisco
@@ -633,7 +633,7 @@ class MyEducation extends HTMLElement {
       <div id="education">
         <div class="education-section" style="margin-top: -8px;">
           <div class="education-text">
-            <h3 id="masters">Kahlert School of Computing, The University of Utah</h3>
+            <h3 id="masters">Kahlert School of Computing, University of Utah</h3>
             <section class="degree-title">Master of Science, Computer Science</section>
             <section class="education-subtitle">
               Aug 2023 - May 2025
@@ -645,7 +645,7 @@ class MyEducation extends HTMLElement {
             </section>
           </div>
           <figure class="education-figure-container">
-            <img class="education-image" src="./assets/uofu.jpeg" alt="The University of Utah U Statue.">
+            <img class="education-image" src="./assets/uofu.jpeg" alt="University of Utah U Statue.">
             <figcaption>Famous U Statue.</figcaption>
           </figure>
         </div>
@@ -718,26 +718,60 @@ class MyExperience extends HTMLElement {
     this.innerHTML = `
       <div style="font-size: 14px;">
         <a href="#current">Current</a>&nbsp; |&nbsp;
-        <a href="#previous">Previous</a>&nbsp; |&nbsp;
         <a href="#internships">Internships</a>&nbsp; |&nbsp;
+        <a href="#previous">Previous</a>&nbsp; |&nbsp;
         <a href="#research">Research</a>&nbsp; |&nbsp;
         <a href="#teaching">Teaching</a>
       </div>
       <br>
       <div id="current">
         <section class="experience-title">Current</section>
-        <section class="company-title" id="nvidia-internship">NVIDIA</section>
-        May 2024 - Aug 2024
-        <br>
-        Santa Clara, CA, USA
-        <br>
-        <br>
-        <section class="role-title">System Software Intern</section>
+        <section class="company-title">University of Utah</section>
+        <section class="role-title">Fall 2024: Graduate Research Assistant</section>
+        <section style="padding: 8px 0 0 0;">Prof. P. (Saday) Sadayappan</section>
         <ul>
-          <li>Working on Nvidia's Jetson products with <i>Linux for Tegra</i> Software Team.</li>
-          <li>Designed & developed PLDM based Redfish Update API for Nvidia's IGX safety functionality.</li>
-          <li>Added HTTPS/CIFS remote virtual media support for Nvidia's OpenBMC via Redfish for webUI.</li>
+          <li>
+            Satellite Autonomous Storm Tracking and Control for Space Based Lightning Sensors.
+          </li>
         </ul>
+      </div>
+      <hr class="hr">
+        <div id="internships">
+          <section class="experience-title">Internships</section>
+          <section class="company-title" id="nvidia-internship">NVIDIA</section>
+          May 2024 - Aug 2024
+          <br>
+          Santa Clara, CA, USA
+          <br>
+          <br>
+          <section class="role-title">System Software Intern</section>
+          <ul>
+            <li>Working on Nvidia's Jetson products with <i>Linux for Tegra</i> Software Team.</li>
+            <li>Designed & developed PLDM based Redfish Update API for Nvidia's IGX safety functionality.</li>
+            <li>Added HTTPS/CIFS remote virtual media support for Nvidia's OpenBMC via Redfish for webUI.</li>
+          </ul>
+        </div>
+        <section class="company-title" id="cisco-internship">Cisco Systems</section>
+        Jan 2020 - Jun 2020
+        <br>
+        mutnawaz@cisco.com
+        <br>
+        <br>
+        <section class="role-title">Software Engineer Intern</section>
+        <ul>
+          <li>
+            Developed 3 new industry-standard Redfish APIs for firmware discovery, update, & monitoring.
+          </li>
+          <li>
+            Ported 7,000+ source code from Python2 to Python3 with no performance impact.
+          </li>
+        </ul>
+        <div class="company-images">
+          <figure>
+            <img class="company-image" src="./assets/cisco0.png" alt="Cisco Onboarding">
+            <figcaption>Cisco Internship Onboarding. Jan 16, 2020.</figcaption>
+          </figure>
+        </div>
       </div>
       <hr class="hr">
       <div id="previous">
@@ -758,7 +792,7 @@ class MyExperience extends HTMLElement {
             <section class="role-title">Software Engineer II</section>
             <ul>
               <li>Engineered a diagnostic utility for Cisco UCS servers, enabling troubleshooting of CPUs, 
-                DIMMs, & PCIe devices. Achieving 40% faster root cause dectection, 10% decrease in RMA costs,
+                DIMMs, & PCIe devices. Achieving 40% faster root cause detection, 10% decrease in RMA costs,
                  and streamlining debugging for TAC.
               </li>
               <li>Designed a secure Data Sanitization framework with Redfish APIs to fully wipe data from storage
@@ -799,36 +833,11 @@ class MyExperience extends HTMLElement {
         </div>
       </div>
       <hr class="hr">
-      <div id="internships">
-        <section class="experience-title">Internships</section>
-        <section class="company-title" id="cisco-internship">Cisco Systems</section>
-        Jan 2020 - Jun 2020
-        <br>
-        mutnawaz@cisco.com
-        <br>
-        <br>
-        <section class="role-title">Software Engineer Intern</section>
-        <ul>
-          <li>
-            Developed 3 new industry-standard Redfish APIs for firmware discovery, update, & monitoring.
-          </li>
-          <li>
-            Ported 7,000+ source code from Python2 to Python3 with no performance impact.
-          </li>
-        </ul>
-        <div class="company-images">
-          <figure>
-            <img class="company-image" src="./assets/cisco0.png" alt="Cisco Onboarding">
-            <figcaption>Cisco Internship Onboarding. Jan 16, 2020.</figcaption>
-          </figure>
-        </div>
-      </div>
-      <hr class="hr">
       <div id="research">
         <section class="experience-title">Research</section>
-        <section class="company-title">The University of Utah</section>
+        <section class="company-title">University of Utah</section>
         <section class="role-title">Spring 2024: CS6950 Independent Study</section>
-        <section style="padding: 8px 0 0 0;">Prof. Vijay Nagarajan</sehttps://users.cs.utah.edu/~vijay/ction>
+        <section style="padding: 8px 0 0 0;">Prof. Vijay Nagarajan</section>
         <ul>
           <li>
             New distributed scheduler for disaggregated memory like CXL, RDMA, etc.
@@ -838,7 +847,7 @@ class MyExperience extends HTMLElement {
       <hr class="hr">
       <div id="teaching">
         <section class="experience-title">Teaching</section>
-        <section class="company-title">The University of Utah</section>
+        <section class="company-title">University of Utah</section>
         <section class="role-title">Fall 2023: CS4000 Senior Capstone Design</section>
         <section class="role-title">Spring 2024: CS4500 Senior Capstone Project</section>
         <section style="padding: 12px 0 0 0;">Professors: Jim de st Germain, David Bean, and Aaron Wood</section>
