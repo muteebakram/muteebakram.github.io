@@ -20,7 +20,7 @@
 
 body {
   padding: 0 1em;
-  max-width: 48rem;
+  max-width: 42rem;
   line-height: 1.4;
   margin-left: auto;
   margin-right: auto;
@@ -81,6 +81,7 @@ a:active {
 }
 
 li {
+  font-size: 14px;
   padding: 4px 0;
 }
 
@@ -125,33 +126,39 @@ footer {
   margin-bottom: 12px;
 }
 
-.about-text {
+.school-title {
   font-size: 16px;
+  font-weight: 600;
+  margin: 16px 0;
+}
+
+.about-text {
+  font-size: 14px;
   text-align: justify;
   padding-bottom: 24px;
 }
 
 .experience-title {
-  font-size: 18px;
+  font-size: 16px;
   padding: 8px 0 8px 0;
-  font-weight: 700;
+  font-weight: 650;
 }
 
 .company-title {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 550;
   padding: 12px 0;
 }
 
 .role-title {
-  padding: 4px 0;
+  font-size: 14px;
   font-weight: 500;
-  font-style: italic;
+  padding: 12px 0 4px 0;
 }
 
 .degree-title {
+  font-size: 14px;
   font-weight: 600;
-  font-size: 16px;
   font-style: italic;
 }
 
@@ -167,12 +174,34 @@ footer {
   border-radius: 2%;
 }
 
+.company-email
+{
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.company-duration {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.company-address {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.advisor-name {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
 .row-header {
   width: 100%;
   margin: 16px 0;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  font-size: 14px;
   justify-content: space-between;
 }
 
@@ -186,8 +215,14 @@ footer {
   justify-content: space-between;
 }
 
+.page-title {
+  font-size: 18px;
+  margin: 16px 0;
+  font-weight: bold;
+}
+
 .header-subtitle {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .page-container {
@@ -200,13 +235,15 @@ footer {
 }
 
 .footer-text {
+  font-size: 10px;
+  margin: 32px 0;
   color: dimgrey;
   width: -webkit-max-content;
 }
 
 .education-links {
   display: flex;
-  font-size: 14px;
+  font-size: 12px;
   padding: 6px 0;
   align-items: center;
 }
@@ -230,7 +267,7 @@ footer {
 
 .education-subtitle {
   padding: 12px 0;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .education-text {
@@ -261,28 +298,30 @@ footer {
 }
 
 .year-title {
-  font-size: 22px;
-  padding: 4px 0 8px 0;
+  font-size: 18px;
   font-weight: 600;
+  margin: 8px 0 16px 0;
 }
 
 .project-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 16px 0;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 20px 0;
 }
 
 .project-subsection {
   display: flex;
   padding: 6px 0;
   flex-wrap: wrap;
-  font-size: 14px;
+  font-size: 12px;
   color: dimgrey;
 }
 
 .project-description {
-  padding: 16px 0px 4px 0px;
+  font-size: 14px;
   text-align: justify;
+  padding: 8px 0px 4px 0px;
+  line-height: 1.4;
 }
 
 .hr {
@@ -296,7 +335,7 @@ footer {
 }
 
 .paper-title {
-  font-size: 18px;
+  font-size: 16px;
   padding: 8px 0;
   font-weight: 600;
 }
@@ -318,11 +357,15 @@ footer {
 
 .small-pad {
   padding: 2px 0;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .footer-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.contact {
+  font-size: 14px;
 }

@@ -1,5 +1,47 @@
 window.projects = [
   {
+    Title: "ECE6785: Advanced Embedded Systems",
+    Description:
+      "<ul class='project-ul'>\
+        <li>Embedded systems, focusing on real-time requirements and reliable systems. The course will cover practical implementation of real-time systems using Real Time Operating Systems (RTOS). Topics covered include: timing requirements, low power modes and energy efficiency, concurrency, distributed communication using CAN bus, system testing and verification.</li>\
+      </ul>",
+    Year: "2024",
+    Date: "Aug 16, 2024",
+    Skills: ["C", "Embedded Systems"],
+    Links: {
+      "Course Page": "https://github.com/uofu-emb/rtos?tab=readme-ov-file",
+      "Github Code": "https://github.com/muteebakram/emb-rtos-labs",
+      "Ashton Snelgrove": "https://ashton.snelgrove.science",
+    },
+  },
+  {
+    Title: "CS6450: Distributed Systems",
+    Description:
+      "<ul class='project-ul'>\
+        <li>The design and implementation of real-world distributed systems. Topics include messaging, messaging failure semantics, remote procedure calls, replication, partitioning, scaling, recovery, fault-tolerance, consistency models, transactions, concurrency control, failure models, consensus protocols, Byzantine fault tolerance, and peer-to-peer systems. Heavy emphasis on systems programming with a focus on highly concurrent code in non-deterministic environments.</li>\
+      </ul>",
+    Year: "2024",
+    Date: "Aug 16, 2024",
+    Skills: ["Go", "Distributed Systems"],
+    Links: {
+      "Github Code": "https://github.com/muteebakram/CS6450",
+      "Prof. Ryan Stutsman": "https://rstutsman.github.io",
+    },
+  },
+  {
+    Title: "CS6150: Graduate Algorithm",
+    Description:
+      "<ul class='project-ul'>\
+        <li>Design and analysis of algorithms. Topics include Greedy algorithms, dynamic programming, divide and conquer, Asymptomatic analysis and recurrence relations, Graph algorithms and network flows, Computational complexity and intractability, NP-hardness and beyond, and Approximation algorithms.</li>\
+      </ul>",
+    Year: "2024",
+    Date: "Aug 16, 2024",
+    Skills: ["Graduate Algorithm"],
+    Links: {
+      "Dr. Valerio Pascucci": "https://www.sci.utah.edu/people/pascucci.html",
+    },
+  },
+  {
     Title: "Coherent Kubernetes Scheduler",
     Description:
       "<ul class='project-ul'>\
@@ -539,7 +581,7 @@ class MyHeader extends HTMLElement {
         </div>
         </center>
         <div class="exp-header">
-          <h2>${this.pageTitle}</h2>
+          <label class="page-title">${this.pageTitle}</label>
           ${subTitle}
         </div>
       </header>`;
@@ -560,8 +602,6 @@ class MyHome extends HTMLElement {
             <strong>Muteeb Akram Nawaz Doctor</strong>
             <section class="small-pad" style="margin-top: 16px;">Graduate Student & Research Assistant</section>
             <section class="small-pad">University of Utah</section>
-            <section class="small-pad" style="margin-top: 20px;">Previously System Software Intern</section>
-            <section class="small-pad">NVIDIA</section>
             <section class="small-pad" style="margin-top: 20px;"><a href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></section>
             <section class="small-pad">Salt Lake City, Utah, USA</section>
           </div>
@@ -574,7 +614,7 @@ class MyHome extends HTMLElement {
             <a target="_blank" href="https://www.utah.edu">University of Utah</a>.
             My research interest lies in the intersection of hardware/software of computer systems, i.e.,
             computer architecture, operating systems, distributed systems, and embedded systems.
-            Researching with <a target="_blank" href="https://users.cs.utah.edu/~saday/">Prof. Saday</a>
+            Currently, working with <a target="_blank" href="https://users.cs.utah.edu/~saday/">Prof. Saday</a>
             on developing low-power neural nets for lightning storm detection on satellites.
             Under the guidance of <a target="_blank" href="https://users.cs.utah.edu/~vijay/index.html">Prof. Vijay Nagarajan</a>
             I researched re-imagining applications for CXL Memory. Additionally, I served as a teaching assistant, helping seniors in their capstone projects.
@@ -599,24 +639,19 @@ class MyHome extends HTMLElement {
             <a target="_blank" href="https://rvce.edu.in">R. V. College of Engineering (RVCE)</a> in
             Bangalore, India. I worked with Prof. Rajashree Shettar, Prof. Minal Moharir, and Prof. Veena Gadad
             on the traffic decongestion system, HTTP3/QUIC protocol survey, and server firmware
-            management, respectively. Additionally, I was a member of the
-            <a target="_blank" href="https://ecellrvce.in">Entrepreneurship Cell</a> and a volunteer for
-            the Rotaract Club of RVCE.
+            management, respectively.
           </p>
           <p>
             Before RVCE, I did my pre-university education with Deeksha Integrated Learning at
             <a target="_blank" href="https://www.revapucollege.edu.in/yelahanka/about-yelahanka">
-              Reva Independent PU College</a>, Bangalore, India. It is here where I learned how to study and
-            the importance of
-            education and hard work. The passion and support of the teachers here truly inspired me.
+              Reva Independent PU College</a>, Bangalore, India.
           </p>
           <p>
             It all started at <a target="_blank" href="https://deepayanschool.com">Deepayan School</a>, Hospet,
             India.
           </p>
           <p>
-            I'm forever grateful to my mother, father, younger brother, sister, and teachers for
-            their unconditional love, guidance, and support.
+            I'm forever grateful to my family, and teachers for their unconditional love, guidance, and support.
           </p>
         </div>
       </div>`;
@@ -633,10 +668,10 @@ class MyEducation extends HTMLElement {
       <div id="education">
         <div class="education-section" style="margin-top: -8px;">
           <div class="education-text">
-            <h3 id="masters">Kahlert School of Computing, University of Utah</h3>
+            <section class="school-title" id="masters">Kahlert School of Computing, University of Utah</section>
             <section class="degree-title">Master of Science, Computer Science</section>
             <section class="education-subtitle">
-              Aug 2023 - May 2025
+              Aug 2023 - Dec 2024
               <br>
               Salt Lake City, Utah, USA
               <br>
@@ -653,7 +688,7 @@ class MyEducation extends HTMLElement {
         <br>
         <div class="education-section">
           <div class="education-text">
-            <h3 id="bachelors">R. V. College of Engineering (RVCE)</h3>
+            <section class="school-title" id="bachelors">R. V. College of Engineering (RVCE)</section>
             <section class="degree-title">Bachelor of Engineering, Computer Science & Engineering</section>
             <section class="education-subtitle">
               Aug 2016 - July 2020
@@ -673,7 +708,7 @@ class MyEducation extends HTMLElement {
         <br>
         <div class="education-section">
           <div class="education-text">
-            <h3 id="PUC">Deeksha Reva Independent PU College</h3>
+            <section class="school-title" id="PUC">Deeksha Reva Independent PU College</section>
             <section class="degree-title">Pre-University Education, Computer Science</section>
             <section class="education-subtitle">
               May 2014 - June 2016
@@ -690,7 +725,7 @@ class MyEducation extends HTMLElement {
         <br>
         <div class="education-section">
           <div class="education-text">
-            <h3 id="classX">Deepayan Secondary School</h3>
+            <section class="school-title" id="classX">Deepayan Secondary School</section>
             <section class="degree-title">Kinder Garden, Primary, and High School</section>
             <section class="education-subtitle">
               Jan 2001 - April 2014
@@ -728,10 +763,10 @@ class MyExperience extends HTMLElement {
         <section class="experience-title">Current</section>
         <section class="company-title">University of Utah</section>
         <section class="role-title">Fall 2024: Graduate Research Assistant</section>
-        <section style="padding: 8px 0 0 0;">Prof. P. (Saday) Sadayappan</section>
+        <section class="advisor-name">Prof. P. (Saday) Sadayappan</section>
         <ul>
           <li>
-            Satellite Autonomous Storm Tracking and Control for Space Based Lightning Sensors.
+            NASA Satellite Autonomous Storm Tracking and Control for Space Based Lightning Sensors.
           </li>
         </ul>
       </div>
@@ -739,11 +774,9 @@ class MyExperience extends HTMLElement {
         <div id="internships">
           <section class="experience-title">Internships</section>
           <section class="company-title" id="nvidia-internship">NVIDIA</section>
-          May 2024 - Aug 2024
-          <br>
-          Santa Clara, CA, USA
-          <br>
-          <br>
+          <section class="company-duration">May 2024 - Aug 2024</section>
+          <section class="company-email">mdoctor@nvidia.com</section>
+          <section class="company-address">Santa Clara, CA, USA</section>
           <section class="role-title">System Software Intern</section>
           <ul>
             <li>Working on Nvidia's Jetson products with <i>Linux for Tegra</i> Software Team.</li>
@@ -752,11 +785,8 @@ class MyExperience extends HTMLElement {
           </ul>
         </div>
         <section class="company-title" id="cisco-internship">Cisco Systems</section>
-        Jan 2020 - Jun 2020
-        <br>
-        mutnawaz@cisco.com
-        <br>
-        <br>
+        <section class="company-duration">Jan 2020 - Jun 2020</section>
+        <section class="company-email">mutnawaz@cisco.com</section>
         <section class="role-title">Software Engineer Intern</section>
         <ul>
           <li>
@@ -779,16 +809,9 @@ class MyExperience extends HTMLElement {
         <div class="company" id="cisco">
           <div>
             <section class="company-title">Cisco Systems</section>
-            Aug 2020 - July 2023
-            <br>
-            mutnawaz@cisco.com
-            <br>
-            <br>
-            3rd floor, BGL 17
-            <br>
-            Cessna Park, Bangalore, India
-            <br>
-            <br>
+            <section class="company-duration">Aug 2020 - July 2023</section>
+            <section class="company-email">mutnawaz@cisco.com</section>
+            <section class="company-address">3rd floor, BGL 17, Cessna Park, Bangalore, India</section>
             <section class="role-title">Software Engineer II</section>
             <ul>
               <li>Engineered a diagnostic utility for Cisco UCS servers, enabling troubleshooting of CPUs, 
@@ -837,7 +860,7 @@ class MyExperience extends HTMLElement {
         <section class="experience-title">Research</section>
         <section class="company-title">University of Utah</section>
         <section class="role-title">Spring 2024: CS6950 Independent Study</section>
-        <section style="padding: 8px 0 0 0;">Prof. Vijay Nagarajan</section>
+        <section class="advisor-name">Prof. Vijay Nagarajan</section>
         <ul>
           <li>
             New distributed scheduler for disaggregated memory like CXL, RDMA, etc.
@@ -1052,9 +1075,9 @@ class MyProject extends HTMLElement {
 
   getProjectTitle(p) {
     if (p.TitleLink && p.TitleLink !== "")
-      return `<h3><a target="_blank" href="${p.TitleLink}">${p.Title}</a></h3>`;
+      return `<label class="project-title"><a target="_blank" href="${p.TitleLink}">${p.Title}</a></label>`;
 
-    return `<h3>${p.Title}</h3>`;
+    return `<label class="project-title">${p.Title}</label>`;
   }
 
   getLinks(p) {
@@ -1179,7 +1202,7 @@ class MyContact extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
-      <div id="contact">
+      <div class="contact" id="contact">
         <p style="padding: 6px 0 0 0;">Hello there!</p>
         <p>Feel free to reach out to me on any of the platforms.</p>
         <ul>
@@ -1214,7 +1237,7 @@ class MyFooter extends HTMLElement {
 
   constructor() {
     super();
-    this.lastUpdated = "Jul 7, 2024";
+    this.lastUpdated = "Oct 16, 2024";
     this.showHR = this.hasAttribute("showHR");
     this.showTop = this.hasAttribute("showTop");
     this.showCopyright = this.hasAttribute("showCopyright");
@@ -1228,13 +1251,11 @@ class MyFooter extends HTMLElement {
 
     this.innerHTML = `
       ${this.showHR ? `<hr>` : ``}
-      <footer>
         <div class="footer-container">
           ${this.showCopyright ? copyright : ``}
           ${this.showTop ? showTop : ``}
           ${this.showLastUpdated ? lastUpdated : ``}
-        </div>
-      </footer>`;
+        </div>`;
   }
 }
 
