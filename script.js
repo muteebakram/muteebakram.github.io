@@ -1,3 +1,328 @@
+window.header = {
+  Title: "Muteeb Akram",
+  DefaultTheme: "dark",
+  Favicon: "./assets/favicon.ico",
+  Pages: [
+    {
+      Name: "Home",
+      ID: "home",
+      Link: "./index.html",
+    },
+    {
+      Name: "Experience",
+      ID: "experience",
+      Link: "./experience.html",
+    },
+    {
+      Name: "Education",
+      ID: "education",
+      Link: "./education.html",
+    },
+    {
+      Name: "Projects",
+      ID: "projects",
+      Link: "./projects.html",
+    },
+    {
+      Name: "Publications",
+      ID: "publications",
+      Link: "./publications.html",
+    },
+    {
+      Name: "Contact",
+      ID: "contact",
+      Link: "./contact.html",
+    },
+  ],
+};
+
+window.home = [
+  {
+    Name: "Muteeb Akram Nawaz Doctor",
+    Title: "Senior System Software Engineer",
+    Organization: "NVIDIA",
+    Email: "muteebakram@gmail.com",
+    Location: "San Jose, California, USA",
+    AboutTitle: "About Me",
+    Image: {
+      Src: "./assets/profile-image.jpg",
+      Alt: "Muteeb Akram Nawaz Doctor",
+    },
+    Paragraphs: `
+        I'm currently a Senior System Software Engineer at <a href="https://www.nvidia.com/en-us/">NVIDIA</a>, 
+        where I build Embedded and Edge AI products. I enjoy working where hardware meets software—across 
+        computer architecture, operating systems, distributed systems, and embedded systems.
+      <br>
+      <br>
+        I earned my Master’s in Computer Science from the <a target="_blank" href="https://www.utah.edu">University of Utah</a>, 
+        Where I developed low-power neural networks for lightning detection on satellites with <a target="_blank" href="https://users.cs.utah.edu/~saday/">Prof. Saday</a>. 
+        I also collaborated with <a target="_blank" href="https://users.cs.utah.edu/~vijay/index.html">Prof. Vijay Nagarajan</a> and <a target="_blank" href="https://rstutsman.github.io">Prof. Ryan Stutsman</a> 
+        on new scheduling approaches for disaggregated memory systems like CXL. And I helped mentor senior students as a teaching assistant for capstone projects.
+      <br>
+      <br>
+        I started as an intern at <a href="https://www.cisco.com">Cisco Systems</a> in Bangalore and became Software Engineer 2 on the 
+        <a target="_blank" href="https://www.cisco.com/site/us/en/products/computing/servers-unified-computing-systems/index.html">Cloud & Compute</a> team. 
+        I implemented server management utilities using the <a target="_blank" href="https://www.dmtf.org/standards/redfish">DMTF Redfish</a> API—covering diagnostics, 
+        firmware updates, data sanitization, and OS provisioning for Cisco UCS servers. This role sparked my deep interest in systems engineering.
+      <br>
+      <br>
+        I hold a Bachelor’s degree in Computer Science from <a target="_blank" href="https://rvce.edu.in">R. V. College of Engineering (RVCE)</a>, 
+        working on diverse projects—from traffic decongestion systems to HTTP/3 protocol research. Before that, I studied at 
+        <a target="_blank" href="https://www.revapucollege.edu.in/yelahanka/about-yelahanka">Reva Independent PU College</a> in Bangalore and 
+        <a target="_blank" href="https://deepayanschool.com">Deepayan School</a> in Hospet.
+      <br>
+      <br>
+        I'm grateful to my family, friends, mentors, and teachers. Their support shaped my journey.
+      <br>
+    `,
+  },
+];
+
+window.experience = [
+  {
+    Company: "NVIDIA",
+    Type: "Full Time",
+    CompanyLogo: "./assets/nvidia_logo.png",
+    Location: "Santa Clara, California, USA",
+    Roles: [
+      {
+        Title: "Sr. System Software Engineer",
+        TimePeriod: "Feb 03, 2025 - Present",
+        Description: `<ul class="role-ul">
+        <li>Working on Nvidia's Jetson products with <i>Linux for Tegra</i> Software Team.</li>        
+      </ul>`,
+      },
+    ],
+    Pictures: [
+      {
+        Src: "./assets/nvidia3.jpeg",
+        Subtitle: "NVIDIA First Day.<br>Feb 3, 2025.",
+      },
+    ],
+  },
+  {
+    Company: "University of Utah",
+    Subtitle: "Prof. P. (Saday) Sadayappan",
+    Type: "Research",
+    CompanyLogo: "./assets/university_of_utah_logo.svg",
+    Location: "Salt Lake City, Utah, USA",
+    Roles: [
+      {
+        Title: "Research Assistant",
+        TimePeriod: "Fall 2024",
+        Description: `<ul class="role-ul">
+        <li>NASA Satellite Autonomous Storm Tracking and Control for Space Based Lightning Sensors.</li>
+      </ul>`,
+      },
+    ],
+  },
+  {
+    Company: "NVIDIA",
+    Type: "Internship",
+    CompanyLogo: "./assets/nvidia_logo.png",
+    Location: "Santa Clara, California, USA",
+    Roles: [
+      {
+        Title: "System Software Intern",
+        TimePeriod: "May 13, 2024 - August 16, 2024",
+        Description: `<ul class="role-ul">
+        <li>Working on Nvidia's Jetson products with <i>Linux for Tegra</i> Software Team.</li>
+        <li>Designed & developed PLDM based Redfish Update API for Nvidia's IGX safety functionality.</li>
+        <li>Added HTTPS/CIFS remote virtual media support for Nvidia's OpenBMC via Redfish for webUI.</li>
+      </ul>`,
+      },
+    ],
+    Pictures: [
+      {
+        Src: "./assets/nvidia0.jpeg",
+        Subtitle: "NVIDIA Internship 1st Week.<br>May 17, 2024.",
+      },
+      {
+        Src: "./assets/nvidia1.jpeg",
+        Subtitle: "NVIDIA Great America.<br>Jun 28, 2024.",
+      },
+      {
+        Src: "./assets/nvidia2.jpeg",
+        Subtitle: "Universal Studios, LA.<br>Jul 4, 2024.",
+      },
+    ],
+  },
+  {
+    Company: "University of Utah",
+    Subtitle: "Prof. Vijay Nagarajan",
+    Type: "Research",
+    CompanyLogo: "./assets/university_of_utah_logo.svg",
+    Location: "Salt Lake City, Utah, USA",
+    Roles: [
+      {
+        Title: "Independent Study",
+        TimePeriod: "Spring 2024",
+        Description: `<ul class="role-ul">
+        <li>New distributed scheduler for disaggregated memory like CXL, RDMA, etc.</li>
+      </ul>`,
+      },
+    ],
+  },
+  {
+    Company: "University of Utah",
+    Subtitle: "Professors: Jim de St Germain, David Bean, and Aaron Wood",
+    CompanyLogo: "./assets/university_of_utah_logo.svg",
+    Location: "Salt Lake City, Utah, USA",
+    Type: "Teaching",
+    Roles: [
+      {
+        Title: "CS4500 Senior Capstone Project",
+        TimePeriod: "Spring 2024",
+      },
+      {
+        Title: "CS4000 Senior Capstone Design",
+        TimePeriod: "Fall 2023",
+        Description: `<ul class="role-ul">
+          <li>Mentoring a class of 160 senior undergraduates in their project ideation, design, development, and deployment.</li>
+        </ul>`,
+      },
+    ],
+  },
+  {
+    Company: "Cisco Systems",
+    Type: "Full Time",
+    CompanyLogo: "./assets/cisco_logo.png",
+    Location: "Bangalore, Karnataka, India",
+    Roles: [
+      {
+        Title: "Software Engineer II",
+        TimePeriod: "Aug 2022 - July 2023",
+        Description: `<ul class="role-ul">
+          <li>Engineered a diagnostic utility for Cisco UCS servers, enabling troubleshooting of CPUs, 
+            DIMMs, & PCIe devices. Achieving 40% faster root cause detection, 10% decrease in RMA costs,
+              and streamlining debugging for TAC.
+          </li>
+          <li>Designed a secure Data Sanitization framework with Redfish APIs to fully wipe data from storage
+            controllers, NVMe & disks.
+          </li>
+          <li>Owned & revamped Cisco firmware application front-end with web components and designed
+            12+ back-end APIs. Shipped the application in a customized Linux container, offering CLI,
+            UI, & Redfish interfaces.
+          </li>
+          <li>Implemented thread synchronization to concurrently install operating systems and update the
+            firmware of 100+ Cisco UCS servers at once.
+          </li>
+        </ul>`,
+      },
+      {
+        Title: "Software Engineer",
+        TimePeriod: "Aug 2020 - Aug 2022",
+        Description: `<ul class="role-ul">
+          <li>Worked on Baseboard Management Controller to streamline low-level firmware and BIOS update,
+            resulting in a 15% reduction in system downtime and improved system stability.
+          </li>
+          <li>Migrate from legacy build systems to container-based CI/CD builds utilizing runC and
+            dockerd runtime engines, resulting in a notable 20% acceleration in build times.
+          </li>
+          <li>Owned and maintained Cisco Inventory Portal by automating source check-ins, creating
+            SSH key-pairs, and optimizing large NFS storage, resulting in a 30% reduction in
+            storage & 2x API performance.
+          </li>
+        </ul>`,
+      },
+    ],
+    Pictures: [
+      {
+        Src: "./assets/cisco1.png",
+        Subtitle: "Cisco First Team Outing.<br>Aug 26, 2022.",
+      },
+      {
+        Src: "./assets/cisco2.png",
+        Subtitle: "Cisco Last Working Day.<br>Jul 20, 2023.",
+      },
+    ],
+  },
+  {
+    Company: "Cisco Systems",
+    Type: "Internship",
+    CompanyLogo: "./assets/cisco_logo.png",
+    Location: "Bangalore, Karnataka, India",
+    Roles: [
+      {
+        Title: "Software Engineer Intern",
+        TimePeriod: "Jan 2020 - June 2020",
+        Description: `<ul class="role-ul">
+          <li>Developed 3 new industry-standard Redfish APIs for firmware discovery, update, & monitoring.</li>
+          <li>Ported 7,000+ source code from Python2 to Python3 with no performance impact.</li>
+        </ul>`,
+      },
+    ],
+    Pictures: [
+      {
+        Src: "./assets/cisco0.png",
+        Subtitle: "Cisco Internship Onboarding.<br>Jan 16, 2020.",
+      },
+    ],
+  },
+];
+
+window.education = [
+  {
+    University: "University of Utah",
+    Degree: "Master of Science",
+    Major: "Computer Science",
+    Duration: "Aug 2023 - Dec 2024",
+    CGPA: "",
+    Location: "Salt Lake City, Utah, USA",
+    Logo: "./assets/university_of_utah_logo.svg",
+    Pictures: [
+      {
+        Src: "./assets/uofu.jpeg",
+        Subtitle: "Famous U Statue",
+      },
+    ],
+  },
+  {
+    University: "R. V. College of Engineering",
+    Degree: "Bachelor of Engineering",
+    Major: "Computer Science",
+    Duration: "Aug 2018 - May 2022",
+    CGPA: "",
+    Location: "Bangalore, Karnataka, India",
+    Logo: "./assets/rvce_logo.png",
+    Pictures: [
+      {
+        Src: "./assets/rvce.jpg",
+        Subtitle: "RVCE Front Gate. ID card is mandatory!",
+      },
+    ],
+  },
+  {
+    University: "Deeksha Integrated Learning",
+    Degree: "Pre-University",
+    Major: "Computer Science",
+    Duration: "Aug 2016 - May 2018",
+    CGPA: "",
+    Location: "Bangalore, Karnataka, India",
+    Logo: "./assets/deeksha_logo.png",
+    Pictures: [
+      {
+        Src: "./assets/reva.jpeg",
+        Subtitle: "Reva PUC building has nice proverbs.",
+      },
+    ],
+  },
+  {
+    University: "Deepayan School",
+    Degree: "Kindergarten to High School",
+    Duration: "Aug 2014 - May 2016",
+    CGPA: "",
+    Location: "Hospet, Karnataka, India",
+    Logo: "./assets/deepayan_logo.png",
+    Pictures: [
+      {
+        Src: "./assets/deepayan.jpeg",
+        Subtitle: "Deepayan new building & ground. 2011",
+      },
+    ],
+  },
+];
+
 window.projects = [
   {
     Title: "ECE6785: Advanced Embedded Systems",
@@ -85,7 +410,8 @@ window.projects = [
     TeamSize: 1,
     Links: {
       "UtahArch Lab": "https://arch.cs.utah.edu/arch-rd-club.html",
-      "Reading Spring'24": "https://arch.cs.utah.edu/arch-rd-club_spring24.html",
+      "Reading Spring'24":
+        "https://arch.cs.utah.edu/arch-rd-club_spring24.html",
       "Github Code": "https://github.com/muteebakram/CS7937",
       "Prof. Vijay Nagarajan": "https://users.cs.utah.edu/~vijay/",
     },
@@ -483,12 +809,73 @@ window.projects = [
     },
   },
 ];
+
+window.publications = [
+  {
+    Title:
+      "A Detail Survey on QUIC and its Impact on Network Data Transmission",
+    URL: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9777199&isnumber=9776641",
+    Conference:
+      "2022 6th International Conference on Trends in Electronics and Informatics (ICOEI), Tirunelveli, India, 2022, pp. 378-385, doi: 10.1109/ICOEI53556.2022.9777199",
+    Authors:
+      "Pratiksha Narasimha Nayak G; Nimisha Dey; Neha N; Malavika Hariprasad; Sandhya S; Minal Moharir; Muteeb Akram",
+  },
+  {
+    Title: "Server Firmware Management using DMTF Redfish REST APIs",
+    URL: "https://www.irjet.net/archives/V7/i5/IRJET-V7I51018.pdf",
+    Conference:
+      "May 2020, International Research Journal of Engineering and Technology (IRJET)",
+    Authors:
+      "Muteeb Akram Nawaz, Veena Gadad (Dept. of Computer Science and Engineering, R V College of Engineering, Karnataka, India)",
+    Links: [
+      {
+        Text: "DMTF Redfish Recognition",
+        URL: "https://www.dmtf.org/about/academicalliance#redfish",
+      },
+    ],
+  },
+];
+
+window.contact = [
+  {
+    greeting: "Hello there!",
+    message: "Feel free to reach out to me on any of the platforms.",
+    links: [
+      {
+        url: "mailto://muteebakram@gmail.com",
+        text: "muteebakram@gmail.com",
+      },
+      {
+        url: "https://www.linkedin.com/in/muteeb-akram/",
+        text: "linkedin.com/in/muteeb-akram",
+      },
+      {
+        url: "https://github.com/muteebakram",
+        text: "github.com/muteebakram",
+      },
+      {
+        url: "https://www.instagram.com/muteebakram/",
+        text: "instagram.com/muteebakram",
+      },
+      {
+        url: "https://www.twitter.com/muteebakram/",
+        text: "twitter.com/muteeb_akram",
+      },
+      {
+        url: "https://scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en",
+        text: "scholar.google.com/citations?user=muteebakram",
+      },
+    ],
+    closing: "Thanks for stopping by.<br>:wq",
+  },
+];
+
 class MyHeader extends HTMLElement {
   static observedAttributes = ["pageTitle", "pageSubTitle", "theme"];
 
   constructor() {
     super();
-    this.theme = "light";
+    this.theme = window.header.DefaultTheme;
     this.pageTitle = this.getAttribute("pageTitle");
     this.pageSubTitle = this.getAttribute("pageSubTitle");
   }
@@ -520,7 +907,8 @@ class MyHeader extends HTMLElement {
 
   setInitialTheme() {
     const initialTheme = localStorage.getItem("theme");
-    const setInitialTheme = initialTheme === null ? "light" : initialTheme;
+    const setInitialTheme =
+      initialTheme === null ? window.header.DefaultTheme : initialTheme;
 
     this.theme = setInitialTheme;
 
@@ -557,27 +945,27 @@ class MyHeader extends HTMLElement {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link rel="stylesheet" href="./style.css">
+        <link rel="icon" type="image/x-icon" href="${window.header.Favicon}">
         <title>Muteeb Akram: ${this.pageTitle}</title>
       </head>
-
       <header>
         <div class="header-container">
-          <h1 class="name">Muteeb Akram</h1>
-          <div title="Toggle Theme" class="theme-icon">
+          <h1 class="name">${window.header.Title}</h1>
+          <div title="Toggle theme" class="theme-icon">
             ${this.renderThemeIcon()}
           </div>
         </div>
         <hr>
         <center>
         <div class="row-header">
-          <section id="#" class="row-header-item" style="padding-left: 0;" title="Home"><a href="./index.html">Home</a></section>
-          <section id="#" class="row-header-item" title="Experience"><a href="./experience.html">Experience</a></section>
-          <section id="#" class="row-header-item" title="Education"><a href="./education.html">Education</a></section>
-          <section id="#" class="row-header-item" title="Projects"><a href="./projects.html">Projects</a></section>
-          <section id="#" class="row-header-item" title="Publications"><a href="./publications.html">Publications</a></section>
-          <section id="#" class="row-header-item" style="padding-right: 0;" title="Contact"><a href="./contact.html">Contact</a></section>
+          ${window.header.Pages.map(
+            (page) => `
+            <section id="#" title="${page.ID}" class="row-header-item">
+              <a href="${page.Link}">${page.Name}</a>
+            </section>
+          `
+          ).join("")}
         </div>
         </center>
         <div class="exp-header">
@@ -595,65 +983,32 @@ class MyHome extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
-      <div class="page-content">
+      ${window.home
+        .map(
+          (section) => `
         <div class="profile-container">
-          <img class="profile-image" src="./assets/profile-image.jpg" alt="Profile Picture of Muteeb">
+          <img class="profile-image" src="${section.Image.Src}" alt="${
+            section.Image.Alt
+          }">
           <div>
-            <strong>Muteeb Akram Nawaz Doctor</strong>
-            <section class="small-pad" style="margin-top: 16px;">Graduate Student & Research Assistant</section>
-            <section class="small-pad">University of Utah</section>
-            <section class="small-pad" style="margin-top: 20px;"><a href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></section>
-            <section class="small-pad">Salt Lake City, Utah, USA</section>
+            <strong>${section.Name}</strong>
+            <section class="pad" style="margin-top: 16px;">${
+              section.Title
+            }</section>
+            <section class="pad">${section.Organization}</section>
+            <section class="small-pad" style="margin-top: 20px;"><a href="mailto://${
+              section.Email
+            }">${section.Email}</a></section>
+            <section class="small-pad">${section.Location}</section>
           </div>
         </div>
         <div class="about-text">
-          <h4>About Me</h4>
-          <p>
-            I'm pursuing graduate studies in Computer Science at the
-            <a target="_blank" href="https://www.cs.utah.edu">Kahlert School of Computing</a>,
-            <a target="_blank" href="https://www.utah.edu">University of Utah</a>.
-            My research interest lies in the intersection of hardware/software of computer systems, i.e.,
-            computer architecture, operating systems, distributed systems, and embedded systems.
-            Currently, working with <a target="_blank" href="https://users.cs.utah.edu/~saday/">Prof. Saday</a>
-            on developing low-power neural nets for lightning storm detection on satellites.
-            Under the guidance of <a target="_blank" href="https://users.cs.utah.edu/~vijay/index.html">Prof. Vijay Nagarajan</a>
-            I researched re-imagining applications for CXL Memory. Additionally, I served as a teaching assistant, helping seniors in their capstone projects.
-          </p>
-          <p>
-            Before Utah, I was part of the Cloud & Compute Team at <a href="https://www.cisco.com">Cisco
-              Systems</a>
-            in Bangalore, India. I started as a college intern and progressed to the role of Software Engineer 2
-            before leaving. While there, I worked on cutting-edge enterprise hardware and
-            implemented industry-standard
-            <a target="_blank" href="https://www.dmtf.org/standards/redfish">DMTF Redfish API</a>
-            for diagnosing hardware, updating firmware, disk data
-            sanitization, and installing operating systems for
-            <a target="_blank"
-              href="https://www.cisco.com/site/us/en/products/computing/servers-unified-computing-systems/index.html">
-              Cisco UCS servers</a>.
-            My experience at Cisco marked my introduction to the software industry.
-            I found immense joy in tackling technical challenges and developed a keen interest in systems.
-          </p>
-          <p>
-            Before Cisco, I did my Bachelor's in Computer Science at
-            <a target="_blank" href="https://rvce.edu.in">R. V. College of Engineering (RVCE)</a> in
-            Bangalore, India. I worked with Prof. Rajashree Shettar, Prof. Minal Moharir, and Prof. Veena Gadad
-            on the traffic decongestion system, HTTP3/QUIC protocol survey, and server firmware
-            management, respectively.
-          </p>
-          <p>
-            Before RVCE, I did my pre-university education with Deeksha Integrated Learning at
-            <a target="_blank" href="https://www.revapucollege.edu.in/yelahanka/about-yelahanka">
-              Reva Independent PU College</a>, Bangalore, India.
-          </p>
-          <p>
-            It all started at <a target="_blank" href="https://deepayanschool.com">Deepayan School</a>, Hospet,
-            India.
-          </p>
-          <p>
-            I'm forever grateful to my family, and teachers for their unconditional love, guidance, and support.
-          </p>
+          <h4>${section.AboutTitle}</h4>
+          ${section.Paragraphs ? section.Paragraphs : ``}
         </div>
+      `
+        )
+        .join("")}
       </div>`;
   }
 }
@@ -665,81 +1020,71 @@ class MyEducation extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
-      <div id="education">
-        <div class="education-section" style="margin-top: -8px;">
-          <div class="education-text">
-            <section class="school-title" id="masters">Kahlert School of Computing, University of Utah</section>
-            <section class="degree-title">Master of Science, Computer Science</section>
-            <section class="education-subtitle">
-              Aug 2023 - Dec 2024
-              <br>
-              Salt Lake City, Utah, USA
-              <br>
-              <br>
-              u1471482@umail.utah.edu
-            </section>
+      <div id="education" class="education">
+        ${window.education
+          .map(
+            (edu) => `
+          <div class="education-section">
+            <div class="education-container">
+              ${
+                edu.Logo
+                  ? `
+                <div class="education-logo-container">
+                  <img class="education-logo" src="${edu.Logo}" alt="${edu.University} Logo">
+                </div>
+              `
+                  : ""
+              }
+              <div class="education-content">
+                <div class="education-text">
+                  <section class="school-title" id="${edu.Degree?.toLowerCase()?.replace(
+                    " ",
+                    "-"
+                  )}">${edu.University}</section>
+                  <section class="degree-title">${edu.Degree}${
+              edu.Major ? `, ${edu.Major}` : ""
+            }</section>
+                  ${
+                    edu.CGPA
+                      ? `<section class="education-subtitle">CGPA: ${edu.CGPA}</section>`
+                      : ""
+                  }
+                  <section class="education-subtitle">${edu.Duration}</section>
+                  <section class="education-subtitle">${edu.Location}</section>
+                </div>
+                ${
+                  edu.Pictures
+                    ? `
+                <div class="company-images">
+                  ${edu.Pictures.map(
+                    (pic) => `
+                    <figure>
+                      <img class="company-image" src="${pic.Src}" alt="${
+                      pic.Subtitle
+                    }">
+                      ${
+                        pic.Subtitle
+                          ? `<figcaption>${pic.Subtitle}</figcaption>`
+                          : ""
+                      }
+                    </figure>
+                  `
+                  ).join("")}
+                </div>`
+                    : ""
+                }
+              </div>
+            </div>
+            ${
+              edu.Description
+                ? `<section class="education-description">${edu.Description}</section>`
+                : ""
+            }
           </div>
-          <figure class="education-figure-container">
-            <img class="education-image" src="./assets/uofu.jpeg" alt="University of Utah U Statue.">
-            <figcaption>Famous U Statue.</figcaption>
-          </figure>
-        </div>
-        <br>
-        <br>
-        <div class="education-section">
-          <div class="education-text">
-            <section class="school-title" id="bachelors">R. V. College of Engineering (RVCE)</section>
-            <section class="degree-title">Bachelor of Engineering, Computer Science & Engineering</section>
-            <section class="education-subtitle">
-              Aug 2016 - July 2020
-              <br>
-              Mysore Road, Bangalore, Karnataka, India
-              <br>
-              <br>
-              muteeban.cs16@rvce.edu.in
-            </section>
-          </div>
-          <figure class="education-figure-container">
-            <img class="education-image" src="./assets/rvce.jpg" alt="RVCE Front Entrance.">
-            <figcaption>RVCE Front Gate. ID card is mandatory!</figcaption>
-          </figure>
-        </div>
-        <br>
-        <br>
-        <div class="education-section">
-          <div class="education-text">
-            <section class="school-title" id="PUC">Deeksha Reva Independent PU College</section>
-            <section class="degree-title">Pre-University Education, Computer Science</section>
-            <section class="education-subtitle">
-              May 2014 - June 2016
-              <br>
-              Yelahanka, Bangalore, Karnataka, India
-            </section>
-          </div>
-          <figure class="education-figure-container">
-            <img class="education-image" src="./assets/reva.jpeg" alt="Reva PUC Building">
-            <figcaption>Reva PUC building has nice proverbs.</figcaption>
-          </figure>
-        </div>
-        <br>
-        <br>
-        <div class="education-section">
-          <div class="education-text">
-            <section class="school-title" id="classX">Deepayan Secondary School</section>
-            <section class="degree-title">Kinder Garden, Primary, and High School</section>
-            <section class="education-subtitle">
-              Jan 2001 - April 2014
-              <br>
-              NC Colony, Hospet, Karnataka, India
-            </section>
-          </div>
-          <figure class="education-figure-container">
-            <img class="education-image" src="./assets/deepayan.jpeg" alt="Deepayan Secondary School Building & Ground">
-            <figcaption>Deepayan new building & ground. 2011</figcaption>
-          </figure>
-        </div>
-        <br>
-        <br>
+          <hr class="hr">
+        `
+          )
+          .join("")}
       </div>`;
   }
 }
@@ -747,140 +1092,128 @@ class MyEducation extends HTMLElement {
 class MyExperience extends HTMLElement {
   constructor() {
     super();
+    this.selectedType = "All";
+    this.experience = [];
+    this.experienceTypes = [];
   }
 
   connectedCallback() {
+    this.prepareExperienceTypes();
+    this.addEventListener("click", this.onTabClick);
+    this.render(window.experience);
+  }
+
+  prepareExperienceTypes() {
+    this.experienceTypes = [
+      ...new Set(window.experience.map((exp) => exp.Type)),
+    ];
+    this.experienceTypes.unshift("All");
+    this.experienceTypes.sort();
+  }
+
+  onTabClick(event) {
+    const selectedType = event.target.innerText;
+    if (!this.experienceTypes.includes(selectedType)) return;
+
+    const filteredExperience =
+      selectedType === "All"
+        ? window.experience
+        : window.experience.filter(
+            (exp) => exp.Type?.toLowerCase() === selectedType.toLowerCase()
+          );
+
+    this.selectedType = selectedType;
+    this.render(filteredExperience);
+  }
+
+  render(experience) {
     this.innerHTML = `
-      <div style="font-size: 14px;">
-        <a href="#current">Current</a>&nbsp; |&nbsp;
-        <a href="#internships">Internships</a>&nbsp; |&nbsp;
-        <a href="#previous">Previous</a>&nbsp; |&nbsp;
-        <a href="#research">Research</a>&nbsp; |&nbsp;
-        <a href="#teaching">Teaching</a>
-      </div>
-      <br>
-      <div id="current">
-        <section class="experience-title">Current</section>
-        <section class="company-title">University of Utah</section>
-        <section class="role-title">Fall 2024: Graduate Research Assistant</section>
-        <section class="advisor-name">Prof. P. (Saday) Sadayappan</section>
-        <ul>
-          <li>
-            NASA Satellite Autonomous Storm Tracking and Control for Space Based Lightning Sensors.
-          </li>
-        </ul>
-      </div>
-      <hr class="hr">
-        <div id="internships">
-          <section class="experience-title">Internships</section>
-          <section class="company-title" id="nvidia-internship">NVIDIA</section>
-          <section class="company-duration">May 2024 - Aug 2024</section>
-          <section class="company-email">mdoctor@nvidia.com</section>
-          <section class="company-address">Santa Clara, CA, USA</section>
-          <section class="role-title">System Software Intern</section>
-          <ul>
-            <li>Working on Nvidia's Jetson products with <i>Linux for Tegra</i> Software Team.</li>
-            <li>Designed & developed PLDM based Redfish Update API for Nvidia's IGX safety functionality.</li>
-            <li>Added HTTPS/CIFS remote virtual media support for Nvidia's OpenBMC via Redfish for webUI.</li>
-          </ul>
+      <div class="page-content">
+        <div class="filter-experience-tabs">
+          ${this.experienceTypes
+            .map(
+              (type) =>
+                `<a class="filter-experience-tab" @click="${() =>
+                  this.onTabClick(type)}" style="${
+                  type === this.selectedType
+                    ? "text-decoration: underline;"
+                    : ""
+                }">${type}</a>`
+            )
+            .join(" ᐧ ")}
         </div>
-        <section class="company-title" id="cisco-internship">Cisco Systems</section>
-        <section class="company-duration">Jan 2020 - Jun 2020</section>
-        <section class="company-email">mutnawaz@cisco.com</section>
-        <section class="role-title">Software Engineer Intern</section>
-        <ul>
-          <li>
-            Developed 3 new industry-standard Redfish APIs for firmware discovery, update, & monitoring.
-          </li>
-          <li>
-            Ported 7,000+ source code from Python2 to Python3 with no performance impact.
-          </li>
-        </ul>
-        <div class="company-images">
-          <figure>
-            <img class="company-image" src="./assets/cisco0.png" alt="Cisco Onboarding">
-            <figcaption>Cisco Internship Onboarding. Jan 16, 2020.</figcaption>
-          </figure>
-        </div>
-      </div>
-      <hr class="hr">
-      <div id="previous">
-        <section class="experience-title">Previous</section>
-        <div class="company" id="cisco">
-          <div>
-            <section class="company-title">Cisco Systems</section>
-            <section class="company-duration">Aug 2020 - July 2023</section>
-            <section class="company-email">mutnawaz@cisco.com</section>
-            <section class="company-address">3rd floor, BGL 17, Cessna Park, Bangalore, India</section>
-            <section class="role-title">Software Engineer II</section>
-            <ul>
-              <li>Engineered a diagnostic utility for Cisco UCS servers, enabling troubleshooting of CPUs, 
-                DIMMs, & PCIe devices. Achieving 40% faster root cause detection, 10% decrease in RMA costs,
-                 and streamlining debugging for TAC.
-              </li>
-              <li>Designed a secure Data Sanitization framework with Redfish APIs to fully wipe data from storage
-                controllers, NVMe & disks.
-              </li>
-              <li>Owned & revamped Cisco firmware application front-end with web components and designed
-                12+ back-end APIs. Shipped the application in a customized Linux container, offering CLI,
-                UI, & Redfish interfaces.
-              </li>
-              <li>Implemented thread synchronization to concurrently install operating systems and update the
-                firmware of 100+ Cisco UCS servers at once.
-              </li>
-            </ul>
-            <section class="role-title">Software Engineer</section>
-            <ul>
-              <li>Worked on Baseboard Management Controller to streamline low-level firmware and BIOS update,
-                resulting in a 15% reduction in system downtime and improved system stability.
-              </li>
-              <li>Migrate from legacy build systems to container-based CI/CD builds utilizing runC and
-                dockerd runtime engines, resulting in a notable 20% acceleration in build times.
-              </li>
-              <li>Owned and maintained Cisco Inventory Portal by automating source check-ins, creating
-                SSH key-pairs, and optimizing large NFS storage, resulting in a 30% reduction in
-                storage & 2x API performance.
-              </li>
-            </ul>
+        ${experience
+          .map(
+            (exp) => `
+          <div class="company">
+            <div class="company-header">
+              ${
+                exp.CompanyLogo
+                  ? `
+                <div class="company-logo-container">
+                  <img class="company-logo" src="${exp.CompanyLogo}" alt="${exp.Company} Logo">
+                </div>
+              `
+                  : ""
+              }
+              <div>
+                <section class="company-title">${exp.Company}</section>
+                <section class="company-location">${exp.Location}</section>
+              </div>
+            </div>
+            ${exp.Roles.map(
+              (role) => `
+              <div class="role">
+                <div class="role-header">
+                  <div class="role-header-item">
+                    <section class="role-title">${role.Title}</section>
+                    ${
+                      exp.Subtitle
+                        ? `<section class="advisor-name">${exp.Subtitle}</section>`
+                        : ""
+                    }
+                  </div>
+                  <div class="role-header-item">
+                    <section class="role-duration">${role.TimePeriod}</section>
+                  </div>
+                </div>
+                ${
+                  role.Description
+                    ? `<section class="role-description">${role.Description}</section>`
+                    : ""
+                }
+              </div>
+            `
+            ).join("")}
+            ${
+              exp.Pictures
+                ? `
+              <div class="company-images">
+                ${exp.Pictures.map(
+                  (pic) => `
+                  <figure>
+                    <img class="company-image" src="${pic.Src}" alt="${
+                    pic.Subtitle
+                  }">
+                    ${
+                      pic.Subtitle
+                        ? `<figcaption>${pic.Subtitle}</figcaption>`
+                        : ""
+                    }
+                  </figure>
+                `
+                ).join("")}
+              </div>
+            `
+                : ""
+            }
           </div>
-          <div class="company-images">
-            <figure>
-              <img class="company-image" src="./assets/cisco1.png" alt="Cisco Team Outing">
-              <figcaption>Cisco First Team Outing. Aug 26, 2022.</figcaption>
-            </figure>
-            <figure>
-              <img class="company-image" src="./assets/cisco2.png" alt="Cisco Last Working Day">
-              <figcaption>Cisco Last Working Day. Jul 20, 2023.</figcaption>
-            </figure>
-          </div>
-        </div>
+          <hr class="hr">
+        `
+          )
+          .join("")}
       </div>
-      <hr class="hr">
-      <div id="research">
-        <section class="experience-title">Research</section>
-        <section class="company-title">University of Utah</section>
-        <section class="role-title">Spring 2024: CS6950 Independent Study</section>
-        <section class="advisor-name">Prof. Vijay Nagarajan</section>
-        <ul>
-          <li>
-            New distributed scheduler for disaggregated memory like CXL, RDMA, etc.
-          </li>
-        </ul>
-      </div>
-      <hr class="hr">
-      <div id="teaching">
-        <section class="experience-title">Teaching</section>
-        <section class="company-title">University of Utah</section>
-        <section class="role-title">Fall 2023: CS4000 Senior Capstone Design</section>
-        <section class="role-title">Spring 2024: CS4500 Senior Capstone Project</section>
-        <section style="padding: 12px 0 0 0;">Professors: Jim de st Germain, David Bean, and Aaron Wood</section>
-        <ul>
-          <li>
-            Mentoring a class of 160 senior undergraduates in their project ideation, design,
-            development, and deployment.
-          </li>
-        </ul>
-      </div>`;
+    `;
   }
 }
 
@@ -1159,37 +1492,34 @@ class MyPublication extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <div id="#publications">
-        <ol>
+        <ol class="paper-list">${window.publications
+          .map(
+            (pub, index) => `
           <li>
             <section class="paper-title">
-              <a target="_blank" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9777199&isnumber=9776641">
-                A Detail Survey on QUIC and its Impact on Network Data Transmission
-              </a>
+              <a target="_blank" href="${pub.URL}">${pub.Title}</a>
             </section>
-            2022 6th International Conference on Trends in Electronics and Informatics (ICOEI), Tirunelveli,
-            India, 2022, pp. 378-385, doi: 10.1109/ICOEI53556.2022.9777199.
+            ${pub.Conference}
             <section class="paper-authors">
-              <i>Pratiksha Narasimha Nayak G; Nimisha Dey; Neha N; Malavika Hariprasad; Sandhya S; Minal Moharir;
-                <strong>Muteeb Akram</strong>
-              </i>
+              <i>${pub.Authors}</i>
             </section>
+            ${
+              pub.Links
+                ? `
+              <section class="paper-subsection">
+                ${pub.Links.map(
+                  (link) => `
+                  [ <a href="${link.URL}">${link.Text}</a> ]
+                `
+                ).join("")}
+              </section>
+            `
+                : ""
+            }
           </li>
-          <li>
-            <section class="paper-title">
-              <a target="_blank" href="https://www.irjet.net/archives/V7/i5/IRJET-V7I51018.pdf">
-                Server Firmware Management using DMTF Redfish REST APIs
-              </a>
-            </section>
-            May 2020, International Research Journal of Engineering and Technology (IRJET)
-            <section class="paper-authors">
-              <i><strong>Muteeb Akram Nawaz</strong>, Veena Gadad (Dept. of Computer Science and Engineering,
-                R V College of Engineering, Karnataka, India)
-              </i>
-            </section>
-            <section class="paper-subsection">
-              [ <a href="https://www.dmtf.org/about/academicalliance#redfish">DMTF Redfish Recognition</a> ]
-            </section>
-          </li>
+          `
+          )
+          .join("")}
         </ol>
       </div>`;
   }
@@ -1202,27 +1532,27 @@ class MyContact extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
-      <div class="contact" id="contact">
-        <p style="padding: 6px 0 0 0;">Hello there!</p>
-        <p>Feel free to reach out to me on any of the platforms.</p>
-        <ul>
-          <li><a target="_blank" href="mailto://muteebakram@gmail.com">muteebakram@gmail.com</a></li>
-          <li>
-            <a target="_blank" href="https://www.linkedin.com/in/muteeb-akram/">linkedin.com/in/muteeb-akram</a>
-          </li>
-          <li><a target="_blank" href="https://github.com/muteebakram">github.com/muteebakram</a></li>
-          <li>
-            <a target="_blank" href="https://www.instagram.com/muteebakram/">instagram.com/muteebakram</a>
-          </li>
-          <li>
-            <a target="_blank" href="https://www.twitter.com/muteeb_akram/">twitter.com/muteeb_akram</a>
-          </li>
-          <li>
-            <a target="_blank" href="https://scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en">scholar.google.com/citations?user=miOm8JMAAAAJ&hl=en</a>
-          </li>
-        </ul>
-        <p>Thanks for stopping by.</p>
-        <p>:wq</p>
+      <div id="contact" class="contact">
+        ${window.contact
+          .map(
+            (section) => `
+          <p style="padding: 6px 0 0 0;">${section.greeting}</p>
+          <p>${section.message}</p>
+          <ul class="contact-ul">
+            ${section.links
+              .map(
+                (link) => `
+              <li>
+                <a target="_blank" href="${link.url}">${link.text}</a>
+              </li>
+            `
+              )
+              .join("")}
+          </ul>
+          ${section.closing}
+        `
+          )
+          .join("")}
       </div>`;
   }
 }
@@ -1237,7 +1567,7 @@ class MyFooter extends HTMLElement {
 
   constructor() {
     super();
-    this.lastUpdated = "Oct 16, 2024";
+    this.lastUpdated = "April 14th, 2025";
     this.showHR = this.hasAttribute("showHR");
     this.showTop = this.hasAttribute("showTop");
     this.showCopyright = this.hasAttribute("showCopyright");
