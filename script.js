@@ -24,9 +24,9 @@ window.header = {
       Link: "./projects.html",
     },
     {
-      Name: "Publications",
-      ID: "publications",
-      Link: "./publications.html",
+      Name: "Photos",
+      ID: "photos",
+      Link: "./photos.html",
     },
     {
       Name: "Contact",
@@ -256,6 +256,43 @@ window.experience = [
       {
         Src: "./assets/cisco0.png",
         Subtitle: "Cisco Internship Onboarding.<br>Jan 16, 2020.",
+      },
+    ],
+  },
+  {
+    Company: "R. V. College of Engineering",
+    Type: "Research",
+    CompanyLogo: "./assets/rvce_logo.png",
+    Location: "Bangalore, Karnataka, India",
+    Roles: [
+      {
+        Title: "Undergraduate Researcher",
+        TimePeriod: "Aug 2018 - May 2022",
+      },
+    ],
+    Publications: [
+      {
+        Title:
+          "A Detail Survey on QUIC and its Impact on Network Data Transmission",
+        URL: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9777199&isnumber=9776641",
+        Conference:
+          "2022 6th International Conference on Trends in Electronics and Informatics (ICOEI), Tirunelveli, India, 2022, pp. 378-385, doi: 10.1109/ICOEI53556.2022.9777199",
+        Authors:
+          "Pratiksha Narasimha Nayak G; Nimisha Dey; Neha N; Malavika Hariprasad; Sandhya S; Minal Moharir; Muteeb Akram",
+      },
+      {
+        Title: "Server Firmware Management using DMTF Redfish REST APIs",
+        URL: "https://www.irjet.net/archives/V7/i5/IRJET-V7I51018.pdf",
+        Conference:
+          "May 2020, International Research Journal of Engineering and Technology (IRJET)",
+        Authors:
+          "Muteeb Akram Nawaz, Veena Gadad (Dept. of Computer Science and Engineering, R V College of Engineering, Karnataka, India)",
+        Links: [
+          {
+            Text: "DMTF Redfish Recognition",
+            URL: "https://www.dmtf.org/about/academicalliance#redfish",
+          },
+        ],
       },
     ],
   },
@@ -810,32 +847,6 @@ window.projects = [
   },
 ];
 
-window.publications = [
-  {
-    Title:
-      "A Detail Survey on QUIC and its Impact on Network Data Transmission",
-    URL: "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9777199&isnumber=9776641",
-    Conference:
-      "2022 6th International Conference on Trends in Electronics and Informatics (ICOEI), Tirunelveli, India, 2022, pp. 378-385, doi: 10.1109/ICOEI53556.2022.9777199",
-    Authors:
-      "Pratiksha Narasimha Nayak G; Nimisha Dey; Neha N; Malavika Hariprasad; Sandhya S; Minal Moharir; Muteeb Akram",
-  },
-  {
-    Title: "Server Firmware Management using DMTF Redfish REST APIs",
-    URL: "https://www.irjet.net/archives/V7/i5/IRJET-V7I51018.pdf",
-    Conference:
-      "May 2020, International Research Journal of Engineering and Technology (IRJET)",
-    Authors:
-      "Muteeb Akram Nawaz, Veena Gadad (Dept. of Computer Science and Engineering, R V College of Engineering, Karnataka, India)",
-    Links: [
-      {
-        Text: "DMTF Redfish Recognition",
-        URL: "https://www.dmtf.org/about/academicalliance#redfish",
-      },
-    ],
-  },
-];
-
 window.contact = [
   {
     greeting: "Hello there!",
@@ -869,6 +880,195 @@ window.contact = [
     closing: "Thanks for stopping by.<br>:wq",
   },
 ];
+
+class MyFilterToggle extends HTMLElement {
+  static observedAttributes = ["filter-target"];
+
+  constructor() {
+    super();
+    this.filterTarget = this.getAttribute("filter-target");
+    this.onToggle = this.onToggle.bind(this);
+  }
+
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if (attr !== "filter-target" || oldValue === newValue) return;
+    this.filterTarget = newValue;
+    if (this.isConnected) {
+      this.render();
+      this.connectButton();
+    }
+  }
+
+  connectedCallback() {
+    this.render();
+    this.connectButton();
+  }
+
+  disconnectedCallback() {
+    this.button?.removeEventListener("click", this.onToggle);
+  }
+
+  connectButton() {
+    this.button?.removeEventListener("click", this.onToggle);
+    this.button = this.querySelector("button");
+    this.button?.addEventListener("click", this.onToggle);
+    this.syncState();
+  }
+
+  syncState() {
+    if (!this.button || !this.filterTarget) return;
+
+    const filterPanel = document.getElementById(this.filterTarget);
+    const isExpanded = filterPanel ? !filterPanel.hidden : false;
+    const label = isExpanded ? "Hide filters" : "Show filters";
+    this.button.setAttribute("aria-expanded", String(isExpanded));
+    this.button.setAttribute("aria-label", label);
+    this.button.title = label;
+    this.button.classList.toggle("is-active", isExpanded);
+  }
+
+  onToggle() {
+    const filterPanel = document.getElementById(this.filterTarget);
+    if (!filterPanel) return;
+
+    filterPanel.hidden = !filterPanel.hidden;
+    this.syncState();
+  }
+
+  render() {
+    this.innerHTML = `
+      <button class="filter-toggle-button" type="button" aria-controls="${this.filterTarget}" aria-expanded="false" aria-label="Show filters" title="Show filters">
+        <svg class="filter-toggle-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 6h16M7 12h10M10 18h4"></path>
+        </svg>
+      </button>`;
+  }
+}
+
+class MyCopyLink extends HTMLElement {
+  static observedAttributes = ["target-id", "target-type"];
+
+  constructor() {
+    super();
+    this.targetId = this.getAttribute("target-id");
+    this.targetType = this.getAttribute("target-type") || "section";
+    this.onCopy = this.onCopy.bind(this);
+  }
+
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if (oldValue === newValue) return;
+    if (attr === "target-id") this.targetId = newValue;
+    if (attr === "target-type") this.targetType = newValue || "section";
+
+    if (this.isConnected) {
+      this.render();
+      this.connectButton();
+    }
+  }
+
+  connectedCallback() {
+    this.render();
+    this.connectButton();
+  }
+
+  disconnectedCallback() {
+    this.button?.removeEventListener("click", this.onCopy);
+  }
+
+  connectButton() {
+    this.button?.removeEventListener("click", this.onCopy);
+    this.button = this.querySelector("button");
+    this.button?.addEventListener("click", this.onCopy);
+  }
+
+  getShareUrl() {
+    if (!this.targetId || !document.getElementById(this.targetId)) {
+      throw new Error("Copy link target was not found");
+    }
+
+    const url = new URL(document.baseURI);
+    url.hash = this.targetId;
+    return url.href;
+  }
+
+  fallbackCopyText(text) {
+    const textarea = document.createElement("textarea");
+    const previousFocus = document.activeElement;
+    textarea.value = text;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    textarea.style.pointerEvents = "none";
+    document.body.appendChild(textarea);
+    textarea.select();
+    const copied = document.execCommand?.("copy");
+    textarea.remove();
+    previousFocus?.focus?.();
+
+    if (!copied) throw new Error("Copy command was unavailable");
+  }
+
+  async copyText(text) {
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return;
+      } catch {
+        // Fall back for browsers that expose Clipboard API but deny access.
+      }
+    }
+
+    this.fallbackCopyText(text);
+  }
+
+  getToast() {
+    let toast = document.getElementById("copyLinkToast");
+    if (toast) return toast;
+
+    toast = document.createElement("div");
+    toast.id = "copyLinkToast";
+    toast.className = "copy-link-toast";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+    toast.setAttribute("aria-atomic", "true");
+    document.body.appendChild(toast);
+    return toast;
+  }
+
+  showToast(message, state) {
+    const toast = this.getToast();
+    window.clearTimeout(toast.hideTimer);
+    toast.textContent = message;
+    toast.dataset.state = state;
+    toast.classList.add("is-visible");
+    toast.hideTimer = window.setTimeout(
+      () => toast.classList.remove("is-visible"),
+      2400
+    );
+  }
+
+  async onCopy() {
+    const subject =
+      this.targetType.charAt(0).toUpperCase() + this.targetType.slice(1);
+
+    try {
+      await this.copyText(this.getShareUrl());
+      this.showToast(`${subject} link copied`, "success");
+    } catch {
+      this.showToast("Unable to copy link", "error");
+    }
+  }
+
+  render() {
+    this.innerHTML = `
+      <button class="copy-link-button" type="button" aria-label="Copy link to this ${this.targetType}" title="Copy link">
+        <svg class="copy-link-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M10 13a5 5 0 0 0 7.54.54l2-2a5 5 0 0 0-7.07-7.07l-1.15 1.15"></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-2 2a5 5 0 0 0 7.07 7.07l1.15-1.15"></path>
+        </svg>
+      </button>`;
+  }
+}
 
 class MyHeader extends HTMLElement {
   static observedAttributes = ["pageTitle", "pageSubTitle", "theme"];
@@ -1126,6 +1326,42 @@ class MyExperience extends HTMLElement {
     this.render(filteredExperience);
   }
 
+  renderPublications(publications) {
+    return `
+      <section class="experience-title">Publications</section>
+      <ol class="paper-list">
+        ${publications
+          .map(
+            (pub) => `
+              <li>
+                <section class="paper-title">
+                  <a target="_blank" href="${pub.URL}">${pub.Title}</a>
+                </section>
+                ${pub.Conference}
+                <section class="paper-authors">
+                  <i>${pub.Authors}</i>
+                </section>
+                ${
+                  pub.Links
+                    ? `
+                      <section class="paper-subsection">
+                        ${pub.Links.map(
+                          (link) => `
+                            [ <a target="_blank" href="${link.URL}">${link.Text}</a> ]
+                          `
+                        ).join("")}
+                      </section>
+                    `
+                    : ""
+                }
+              </li>
+            `
+          )
+          .join("")}
+      </ol>
+    `;
+  }
+
   render(experience) {
     this.innerHTML = `
       <div class="page-content">
@@ -1185,6 +1421,11 @@ class MyExperience extends HTMLElement {
               </div>
             `
             ).join("")}
+            ${
+              exp.Publications
+                ? this.renderPublications(exp.Publications)
+                : ""
+            }
             ${
               exp.Pictures
                 ? `
@@ -1334,7 +1575,7 @@ class MyFilter extends HTMLElement {
     );
     titleFilter += "</select>";
 
-    filters += `<div class="filters-div">${filterIcon} ${titleFilter}&nbsp; ${skillFilter}&nbsp; ${yearFilter}</div>`;
+    filters += `<div class="filters-div project-filters">${filterIcon} ${titleFilter}&nbsp; ${skillFilter}&nbsp; ${yearFilter}</div>`;
     return filters;
   }
 
@@ -1406,11 +1647,25 @@ class MyProject extends HTMLElement {
     return sortedMap;
   }
 
-  getProjectTitle(p) {
-    if (p.TitleLink && p.TitleLink !== "")
-      return `<label class="project-title"><a target="_blank" href="${p.TitleLink}">${p.Title}</a></label>`;
+  getProjectId(p) {
+    const slug = p.Title.normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/&/g, " and ")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
 
-    return `<label class="project-title">${p.Title}</label>`;
+    return `project-${slug}`;
+  }
+
+  getProjectTitle(p) {
+    const projectId = this.getProjectId(p);
+    const copyLink = `<my-copy-link target-id="${projectId}" target-type="project"></my-copy-link>`;
+
+    if (p.TitleLink && p.TitleLink !== "")
+      return `<section id="${projectId}" class="project-title linked-title">${copyLink}<a target="_blank" href="${p.TitleLink}">${p.Title}</a></section>`;
+
+    return `<section id="${projectId}" class="project-title linked-title">${copyLink}<span>${p.Title}</span></section>`;
   }
 
   getLinks(p) {
@@ -1472,7 +1727,11 @@ class MyProject extends HTMLElement {
   }
 
   render(projectMap) {
-    let resultantHTML = `<section class="filter-result">Showing ${this.projectCount} from ${window.projects.length} projects with ${this.skillCount} from ${this.totalSkillCount} skills.</section>`;
+    let resultantHTML = `
+      <section class="filter-result filter-result-row">
+        <span aria-live="polite">Showing ${this.projectCount} from ${window.projects.length} projects with ${this.skillCount} from ${this.totalSkillCount} skills.</span>
+        <my-filter-toggle filter-target="projectFilters"></my-filter-toggle>
+      </section>`;
 
     projectMap.forEach((projects, year) => {
       resultantHTML += `
@@ -1481,47 +1740,6 @@ class MyProject extends HTMLElement {
     });
 
     this.innerHTML = resultantHTML;
-  }
-}
-
-class MyPublication extends HTMLElement {
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    this.innerHTML = `
-      <div id="#publications">
-        <ol class="paper-list">${window.publications
-          .map(
-            (pub, index) => `
-          <li>
-            <section class="paper-title">
-              <a target="_blank" href="${pub.URL}">${pub.Title}</a>
-            </section>
-            ${pub.Conference}
-            <section class="paper-authors">
-              <i>${pub.Authors}</i>
-            </section>
-            ${
-              pub.Links
-                ? `
-              <section class="paper-subsection">
-                ${pub.Links.map(
-                  (link) => `
-                  [ <a href="${link.URL}">${link.Text}</a> ]
-                `
-                ).join("")}
-              </section>
-            `
-                : ""
-            }
-          </li>
-          `
-          )
-          .join("")}
-        </ol>
-      </div>`;
   }
 }
 
@@ -1590,10 +1808,11 @@ class MyFooter extends HTMLElement {
 }
 
 customElements.define("my-header", MyHeader);
+customElements.define("my-filter-toggle", MyFilterToggle);
+customElements.define("my-copy-link", MyCopyLink);
 customElements.define("my-home", MyHome);
 customElements.define("my-experience", MyExperience);
 customElements.define("my-education", MyEducation);
-customElements.define("my-publication", MyPublication);
 customElements.define("my-filter", MyFilter);
 customElements.define("my-project", MyProject);
 customElements.define("my-contact", MyContact);

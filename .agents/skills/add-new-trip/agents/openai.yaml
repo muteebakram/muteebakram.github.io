@@ -1,0 +1,4 @@
+interface:
+  display_name: "Add New Trip"
+  short_description: "Add a photo trip to the portfolio gallery"
+  default_prompt: "Use $add-new-trip to add a new trip folder to my portfolio gallery."

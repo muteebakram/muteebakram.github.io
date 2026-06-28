@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script type="module" src="script.js"></script>
+<script type="module" src="photos.js"></script>
+<script type="module" src="multi-select-dropdown.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1W01HG67P1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-1W01HG67P1");
+</script>
+
+<body class="body">
+  <my-header pageTitle="Photos"></my-header>
+  <my-photo-filter id="photoFilters" hidden></my-photo-filter>
+  <my-photo-gallery></my-photo-gallery>
+  <my-footer showCopyright showTop></my-footer>
+</body>
+
+</html>
