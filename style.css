@@ -651,7 +651,7 @@ my-copy-link {
 
 .photo-card-title {
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   line-height: 1.4;
 }
@@ -659,7 +659,7 @@ my-copy-link {
 .photo-card-meta {
   margin: 0;
   color: dimgrey;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 400;
   line-height: 1.4;
 }
@@ -775,15 +775,16 @@ my-copy-link {
   color: white;
 }
 
+.photo-lightbox:focus {
+  outline: none;
+}
+
 .photo-lightbox::backdrop {
   background: rgba(0, 0, 0, 0.88);
 }
 
 .photo-lightbox-shell {
   position: relative;
-  display: grid;
-  grid-template-columns: 52px minmax(0, 1fr) 52px;
-  align-items: center;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -792,9 +793,10 @@ my-copy-link {
 }
 
 .photo-lightbox-figure {
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  position: relative;
+  display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   min-width: 0;
@@ -805,31 +807,59 @@ my-copy-link {
 
 .photo-lightbox-image {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   min-width: 0;
   min-height: 0;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  object-position: center;
+}
+
+.photo-lightbox-topbar {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: start;
+  box-sizing: border-box;
+  padding: 12px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.78),
+    rgba(0, 0, 0, 0.38) 70%,
+    transparent
+  );
+  color: white;
 }
 
 .photo-lightbox-caption {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 14px 16px;
-  text-align: center;
+  min-width: 0;
+  padding: 3px 4px;
+  text-align: left;
   font-size: 14px;
 }
 
 .photo-lightbox-title-row {
   display: flex;
   gap: 8px;
+  min-width: 0;
   align-items: center;
-  justify-content: center;
+}
+
+.photo-lightbox-title-row strong,
+.photo-lightbox-meta {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .photo-lightbox-loader {
@@ -855,6 +885,7 @@ my-copy-link {
 }
 
 .photo-lightbox-meta {
+  display: block;
   color: #c7c7c7;
   font-size: 12px;
   font-weight: normal;
@@ -864,13 +895,18 @@ my-copy-link {
 .photo-lightbox-nav {
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  background: transparent;
   color: white;
   cursor: pointer;
 }
 
 .photo-lightbox-close:hover,
-.photo-lightbox-nav:hover,
+.photo-lightbox-nav:hover {
+  border: 0;
+  background: rgba(128, 128, 128, 0.58);
+  outline: 0;
+}
+
 .photo-lightbox-close:focus-visible,
 .photo-lightbox-nav:focus-visible {
   background: rgba(255, 255, 255, 0.24);
@@ -879,26 +915,18 @@ my-copy-link {
 }
 
 .photo-lightbox-close {
-  position: absolute;
-  z-index: 1;
-  top: 12px;
-  right: 12px;
   width: 40px;
   height: 40px;
+  flex: 0 0 auto;
   font-size: 28px;
   line-height: 1;
 }
 
 .photo-lightbox-actions {
-  position: absolute;
-  z-index: 1;
-  top: 12px;
-  right: 64px;
   display: flex;
   gap: 6px;
   align-items: center;
   color: white;
-  padding: 0 4px;
 }
 
 .photo-lightbox-copy,
@@ -929,10 +957,36 @@ my-copy-link {
 }
 
 .photo-lightbox-nav {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
   width: 40px;
   height: 40px;
-  margin: auto;
+  margin: 0;
   font-size: 22px;
+  transform: translateY(-50%);
+}
+
+.photo-lightbox-previous {
+  left: 12px;
+}
+
+.photo-lightbox-next {
+  right: 12px;
+}
+
+.photo-lightbox-topbar,
+.photo-lightbox-nav {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 160ms ease, visibility 160ms ease;
+}
+
+.photo-lightbox.is-controls-hidden .photo-lightbox-topbar,
+.photo-lightbox.is-controls-hidden .photo-lightbox-nav {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -947,7 +1001,9 @@ my-copy-link {
   .photo-card-copy,
   .photo-card-action::after,
   .photo-toast,
-  .copy-link-toast {
+  .copy-link-toast,
+  .photo-lightbox-topbar,
+  .photo-lightbox-nav {
     transition: none;
   }
 }
@@ -988,18 +1044,16 @@ my-copy-link {
   }
 
   .photo-lightbox-shell {
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
     border-radius: 0;
   }
 
-  .photo-lightbox-close {
-    top: 8px;
-    right: 8px;
+  .photo-lightbox-topbar {
+    gap: 4px;
+    padding: 8px;
   }
 
   .photo-lightbox-actions {
-    top: 8px;
-    right: 56px;
+    gap: 4px;
   }
 
   .photo-toast {
@@ -1009,6 +1063,14 @@ my-copy-link {
   .photo-lightbox-nav {
     width: 36px;
     height: 36px;
+  }
+
+  .photo-lightbox-previous {
+    left: 8px;
+  }
+
+  .photo-lightbox-next {
+    right: 8px;
   }
 }
 
