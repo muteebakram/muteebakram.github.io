@@ -825,6 +825,35 @@ my-copy-link {
   font-size: 14px;
 }
 
+.photo-lightbox-title-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-lightbox-loader {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: conic-gradient(
+    currentColor 0 25%,
+    rgba(255, 255, 255, 0.2) 25% 100%
+  );
+  animation: photo-lightbox-loader-spin 800ms linear infinite;
+}
+
+.photo-lightbox-loader[hidden] {
+  display: none;
+}
+
+@keyframes photo-lightbox-loader-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 .photo-lightbox-meta {
   color: #c7c7c7;
   font-size: 12px;
@@ -909,6 +938,10 @@ my-copy-link {
 @media (prefers-reduced-motion: reduce) {
   .photo-card-image {
     transition: none;
+  }
+
+  .photo-lightbox-loader {
+    animation: none;
   }
 
   .photo-card-copy,

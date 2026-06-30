@@ -501,6 +501,9 @@ class MyPhotoGallery extends HTMLElement {
     this.previousFocus = null;
     this.previousBodyOverflow = "";
     this.toastTimer = null;
+    this.photoLoadRequestId = 0;
+    this.pendingFullImages = new Map();
+    this.loadedFullImageSources = new Set();
     this.onGalleryClick = this.onGalleryClick.bind(this);
     this.onGalleryKeyDown = this.onGalleryKeyDown.bind(this);
   }
@@ -515,6 +518,7 @@ class MyPhotoGallery extends HTMLElement {
     this.removeEventListener("click", this.onGalleryClick);
     this.removeEventListener("keydown", this.onGalleryKeyDown);
     window.clearTimeout(this.toastTimer);
+    this.cancelPendingPhotoLoads();
   }
 
   setPhotos(photos) {
@@ -668,9 +672,12 @@ class MyPhotoGallery extends HTMLElement {
           <button class="photo-lightbox-close" type="button" data-lightbox-action="close" aria-label="Close full-size photo">&times;</button>
           <button class="photo-lightbox-nav photo-lightbox-previous" type="button" data-lightbox-action="previous" aria-label="Show previous photo">&#10094;</button>
           <figure class="photo-lightbox-figure">
-            <img class="photo-lightbox-image" src="${photo.Src}" alt="${photo.Alt}">
+            <img class="photo-lightbox-image" src="${photo.CachedSrc}" alt="${photo.Alt}" decoding="async">
             <figcaption class="photo-lightbox-caption">
-              <strong id="photoLightboxTitle">${photo.Title}</strong>
+              <div class="photo-lightbox-title-row">
+                <strong id="photoLightboxTitle">${photo.Title}</strong>
+                <span class="photo-lightbox-loader" role="status" aria-label="Loading full-resolution photo" hidden></span>
+              </div>
               <span class="photo-lightbox-meta">${photo.Location}&nbsp; • &nbsp;${photo.Date}</span>
             </figcaption>
           </figure>
@@ -736,6 +743,7 @@ class MyPhotoGallery extends HTMLElement {
 
   closeLightbox() {
     const dialog = this.querySelector(".photo-lightbox");
+    this.cancelPendingPhotoLoads();
     if (!dialog?.open) return;
 
     dialog.close();
@@ -743,18 +751,140 @@ class MyPhotoGallery extends HTMLElement {
     if (this.previousFocus?.isConnected) this.previousFocus.focus();
   }
 
+  invalidatePhotoDisplay() {
+    this.photoLoadRequestId += 1;
+  }
+
+  cancelPendingFullImageLoad(fullImageUrl, loadRecord) {
+    if (this.pendingFullImages.get(fullImageUrl) !== loadRecord) return;
+
+    this.pendingFullImages.delete(fullImageUrl);
+    loadRecord.image.onload = null;
+    loadRecord.image.onerror = null;
+    loadRecord.image.removeAttribute("src");
+    loadRecord.reject(new Error(`Cancelled loading ${fullImageUrl}`));
+  }
+
+  cancelPendingPhotoLoads() {
+    this.invalidatePhotoDisplay();
+
+    for (const [fullImageUrl, loadRecord] of this.pendingFullImages) {
+      this.cancelPendingFullImageLoad(fullImageUrl, loadRecord);
+    }
+  }
+
+  getAdjacentPhotoIndexes(index) {
+    if (this.photos.length < 2) return [];
+
+    return [
+      ...new Set([
+        (index + 1) % this.photos.length,
+        (index - 1 + this.photos.length) % this.photos.length,
+      ]),
+    ].filter((adjacentIndex) => adjacentIndex !== index);
+  }
+
+  cancelUnneededFullImageLoads(index) {
+    const relevantIndexes = [index, ...this.getAdjacentPhotoIndexes(index)];
+    const relevantSources = new Set(
+      relevantIndexes.map((photoIndex) =>
+        this.getPhotoUrl(this.photos[photoIndex])
+      )
+    );
+
+    for (const [fullImageUrl, loadRecord] of this.pendingFullImages) {
+      if (!relevantSources.has(fullImageUrl)) {
+        this.cancelPendingFullImageLoad(fullImageUrl, loadRecord);
+      }
+    }
+  }
+
+  ensureFullImageLoaded(photo) {
+    const fullImageUrl = this.getPhotoUrl(photo);
+    if (this.loadedFullImageSources.has(fullImageUrl)) {
+      return Promise.resolve(fullImageUrl);
+    }
+
+    const pendingLoad = this.pendingFullImages.get(fullImageUrl);
+    if (pendingLoad) return pendingLoad.promise;
+
+    const fullImage = new Image();
+    let resolveLoad;
+    let rejectLoad;
+    const promise = new Promise((resolve, reject) => {
+      resolveLoad = resolve;
+      rejectLoad = reject;
+    });
+    const loadRecord = {
+      image: fullImage,
+      promise,
+      reject: rejectLoad,
+    };
+    this.pendingFullImages.set(fullImageUrl, loadRecord);
+
+    const rejectCurrentLoad = (error) => {
+      if (this.pendingFullImages.get(fullImageUrl) !== loadRecord) return;
+
+      this.pendingFullImages.delete(fullImageUrl);
+      fullImage.onload = null;
+      fullImage.onerror = null;
+      rejectLoad(error);
+    };
+
+    fullImage.decoding = "async";
+    fullImage.onload = async () => {
+      if (typeof fullImage.decode === "function") {
+        try {
+          await fullImage.decode();
+        } catch (error) {
+          rejectCurrentLoad(error);
+          return;
+        }
+      }
+
+      if (this.pendingFullImages.get(fullImageUrl) !== loadRecord) return;
+
+      this.pendingFullImages.delete(fullImageUrl);
+      this.loadedFullImageSources.add(fullImageUrl);
+      fullImage.onload = null;
+      fullImage.onerror = null;
+      resolveLoad(fullImageUrl);
+    };
+    fullImage.onerror = () =>
+      rejectCurrentLoad(new Error(`Unable to load ${fullImageUrl}`));
+    fullImage.src = photo.Src;
+
+    return promise;
+  }
+
+  preloadAdjacentPhotos(index) {
+    for (const adjacentIndex of this.getAdjacentPhotoIndexes(index)) {
+      void this.ensureFullImageLoaded(this.photos[adjacentIndex]).catch(
+        () => {}
+      );
+    }
+  }
+
   showPhoto(index) {
     if (!this.photos.length) return;
 
+    this.invalidatePhotoDisplay();
+    const loadRequestId = this.photoLoadRequestId;
     this.activePhotoIndex =
       (index + this.photos.length) % this.photos.length;
     const photo = this.photos[this.activePhotoIndex];
     const dialog = this.querySelector(".photo-lightbox");
     if (!dialog) return;
 
+    this.cancelUnneededFullImageLoads(this.activePhotoIndex);
+
     const image = dialog.querySelector(".photo-lightbox-image");
-    image.src = photo.Src;
+    const loader = dialog.querySelector(".photo-lightbox-loader");
+    const selectedFullImageUrl = this.getPhotoUrl(photo);
+    loader.hidden = this.loadedFullImageSources.has(selectedFullImageUrl);
     image.alt = photo.Alt;
+    image.src = photo.CachedSrc;
+
     dialog.querySelector("#photoLightboxTitle").textContent = photo.Title;
     dialog.querySelector(".photo-lightbox-meta").textContent =
       `${photo.Location} • ${photo.Date}`;
@@ -765,6 +895,20 @@ class MyPhotoGallery extends HTMLElement {
     const copy = dialog.querySelector(".photo-lightbox-copy");
     copy.dataset.copyPhotoIndex = String(this.activePhotoIndex);
     copy.setAttribute("aria-label", `Copy link to ${photo.Title}`);
+
+    void this.ensureFullImageLoaded(photo)
+      .then((loadedFullImageUrl) => {
+        if (loadRequestId !== this.photoLoadRequestId) return;
+
+        image.src = loadedFullImageUrl;
+        loader.hidden = true;
+        this.preloadAdjacentPhotos(this.activePhotoIndex);
+      })
+      .catch(() => {
+        if (loadRequestId === this.photoLoadRequestId) {
+          loader.hidden = true;
+        }
+      });
   }
 
   render() {
