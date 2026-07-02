@@ -19,15 +19,15 @@ window.photoTrips = {
 
 window.photos = [
   {
-    Id: "mammoth-lake-mary",
-    Src: "./assets/trips/04/DSC01168.jpeg",
-    CachedSrc: "./assets/trips/04/Cached/Cached_DSC01168.jpeg",
-    Title: "Lake Mary",
-    Alt: "Lake Mary in the Mammoth Lakes area of the Eastern Sierra",
-    Date: "Jun 18, 2026",
+    Id: "tuolumne-meadows",
+    Src: "./assets/trips/04/DSC01483.jpeg",
+    CachedSrc: "./assets/trips/04/Cached/Cached_DSC01483.jpeg",
+    Title: "Tuolumne Meadows",
+    Alt: "Tuolumne River and footbridge crossing a broad mountain meadow",
+    Date: "Jun 19, 2026",
     Year: "2026",
     Trip: "04",
-    Location: "Mammoth Lakes, USA",
+    Location: "Tioga Pass, USA",
   },
   {
     Id: "mammoth-lake-road",
@@ -107,15 +107,15 @@ window.photos = [
     Location: "Tioga Pass, USA",
   },
   {
-    Id: "tuolumne-meadows",
-    Src: "./assets/trips/04/DSC01483.jpeg",
-    CachedSrc: "./assets/trips/04/Cached/Cached_DSC01483.jpeg",
-    Title: "Tuolumne Meadows",
-    Alt: "Tuolumne River and footbridge crossing a broad mountain meadow",
-    Date: "Jun 19, 2026",
+    Id: "mammoth-lake-mary",
+    Src: "./assets/trips/04/DSC01168.jpeg",
+    CachedSrc: "./assets/trips/04/Cached/Cached_DSC01168.jpeg",
+    Title: "Lake Mary",
+    Alt: "Lake Mary in the Mammoth Lakes area of the Eastern Sierra",
+    Date: "Jun 18, 2026",
     Year: "2026",
     Trip: "04",
-    Location: "Tioga Pass, USA",
+    Location: "Mammoth Lakes, USA",
   },
   {
     Id: "lakeside-e-bikes",
@@ -505,6 +505,13 @@ class MyPhotoGallery extends HTMLElement {
     this.lightboxClickGuardTimer = null;
     this.lightboxLastInput = "pointer";
     this.lightboxSwipe = null;
+    this.lightboxZoom = {
+      scale: 1,
+      x: 0,
+      y: 0,
+      pointers: new Map(),
+      gesture: null,
+    };
     this.suppressNextLightboxClick = false;
     this.photoLoadRequestId = 0;
     this.pendingFullImages = new Map();
@@ -516,6 +523,10 @@ class MyPhotoGallery extends HTMLElement {
     this.onLightboxPointerDown = this.onLightboxPointerDown.bind(this);
     this.onLightboxPointerUp = this.onLightboxPointerUp.bind(this);
     this.onLightboxPointerCancel = this.onLightboxPointerCancel.bind(this);
+    this.onLightboxWheel = this.onLightboxWheel.bind(this);
+    this.onLightboxDoubleClick = this.onLightboxDoubleClick.bind(this);
+    this.onLightboxResize = this.onLightboxResize.bind(this);
+    this.onLightboxImageLoad = this.onLightboxImageLoad.bind(this);
     this.onLightboxFocusIn = this.onLightboxFocusIn.bind(this);
     this.onLightboxFocusOut = this.onLightboxFocusOut.bind(this);
   }
@@ -528,8 +539,11 @@ class MyPhotoGallery extends HTMLElement {
     this.addEventListener("pointerdown", this.onLightboxPointerDown);
     this.addEventListener("pointerup", this.onLightboxPointerUp);
     this.addEventListener("pointercancel", this.onLightboxPointerCancel);
+    this.addEventListener("wheel", this.onLightboxWheel, { passive: false });
+    this.addEventListener("dblclick", this.onLightboxDoubleClick);
     this.addEventListener("focusin", this.onLightboxFocusIn);
     this.addEventListener("focusout", this.onLightboxFocusOut);
+    window.addEventListener("resize", this.onLightboxResize);
   }
 
   disconnectedCallback() {
@@ -539,12 +553,16 @@ class MyPhotoGallery extends HTMLElement {
     this.removeEventListener("pointerdown", this.onLightboxPointerDown);
     this.removeEventListener("pointerup", this.onLightboxPointerUp);
     this.removeEventListener("pointercancel", this.onLightboxPointerCancel);
+    this.removeEventListener("wheel", this.onLightboxWheel);
+    this.removeEventListener("dblclick", this.onLightboxDoubleClick);
     this.removeEventListener("focusin", this.onLightboxFocusIn);
     this.removeEventListener("focusout", this.onLightboxFocusOut);
+    window.removeEventListener("resize", this.onLightboxResize);
     window.clearTimeout(this.toastTimer);
     this.clearLightboxControlsTimer();
     window.clearTimeout(this.lightboxClickGuardTimer);
     this.lightboxSwipe = null;
+    this.resetLightboxZoom();
     this.cancelPendingPhotoLoads();
   }
 
@@ -733,7 +751,7 @@ class MyPhotoGallery extends HTMLElement {
           <div class="photo-toast" data-photo-toast="lightbox" role="status" aria-live="polite" aria-atomic="true"></div>
           <button class="photo-lightbox-nav photo-lightbox-previous" type="button" data-lightbox-action="previous" aria-label="Show previous photo">&#10094;</button>
           <figure class="photo-lightbox-figure">
-            <img class="photo-lightbox-image" src="${photo.CachedSrc}" alt="${photo.Alt}" decoding="async">
+            <img class="photo-lightbox-image" src="${photo.CachedSrc}" alt="${photo.Alt}" decoding="async" draggable="false">
           </figure>
           <button class="photo-lightbox-nav photo-lightbox-next" type="button" data-lightbox-action="next" aria-label="Show next photo">&#10095;</button>
         </div>
@@ -813,6 +831,7 @@ class MyPhotoGallery extends HTMLElement {
     this.clearLightboxControlsTimer();
     window.clearTimeout(this.lightboxClickGuardTimer);
     this.lightboxSwipe = null;
+    this.resetLightboxZoom();
     this.suppressNextLightboxClick = false;
     this.cancelPendingPhotoLoads();
     if (!dialog?.open) return;
@@ -881,11 +900,310 @@ class MyPhotoGallery extends HTMLElement {
     }
   }
 
+  isLightboxZoomed() {
+    return this.lightboxZoom.scale > 1.001;
+  }
+
+  resetLightboxZoom() {
+    this.lightboxZoom.scale = 1;
+    this.lightboxZoom.x = 0;
+    this.lightboxZoom.y = 0;
+    this.lightboxZoom.pointers.clear();
+    this.lightboxZoom.gesture = null;
+    this.lightboxSwipe = null;
+
+    const dialog = this.querySelector(".photo-lightbox");
+    dialog?.classList.remove("is-zoomed", "is-panning");
+    const image = dialog?.querySelector(".photo-lightbox-image");
+    image?.style.removeProperty("transform");
+  }
+
+  clampLightboxPan() {
+    const figure = this.querySelector(".photo-lightbox-figure");
+    const image = this.querySelector(".photo-lightbox-image");
+    if (!figure || !image) return;
+
+    if (!this.isLightboxZoomed()) {
+      this.lightboxZoom.scale = 1;
+      this.lightboxZoom.x = 0;
+      this.lightboxZoom.y = 0;
+      return;
+    }
+
+    const maximumX = Math.max(
+      0,
+      (image.offsetWidth * this.lightboxZoom.scale - figure.clientWidth) / 2
+    );
+    const maximumY = Math.max(
+      0,
+      (image.offsetHeight * this.lightboxZoom.scale - figure.clientHeight) / 2
+    );
+    this.lightboxZoom.x = Math.max(
+      -maximumX,
+      Math.min(maximumX, this.lightboxZoom.x)
+    );
+    this.lightboxZoom.y = Math.max(
+      -maximumY,
+      Math.min(maximumY, this.lightboxZoom.y)
+    );
+  }
+
+  applyLightboxZoom() {
+    const dialog = this.querySelector(".photo-lightbox");
+    const image = dialog?.querySelector(".photo-lightbox-image");
+    if (!dialog || !image) return;
+
+    this.clampLightboxPan();
+    const isZoomed = this.isLightboxZoomed();
+    dialog.classList.toggle("is-zoomed", isZoomed);
+    dialog.classList.toggle(
+      "is-panning",
+      isZoomed && this.lightboxZoom.gesture?.type === "pan"
+    );
+
+    if (!isZoomed) {
+      image.style.removeProperty("transform");
+      return;
+    }
+
+    image.style.transform = `translate3d(${this.lightboxZoom.x}px, ${this.lightboxZoom.y}px, 0) scale(${this.lightboxZoom.scale})`;
+  }
+
+  setLightboxZoomAt(scale, clientX, clientY) {
+    const figure = this.querySelector(".photo-lightbox-figure");
+    if (!figure) return;
+
+    const previousScale = this.lightboxZoom.scale;
+    const nextScale = Math.max(1, Math.min(4, scale));
+    if (Math.abs(nextScale - previousScale) < 0.0001) {
+      if (nextScale === 1) {
+        this.lightboxZoom.x = 0;
+        this.lightboxZoom.y = 0;
+      }
+      this.applyLightboxZoom();
+      return;
+    }
+
+    if (nextScale === 1) {
+      this.lightboxZoom.scale = 1;
+      this.lightboxZoom.x = 0;
+      this.lightboxZoom.y = 0;
+      this.applyLightboxZoom();
+      return;
+    }
+
+    const figureRect = figure.getBoundingClientRect();
+    const anchorX = clientX - (figureRect.left + figureRect.width / 2);
+    const anchorY = clientY - (figureRect.top + figureRect.height / 2);
+    const scaleRatio = nextScale / previousScale;
+    this.lightboxZoom.x =
+      anchorX - (anchorX - this.lightboxZoom.x) * scaleRatio;
+    this.lightboxZoom.y =
+      anchorY - (anchorY - this.lightboxZoom.y) * scaleRatio;
+    this.lightboxZoom.scale = nextScale;
+    this.lightboxSwipe = null;
+    this.applyLightboxZoom();
+  }
+
+  startLightboxPan(event, figure) {
+    this.lightboxZoom.gesture = {
+      type: "pan",
+      pointerId: event.pointerId,
+      startClientX: event.clientX,
+      startClientY: event.clientY,
+      startX: this.lightboxZoom.x,
+      startY: this.lightboxZoom.y,
+    };
+    figure.setPointerCapture?.(event.pointerId);
+    this.applyLightboxZoom();
+  }
+
+  startLightboxPinch() {
+    const points = [...this.lightboxZoom.pointers.values()];
+    if (points.length < 2) return;
+
+    const [first, second] = points;
+    this.lightboxZoom.gesture = {
+      type: "pinch",
+      lastDistance: Math.hypot(second.x - first.x, second.y - first.y),
+      lastMidpointX: (first.x + second.x) / 2,
+      lastMidpointY: (first.y + second.y) / 2,
+    };
+    this.lightboxSwipe = null;
+    this.applyLightboxZoom();
+  }
+
+  beginLightboxZoomPointer(event, figure) {
+    if (event.pointerType === "touch") {
+      this.lightboxZoom.pointers.set(event.pointerId, {
+        x: event.clientX,
+        y: event.clientY,
+      });
+      figure.setPointerCapture?.(event.pointerId);
+
+      if (this.lightboxZoom.pointers.size >= 2) {
+        this.startLightboxPinch();
+        return true;
+      }
+
+      if (this.isLightboxZoomed()) {
+        this.startLightboxPan(event, figure);
+        return true;
+      }
+
+      return false;
+    }
+
+    if (
+      event.pointerType === "mouse" &&
+      event.button === 0 &&
+      this.isLightboxZoomed()
+    ) {
+      this.startLightboxPan(event, figure);
+      return true;
+    }
+
+    return false;
+  }
+
+  updateLightboxZoomPointer(event) {
+    const gesture = this.lightboxZoom.gesture;
+    if (!gesture) return false;
+
+    if (
+      event.pointerType === "touch" &&
+      this.lightboxZoom.pointers.has(event.pointerId)
+    ) {
+      this.lightboxZoom.pointers.set(event.pointerId, {
+        x: event.clientX,
+        y: event.clientY,
+      });
+    }
+
+    if (gesture.type === "pan" && gesture.pointerId === event.pointerId) {
+      event.preventDefault();
+      this.lightboxZoom.x =
+        gesture.startX + (event.clientX - gesture.startClientX);
+      this.lightboxZoom.y =
+        gesture.startY + (event.clientY - gesture.startClientY);
+      this.applyLightboxZoom();
+      return true;
+    }
+
+    if (gesture.type === "pinch") {
+      const points = [...this.lightboxZoom.pointers.values()];
+      if (points.length < 2) return true;
+
+      event.preventDefault();
+      const [first, second] = points;
+      const distance = Math.hypot(second.x - first.x, second.y - first.y);
+      const midpointX = (first.x + second.x) / 2;
+      const midpointY = (first.y + second.y) / 2;
+      if (distance === 0 || gesture.lastDistance === 0) return true;
+      this.lightboxZoom.x += midpointX - gesture.lastMidpointX;
+      this.lightboxZoom.y += midpointY - gesture.lastMidpointY;
+      this.setLightboxZoomAt(
+        this.lightboxZoom.scale * (distance / gesture.lastDistance),
+        midpointX,
+        midpointY
+      );
+      gesture.lastDistance = distance;
+      gesture.lastMidpointX = midpointX;
+      gesture.lastMidpointY = midpointY;
+      return true;
+    }
+
+    return false;
+  }
+
+  endLightboxZoomPointer(event, cancelled = false) {
+    const gesture = this.lightboxZoom.gesture;
+    const trackedTouch = this.lightboxZoom.pointers.has(event.pointerId);
+    if (trackedTouch) this.lightboxZoom.pointers.delete(event.pointerId);
+    if (!gesture) return false;
+
+    if (cancelled) {
+      this.lightboxZoom.pointers.clear();
+      this.lightboxZoom.gesture = null;
+      this.applyLightboxZoom();
+      return true;
+    }
+
+    if (gesture.type === "pan" && gesture.pointerId === event.pointerId) {
+      this.lightboxZoom.gesture = null;
+      this.applyLightboxZoom();
+      return true;
+    }
+
+    if (gesture.type === "pinch" && this.lightboxZoom.pointers.size < 2) {
+      this.lightboxZoom.gesture = null;
+      if (this.isLightboxZoomed() && this.lightboxZoom.pointers.size === 1) {
+        const [pointerId, point] = this.lightboxZoom.pointers.entries().next()
+          .value;
+        this.lightboxZoom.gesture = {
+          type: "pan",
+          pointerId,
+          startClientX: point.x,
+          startClientY: point.y,
+          startX: this.lightboxZoom.x,
+          startY: this.lightboxZoom.y,
+        };
+      }
+      this.applyLightboxZoom();
+      return true;
+    }
+
+    return trackedTouch;
+  }
+
+  onLightboxWheel(event) {
+    const figure = event.target.closest?.(".photo-lightbox-figure");
+    const dialog = event.target.closest?.(".photo-lightbox");
+    if (!figure || !dialog?.open) return;
+
+    event.preventDefault();
+    this.lightboxLastInput = "pointer";
+    this.showLightboxControls();
+    const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? 100 : 1;
+    const zoomFactor = Math.exp(-event.deltaY * unit * 0.002);
+    this.setLightboxZoomAt(
+      this.lightboxZoom.scale * zoomFactor,
+      event.clientX,
+      event.clientY
+    );
+  }
+
+  onLightboxDoubleClick(event) {
+    const figure = event.target.closest?.(".photo-lightbox-figure");
+    const dialog = event.target.closest?.(".photo-lightbox");
+    if (!figure || !dialog?.open) return;
+
+    event.preventDefault();
+    this.lightboxLastInput = "pointer";
+    this.showLightboxControls();
+    if (this.isLightboxZoomed()) {
+      this.resetLightboxZoom();
+    } else {
+      this.setLightboxZoomAt(2, event.clientX, event.clientY);
+    }
+  }
+
+  onLightboxResize() {
+    const dialog = this.querySelector(".photo-lightbox");
+    if (dialog?.open) this.applyLightboxZoom();
+  }
+
+  onLightboxImageLoad() {
+    window.requestAnimationFrame(() => this.applyLightboxZoom());
+  }
+
   onLightboxPointerActivity(event) {
     const dialog = event.target.closest?.(".photo-lightbox");
     if (!dialog?.open) return;
 
+    const handledZoomGesture = this.updateLightboxZoomPointer(event);
     if (
+      !handledZoomGesture &&
       this.lightboxSwipe &&
       event.pointerId === this.lightboxSwipe.pointerId
     ) {
@@ -913,10 +1231,15 @@ class MyPhotoGallery extends HTMLElement {
     this.showLightboxControls();
 
     const figure = event.target.closest?.(".photo-lightbox-figure");
+    const handledZoomGesture = figure
+      ? this.beginLightboxZoomPointer(event, figure)
+      : false;
     if (
+      !handledZoomGesture &&
       event.pointerType === "touch" &&
       event.isPrimary &&
       figure &&
+      !this.isLightboxZoomed() &&
       !this.lightboxSwipe
     ) {
       this.lightboxSwipe = {
@@ -937,6 +1260,17 @@ class MyPhotoGallery extends HTMLElement {
   }
 
   onLightboxPointerUp(event) {
+    if (this.endLightboxZoomPointer(event)) {
+      this.lightboxSwipe = null;
+      event.preventDefault();
+      this.suppressNextLightboxClick = true;
+      window.clearTimeout(this.lightboxClickGuardTimer);
+      this.lightboxClickGuardTimer = window.setTimeout(() => {
+        this.suppressNextLightboxClick = false;
+      }, 600);
+      return;
+    }
+
     const swipe = this.lightboxSwipe;
     if (!swipe || event.pointerId !== swipe.pointerId) return;
 
@@ -968,6 +1302,7 @@ class MyPhotoGallery extends HTMLElement {
   }
 
   onLightboxPointerCancel(event) {
+    this.endLightboxZoomPointer(event, true);
     if (event.pointerId === this.lightboxSwipe?.pointerId) {
       this.lightboxSwipe = null;
     }
@@ -1129,6 +1464,7 @@ class MyPhotoGallery extends HTMLElement {
     const dialog = this.querySelector(".photo-lightbox");
     if (!dialog) return;
 
+    this.resetLightboxZoom();
     this.cancelUnneededFullImageLoads(this.activePhotoIndex);
 
     const image = dialog.querySelector(".photo-lightbox-image");
@@ -1192,6 +1528,9 @@ class MyPhotoGallery extends HTMLElement {
       event.preventDefault();
       this.closeLightbox();
     });
+    dialog
+      ?.querySelector(".photo-lightbox-image")
+      ?.addEventListener("load", this.onLightboxImageLoad);
   }
 }
 

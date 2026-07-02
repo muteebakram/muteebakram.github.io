@@ -20,7 +20,7 @@
 
 body {
   padding: 0 1em;
-  max-width: 42rem;
+  max-width: 46rem;
   line-height: 1.4;
   margin-left: auto;
   margin-right: auto;
@@ -803,7 +803,8 @@ my-copy-link {
   min-height: 0;
   margin: 0;
   overflow: hidden;
-  touch-action: pan-y pinch-zoom;
+  cursor: zoom-in;
+  touch-action: none;
 }
 
 .photo-lightbox-image {
@@ -816,6 +817,18 @@ my-copy-link {
   max-height: 100%;
   object-fit: contain;
   object-position: center;
+  transform-origin: center;
+  user-select: none;
+  will-change: transform;
+  -webkit-user-drag: none;
+}
+
+.photo-lightbox.is-zoomed .photo-lightbox-figure {
+  cursor: grab;
+}
+
+.photo-lightbox.is-panning .photo-lightbox-figure {
+  cursor: grabbing;
 }
 
 .photo-lightbox-topbar {
