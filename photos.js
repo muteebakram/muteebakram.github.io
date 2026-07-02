@@ -172,17 +172,17 @@ window.photos = [
     Trip: "03",
     Location: "Monterey Peninsula, USA",
   },
-  {
-    Id: "bixby-creek-bridge",
-    Src: "./assets/trips/03/DSC01144.jpeg",
-    CachedSrc: "./assets/trips/03/Cached/Cached_DSC01144.jpeg",
-    Title: "Bixby Creek Bridge",
-    Alt: "Bixby Creek Bridge spanning coastal cliffs in Big Sur",
-    Date: "May 25, 2026",
-    Year: "2026",
-    Trip: "03",
-    Location: "Big Sur, USA",
-  },
+  // {
+  //   Id: "bixby-creek-bridge",
+  //   Src: "./assets/trips/03/DSC01144.jpeg",
+  //   CachedSrc: "./assets/trips/03/Cached/Cached_DSC01144.jpeg",
+  //   Title: "Bixby Creek Bridge",
+  //   Alt: "Bixby Creek Bridge spanning coastal cliffs in Big Sur",
+  //   Date: "May 25, 2026",
+  //   Year: "2026",
+  //   Trip: "03",
+  //   Location: "Big Sur, USA",
+  // },
   {
     Id: "carmel-beach",
     Src: "./assets/trips/03/DSC00935.jpeg",
@@ -504,6 +504,7 @@ class MyPhotoGallery extends HTMLElement {
     this.lightboxControlsTimer = null;
     this.lightboxClickGuardTimer = null;
     this.lightboxLastInput = "pointer";
+    this.lightboxSwipe = null;
     this.suppressNextLightboxClick = false;
     this.photoLoadRequestId = 0;
     this.pendingFullImages = new Map();
@@ -513,6 +514,8 @@ class MyPhotoGallery extends HTMLElement {
     this.onLightboxPointerActivity =
       this.onLightboxPointerActivity.bind(this);
     this.onLightboxPointerDown = this.onLightboxPointerDown.bind(this);
+    this.onLightboxPointerUp = this.onLightboxPointerUp.bind(this);
+    this.onLightboxPointerCancel = this.onLightboxPointerCancel.bind(this);
     this.onLightboxFocusIn = this.onLightboxFocusIn.bind(this);
     this.onLightboxFocusOut = this.onLightboxFocusOut.bind(this);
   }
@@ -523,6 +526,8 @@ class MyPhotoGallery extends HTMLElement {
     this.addEventListener("keydown", this.onGalleryKeyDown);
     this.addEventListener("pointermove", this.onLightboxPointerActivity);
     this.addEventListener("pointerdown", this.onLightboxPointerDown);
+    this.addEventListener("pointerup", this.onLightboxPointerUp);
+    this.addEventListener("pointercancel", this.onLightboxPointerCancel);
     this.addEventListener("focusin", this.onLightboxFocusIn);
     this.addEventListener("focusout", this.onLightboxFocusOut);
   }
@@ -532,11 +537,14 @@ class MyPhotoGallery extends HTMLElement {
     this.removeEventListener("keydown", this.onGalleryKeyDown);
     this.removeEventListener("pointermove", this.onLightboxPointerActivity);
     this.removeEventListener("pointerdown", this.onLightboxPointerDown);
+    this.removeEventListener("pointerup", this.onLightboxPointerUp);
+    this.removeEventListener("pointercancel", this.onLightboxPointerCancel);
     this.removeEventListener("focusin", this.onLightboxFocusIn);
     this.removeEventListener("focusout", this.onLightboxFocusOut);
     window.clearTimeout(this.toastTimer);
     this.clearLightboxControlsTimer();
     window.clearTimeout(this.lightboxClickGuardTimer);
+    this.lightboxSwipe = null;
     this.cancelPendingPhotoLoads();
   }
 
@@ -571,8 +579,31 @@ class MyPhotoGallery extends HTMLElement {
     if (!copied) throw new Error("Copy command was unavailable");
   }
 
-  async copyPhotoLink(photo, trigger) {
+  async sharePhotoLink(photo, trigger) {
     const photoUrl = this.getPhotoUrl(photo);
+    const shareData = {
+      title: photo.Title,
+      url: photoUrl,
+    };
+    let canShareNatively = typeof navigator.share === "function";
+
+    if (canShareNatively && typeof navigator.canShare === "function") {
+      try {
+        canShareNatively = navigator.canShare(shareData);
+      } catch {
+        canShareNatively = false;
+      }
+    }
+
+    if (canShareNatively) {
+      try {
+        await navigator.share(shareData);
+        this.showToast("Photo shared.", trigger, "success");
+        return;
+      } catch (error) {
+        if (error?.name === "AbortError") return;
+      }
+    }
 
     try {
       let copied = false;
@@ -588,7 +619,7 @@ class MyPhotoGallery extends HTMLElement {
       if (!copied) this.fallbackCopyText(photoUrl);
       this.showToast("Photo share link copied.", trigger, "success");
     } catch {
-      this.showToast("Unable to copy photo link", trigger, "error");
+      this.showToast("Unable to share photo link", trigger, "error");
     }
   }
 
@@ -620,11 +651,13 @@ class MyPhotoGallery extends HTMLElement {
       </svg>`;
   }
 
-  getCopyIcon() {
+  getShareIcon() {
     return `
-      <svg class="photo-action-icon photo-copy-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <rect x="9" y="9" width="11" height="11" rx="2"></rect>
-        <path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"></path>
+      <svg class="photo-action-icon photo-share-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="18" cy="5" r="3"></circle>
+        <circle cx="6" cy="12" r="3"></circle>
+        <circle cx="18" cy="19" r="3"></circle>
+        <path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"></path>
       </svg>`;
   }
 
@@ -640,7 +673,7 @@ class MyPhotoGallery extends HTMLElement {
             <div class="photo-card-title-container">
               <section class="photo-card-title">${photo.Title}</section>
               <div class="photo-card-actions">
-                <button class="photo-control photo-copy-button photo-card-action" type="button" data-copy-photo-index="${photoIndex}" data-tooltip="Copy link" aria-label="Copy link to ${photo.Title}">${this.getCopyIcon()}</button>
+                <button class="photo-control photo-share-button photo-card-action" type="button" data-share-photo-index="${photoIndex}" data-tooltip="Share" aria-label="Share ${photo.Title}">${this.getShareIcon()}</button>
                 <a class="photo-control photo-download photo-card-action photo-card-download" href="${photo.Src}" download="${this.getPhotoFilename(photo)}" data-tooltip="Download" aria-label="Download ${photo.Title}">${this.getDownloadIcon()}</a>
               </div>
             </div>
@@ -692,7 +725,7 @@ class MyPhotoGallery extends HTMLElement {
               <span class="photo-lightbox-meta">${photo.Location}&nbsp; • &nbsp;${photo.Date}</span>
             </div>
             <div class="photo-lightbox-actions" role="group" aria-label="Photo actions">
-              <button class="photo-control photo-copy-button photo-lightbox-copy" type="button" data-copy-photo-index="0" aria-label="Copy link to ${photo.Title}">${this.getCopyIcon()}<span>Copy link</span></button>
+              <button class="photo-control photo-share-button photo-lightbox-share" type="button" data-share-photo-index="0" aria-label="Share ${photo.Title}">${this.getShareIcon()}<span>Share</span></button>
               <a class="photo-control photo-download photo-lightbox-download" href="${photo.Src}" download="${this.getPhotoFilename(photo)}" aria-label="Download ${photo.Title}">${this.getDownloadIcon()}<span>Download</span></a>
             </div>
             <button class="photo-lightbox-close" type="button" data-lightbox-action="close" aria-label="Close full-size photo">&times;</button>
@@ -716,11 +749,11 @@ class MyPhotoGallery extends HTMLElement {
       return;
     }
 
-    const copyButton = event.target.closest("[data-copy-photo-index]");
-    if (copyButton) {
+    const shareButton = event.target.closest("[data-share-photo-index]");
+    if (shareButton) {
       event.preventDefault();
-      const photo = this.photos[Number(copyButton.dataset.copyPhotoIndex)];
-      if (photo) void this.copyPhotoLink(photo, copyButton);
+      const photo = this.photos[Number(shareButton.dataset.sharePhotoIndex)];
+      if (photo) void this.sharePhotoLink(photo, shareButton);
       return;
     }
 
@@ -779,11 +812,12 @@ class MyPhotoGallery extends HTMLElement {
     const dialog = this.querySelector(".photo-lightbox");
     this.clearLightboxControlsTimer();
     window.clearTimeout(this.lightboxClickGuardTimer);
+    this.lightboxSwipe = null;
     this.suppressNextLightboxClick = false;
     this.cancelPendingPhotoLoads();
     if (!dialog?.open) return;
 
-    dialog.classList.remove("is-controls-hidden");
+    dialog.classList.remove("is-controls-hidden", "is-loading-photo");
     dialog.close();
     document.body.style.overflow = this.previousBodyOverflow;
     if (this.previousFocus?.isConnected) this.previousFocus.focus();
@@ -803,7 +837,7 @@ class MyPhotoGallery extends HTMLElement {
   hideLightboxControls() {
     this.lightboxControlsTimer = null;
     const dialog = this.querySelector(".photo-lightbox");
-    if (!dialog?.open) return;
+    if (!dialog?.open || dialog.classList.contains("is-loading-photo")) return;
 
     if (
       this.lightboxLastInput === "keyboard" &&
@@ -818,7 +852,7 @@ class MyPhotoGallery extends HTMLElement {
   scheduleLightboxControlsHide() {
     this.clearLightboxControlsTimer();
     const dialog = this.querySelector(".photo-lightbox");
-    if (!dialog?.open) return;
+    if (!dialog?.open || dialog.classList.contains("is-loading-photo")) return;
 
     this.lightboxControlsTimer = window.setTimeout(
       () => this.hideLightboxControls(),
@@ -834,9 +868,37 @@ class MyPhotoGallery extends HTMLElement {
     this.scheduleLightboxControlsHide();
   }
 
+  setLightboxImageLoading(isLoading) {
+    const dialog = this.querySelector(".photo-lightbox");
+    if (!dialog) return;
+
+    dialog.classList.toggle("is-loading-photo", isLoading);
+    if (isLoading) {
+      this.clearLightboxControlsTimer();
+      dialog.classList.remove("is-controls-hidden");
+    } else {
+      this.scheduleLightboxControlsHide();
+    }
+  }
+
   onLightboxPointerActivity(event) {
     const dialog = event.target.closest?.(".photo-lightbox");
     if (!dialog?.open) return;
+
+    if (
+      this.lightboxSwipe &&
+      event.pointerId === this.lightboxSwipe.pointerId
+    ) {
+      const horizontalDistance = Math.abs(
+        event.clientX - this.lightboxSwipe.startX
+      );
+      const verticalDistance = Math.abs(
+        event.clientY - this.lightboxSwipe.startY
+      );
+      if (horizontalDistance > 8 && horizontalDistance > verticalDistance) {
+        event.preventDefault();
+      }
+    }
 
     this.lightboxLastInput = "pointer";
     this.showLightboxControls();
@@ -850,12 +912,64 @@ class MyPhotoGallery extends HTMLElement {
     this.lightboxLastInput = "pointer";
     this.showLightboxControls();
 
+    const figure = event.target.closest?.(".photo-lightbox-figure");
+    if (
+      event.pointerType === "touch" &&
+      event.isPrimary &&
+      figure &&
+      !this.lightboxSwipe
+    ) {
+      this.lightboxSwipe = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        availableWidth: figure.clientWidth,
+      };
+    }
+
     if (controlsWereHidden && event.target.closest?.(".photo-lightbox-shell")) {
       this.suppressNextLightboxClick = true;
       window.clearTimeout(this.lightboxClickGuardTimer);
       this.lightboxClickGuardTimer = window.setTimeout(() => {
         this.suppressNextLightboxClick = false;
       }, 600);
+    }
+  }
+
+  onLightboxPointerUp(event) {
+    const swipe = this.lightboxSwipe;
+    if (!swipe || event.pointerId !== swipe.pointerId) return;
+
+    this.lightboxSwipe = null;
+    const horizontalDistance = event.clientX - swipe.startX;
+    const verticalDistance = event.clientY - swipe.startY;
+    const swipeThreshold = Math.min(
+      120,
+      Math.max(50, swipe.availableWidth * 0.1)
+    );
+
+    if (
+      Math.abs(horizontalDistance) < swipeThreshold ||
+      Math.abs(horizontalDistance) <= Math.abs(verticalDistance) * 1.25
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    this.showLightboxControls();
+    this.showPhoto(
+      this.activePhotoIndex + (horizontalDistance < 0 ? 1 : -1)
+    );
+    this.suppressNextLightboxClick = true;
+    window.clearTimeout(this.lightboxClickGuardTimer);
+    this.lightboxClickGuardTimer = window.setTimeout(() => {
+      this.suppressNextLightboxClick = false;
+    }, 600);
+  }
+
+  onLightboxPointerCancel(event) {
+    if (event.pointerId === this.lightboxSwipe?.pointerId) {
+      this.lightboxSwipe = null;
     }
   }
 
@@ -1020,7 +1134,10 @@ class MyPhotoGallery extends HTMLElement {
     const image = dialog.querySelector(".photo-lightbox-image");
     const loader = dialog.querySelector(".photo-lightbox-loader");
     const selectedFullImageUrl = this.getPhotoUrl(photo);
-    loader.hidden = this.loadedFullImageSources.has(selectedFullImageUrl);
+    const isFullImageLoaded =
+      this.loadedFullImageSources.has(selectedFullImageUrl);
+    loader.hidden = isFullImageLoaded;
+    this.setLightboxImageLoading(!isFullImageLoaded);
     image.alt = photo.Alt;
     image.src = photo.CachedSrc;
 
@@ -1031,9 +1148,9 @@ class MyPhotoGallery extends HTMLElement {
     download.href = photo.Src;
     download.download = this.getPhotoFilename(photo);
     download.setAttribute("aria-label", `Download ${photo.Title}`);
-    const copy = dialog.querySelector(".photo-lightbox-copy");
-    copy.dataset.copyPhotoIndex = String(this.activePhotoIndex);
-    copy.setAttribute("aria-label", `Copy link to ${photo.Title}`);
+    const share = dialog.querySelector(".photo-lightbox-share");
+    share.dataset.sharePhotoIndex = String(this.activePhotoIndex);
+    share.setAttribute("aria-label", `Share ${photo.Title}`);
 
     void this.ensureFullImageLoaded(photo)
       .then((loadedFullImageUrl) => {
@@ -1041,11 +1158,13 @@ class MyPhotoGallery extends HTMLElement {
 
         image.src = loadedFullImageUrl;
         loader.hidden = true;
+        this.setLightboxImageLoading(false);
         this.preloadAdjacentPhotos(this.activePhotoIndex);
       })
       .catch(() => {
         if (loadRequestId === this.photoLoadRequestId) {
           loader.hidden = true;
+          this.setLightboxImageLoading(false);
         }
       });
   }

@@ -803,6 +803,7 @@ my-copy-link {
   min-height: 0;
   margin: 0;
   overflow: hidden;
+  touch-action: pan-y pinch-zoom;
 }
 
 .photo-lightbox-image {
@@ -843,7 +844,7 @@ my-copy-link {
   flex-direction: column;
   gap: 4px;
   min-width: 0;
-  padding: 3px 4px;
+  padding: 0 4px;
   text-align: left;
   font-size: 14px;
 }
@@ -852,6 +853,7 @@ my-copy-link {
   display: flex;
   gap: 8px;
   min-width: 0;
+  min-height: 40px;
   align-items: center;
 }
 
@@ -871,17 +873,10 @@ my-copy-link {
     currentColor 0 25%,
     rgba(255, 255, 255, 0.2) 25% 100%
   );
-  animation: photo-lightbox-loader-spin 800ms linear infinite;
 }
 
 .photo-lightbox-loader[hidden] {
   display: none;
-}
-
-@keyframes photo-lightbox-loader-spin {
-  to {
-    transform: rotate(1turn);
-  }
 }
 
 .photo-lightbox-meta {
@@ -929,7 +924,7 @@ my-copy-link {
   color: white;
 }
 
-.photo-lightbox-copy,
+.photo-lightbox-share,
 .photo-lightbox-download {
   height: 40px;
   padding: 0;
@@ -943,10 +938,10 @@ my-copy-link {
   height: 17px;
 }
 
-.photo-lightbox-copy:hover,
-.photo-lightbox-copy:focus,
-.photo-lightbox-copy:focus-visible,
-.photo-lightbox-copy:active,
+.photo-lightbox-share:hover,
+.photo-lightbox-share:focus,
+.photo-lightbox-share:focus-visible,
+.photo-lightbox-share:active,
 .photo-lightbox-download:link,
 .photo-lightbox-download:visited,
 .photo-lightbox-download:hover,
@@ -960,8 +955,8 @@ my-copy-link {
   position: absolute;
   z-index: 1;
   top: 50%;
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   margin: 0;
   font-size: 22px;
   transform: translateY(-50%);
@@ -992,10 +987,6 @@ my-copy-link {
 @media (prefers-reduced-motion: reduce) {
   .photo-card-image {
     transition: none;
-  }
-
-  .photo-lightbox-loader {
-    animation: none;
   }
 
   .photo-card-copy,
@@ -1056,13 +1047,18 @@ my-copy-link {
     gap: 4px;
   }
 
-  .photo-toast {
-    bottom: 16px;
+  .photo-lightbox-share,
+  .photo-lightbox-download {
+    width: 40px;
+    min-width: 40px;
   }
 
-  .photo-lightbox-nav {
-    width: 36px;
-    height: 36px;
+  .photo-lightbox-actions .photo-control span {
+    display: none;
+  }
+
+  .photo-toast {
+    bottom: 16px;
   }
 
   .photo-lightbox-previous {
